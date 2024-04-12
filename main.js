@@ -8,7 +8,7 @@ if (window.innerWidth > 600) {
         };
     });
 }
-
+//test foi"zenfzoifnzfoizn
 
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.section');
