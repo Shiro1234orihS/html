@@ -1,0 +1,116 @@
+button {
+    margin: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+body{
+    background-color: rgb(93, 9, 177);
+}
+
+/* Pas de changement nécessaire ici, le CSS fourni précédemment fonctionnera pour les boutons */
+.question-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+h1.valentine-title {
+    font-family: 'Dancing Script', cursive; /* Une police élégante */
+    color: #e63946; /* Une nuance de rouge */
+    text-align: center; /* Centrer le titre */
+    font-size: 48px; /* Taille de la police */
+    margin: 20px 0; /* Marge en haut et en bas */
+    padding: 10px; /* Padding intérieur */
+    background-color: #ffe0f0; /* Un fond rose pâle */
+    border: 3px dashed #ffafc0; /* Une bordure en pointillé rose */
+    border-radius: 10px; /* Des coins arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Une légère ombre pour le relief */
+}
+
+h1.valentine-title::before,
+h1.valentine-title::after {
+    content: '❤️'; /* Ajouter des cœurs avant et après le titre */
+    font-size: 24px; /* Taille des cœurs */
+    padding: 0 10px; /* Espacement autour des cœurs */
+}
+
+h1.valentine-title:hover {
+    color: #ffafc0; /* Changer la couleur du texte au survol */
+    background-color: #e63946; /* Changer la couleur de fond au survol */
+    border-color: #fff; /* Changer la couleur de la bordure au survol */
+    transition: all 0.3s ease; /* Ajouter un effet de transition doux */
+}
+
+
+/* Style de base pour les boutons */
+.button-valentine {
+    font-family: 'Dancing Script', cursive; /* Police élégante */
+    font-size: 20px; /* Taille de la police */
+    color: white; /* Couleur du texte */
+    background-color: #ff4d6d; /* Couleur de fond rouge-rose */
+    border: none; /* Pas de bordure */
+    padding: 10px 20px; /* Padding intérieur pour agrandir le bouton */
+    border-radius: 30px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointeur pour indiquer qu'il s'agit d'un bouton cliquable */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de profondeur */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Ombre légère sur le texte pour le contraste */
+    margin: 5px; /* Marge autour du bouton pour éviter qu'ils ne se touchent */
+}
+
+/* Effet au survol du bouton */
+.button-valentine:hover {
+    background-color: #e63946; /* Couleur de fond plus foncée au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée pour l'effet au survol */
+}
+
+/* Effet lors du clic sur le bouton */
+.button-valentine:active {
+    transform: translateY(2px); /* Décale légèrement le bouton vers le bas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Réduit l'ombre pour simuler le pression */
+}
+
+
+.heart {
+    position: absolute;
+    width: 15px; /* Augmentation de la taille du cœur */
+    height: 15px; /* Augmentation de la taille du cœur */
+    background-image: url('lesIcons/coeur.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    will-change: transform;
+}
+
+.heart.is-active {
+    opacity: 1;
+    transform: scale(1); /* Ajustement de la taille lors de l'animation */
+    animation: fall 2s linear forwards, trail 2s linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        transform: translateY(200px) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes trail {
+    0% {
+        width: 15px;
+        height: 15px;
+        opacity: 1;
+    }
+    100% {
+        width: 50px; /* Augmentation de la taille pour l'effet de traînée */
+        height: 50px; /* Augmentation de la taille pour l'effet de traînée */
+        opacity: 0;
+    }
+}

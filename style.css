@@ -1,0 +1,394 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: black;
+}
+/* LA BARRE à DROITE  */
+.sidebar {
+    width: 10%; /* Largeur initiale de la barre latérale */
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0%;
+    left: 0%;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: width 0.5s; /* Animation de la largeur */
+}
+
+.sidebar a {
+    display: flex;
+    flex-direction: column; /* Empile les éléments en colonne */
+    align-items: center; /* Centre les éléments horizontalement */
+    color: white;
+    padding: 10%;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s; /* Animation pour le texte */
+}
+.sidebar button{
+    flex-direction: column; /* Empile les éléments en colonne */
+    align-items: center; /* Centre les éléments horizontalement */
+    color: white;
+    padding: 5%;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s; /* Animation pour le texte */
+}
+.sidebar img{
+    height: 50%;
+    width: 50%;
+    border-radius: 20%;  
+}
+.sidebar:hover {
+    width: 17%; /* Largeur au survol de la souris */
+}
+
+.sidebar a:hover {
+    background-color: #575757; /* Couleur de fond au survol des liens */
+}
+
+.sidebar a img.icone {
+    width: 45%;
+    height: auto;
+    transition: transform 0.3s, width 0.3s, height 0.3s;
+}
+
+.sidebar a span.text {
+    font-size: clamp(0.8rem, 2.5vw, 1rem); /* adapte la taille entre 0.8rem et 1rem en fonction de la largeur de la viewport */
+    display: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sidebar:hover a span.text {
+    display: none;
+}
+
+.sidebar-adjacent-image{
+    position: fixed; /* ou 'absolute' selon vos besoins */
+    left: 20%; /* Remplacez par la largeur réelle de votre barre latérale */
+   
+}
+.hidden {
+    display: none;
+}
+
+#changementlangue {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alignez les éléments enfants à gauche */
+    
+}
+
+#changementlangue img {
+    cursor: pointer; /* Style du curseur en forme de main lors du survol des icônes */
+    margin: 5%; /* Espacement entre les icônes */
+    
+}
+
+#pdf-button {
+    text-decoration: none;
+   
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 10%;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+#pdf-button:hover {
+    background-color: darkblue;
+}
+
+.NomPrenom{
+    color: #ffffff;
+}
+
+.background{
+    position: relative; /* Utilisez position:relative ici pour les bulles */
+    background-size: cover; /* Couvre toute la zone disponible sans perdre le ratio d'aspect */
+    background-position: center; /* Centre l'image dans la zone disponible */
+    margin-left: 10%; /* Ajustez en fonction de la largeur de votre barre latérale */
+    min-height: 100vh; /* Assurez-vous que le conteneur est aussi haut que la fenêtre de visualisation */
+}
+
+
+
+.container_info_personnel {
+    width: 50%;
+    border-radius: 20px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.personal-info {
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    background: rgba(142, 131, 131, 0.1);
+    display: flex;
+    align-items: center;
+    
+}
+
+.info{
+    margin-left: 10%;
+}
+
+.personal-info img {
+    width: 20%;
+    height: 20%;
+    margin-left: 5%;
+}
+
+.linkedin-btn {
+    background-color:  rgba(255,255, 255, 0);
+    height: 10%;
+    width: 10%;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 40%;
+    cursor: pointer;
+    border-radius: 4px;    
+}
+
+.linkedin-btn img {
+    height: 120%;
+    width: 120%;
+    margin-right: 8%;
+    vertical-align: middle;
+}
+
+h1{
+    font-size: 32px;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight:lighter;
+    -moz-box-shadow: 2px 2px 6px #888;  
+    -webkit-box-shadow: 2px 2px 6px #888;  
+    box-shadow:2px 2px 6px #888;  
+    text-align:center;
+    
+}
+
+h2{ /* Supposons que vous ayez ajouté un titre <h1> */
+    font-size: 24px; /* Taille de la police */
+    color: #ffffff; /* Couleur de la police */
+    background-color: rgba(0, 0, 0, 0.5);; /* Couleur de l'arrière-plan */
+    padding: 10px; /* Espacement intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre portée */
+    font-family: 'Arial', sans-serif; /* Police de caractères */
+    margin-bottom: 20px; /* Marge en dessous du titre */
+}
+
+.nomLanguage{
+    text-align: center;
+    color: #ffffff;
+}
+h4{
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+}
+p{
+    color: #ffffff;
+}
+span{
+    color: #ffffff;
+    font-size: 14px;
+}
+ul{
+    background: rgba(57, 53, 53, 0.6); 
+    border-radius: 20px;  
+    list-style-type: none;
+    width: 96%; 
+    height: 96%;
+   
+    position: absolute; 
+    top: 0;
+    left: 0;
+}
+
+.container_presentation{
+    width: 70%;
+    border-radius: 20px;
+    margin: auto;
+    overflow: hidden;
+}
+
+
+.portfolio-item {
+    margin-bottom: 10%;
+    margin:0%;
+    align-items: center;
+}
+ 
+.progress-bar {
+    
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+ 
+.progress {
+    height: 20px;
+    border-radius: 5px;
+    background-color: #1d0c66;
+    text-align: center;
+    color: white;
+    line-height: 20px; 
+}
+
+.presentation_langue {
+    width: 70%;
+    border-radius: 5%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Style pour la popover personnalisée */
+.custom-popover {
+    position: absolute;
+    background: #000;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: none; /* caché par défaut */
+    z-index: 10;
+    width: 250px; /* Largeur du popover */
+    font-size: 0.9em;
+}
+
+/* Flèche au-dessus du popover */
+.custom-popover:before {
+    content: "";
+    position: absolute;
+    top: -20px; /* Ajustez si nécessaire */
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #000 transparent;
+}
+
+
+@media screen and (max-width: 600px) {
+    .sidebar {
+        width: 100%; /* Full width on small screens */
+    }
+    .sidebar:hover{
+        width: 0%;
+    }
+    .sidebar a {
+        display: flex; /* Utilisez Flexbox pour afficher les éléments en ligne */
+        align-items: center; /* Alignez les éléments verticalement au centre */
+    }
+    .background{
+        margin-left: 0%;
+    }
+    .sidebar a span.text{
+        display: inline;
+    }
+    .container_presentation{
+        margin: 10%;
+    }
+}
+.active {
+    font-weight: bold; /* Couleur de fond */
+    /* Ajoutez d'autres styles si nécessaire */
+    background-color:transparent; /* Rend le fond du bouton transparent */
+    border: none; /* Enlève les bordures si nécessaire */
+    color: rgb(60, 60, 60);
+}
+
+#francais, #portugais, #anglais {
+    background-color: transparent; /* Rend le fond du bouton transparent */
+    color: white; /* Changez cette couleur pour celle que vous voulez pour le texte */
+    border: none; /* Enlève les bordures si nécessaire */
+}
+
+.container-buttons {
+    width: 100%; /* Assurez-vous que le tableau prenne toute la largeur disponible */
+    border-collapse: collapse; /* Supprime l'espace entre les cellules */
+    margin-bottom: 20px; /* Ajoute de l'espace en dessous du tableau */
+}
+.container-buttons td {
+    text-align: center; /* Centre le contenu de chaque cellule */
+    padding: 5px; /* Ajoute un peu d'espace autour du contenu de chaque cellule */
+}
+.lang-buttons {
+    display: flex;
+    flex-direction: row; /* Change la direction de la flexbox pour aligner les éléments en ligne */
+}
+.container-buttons .lang-title {
+    padding: 10px 0; /* Ajoute de l'espace au-dessus et en dessous du titre des langues */
+    font-weight: bold; /* Rend le titre des langues gras */
+    color: #fff;
+}
+
+#changementlangue p {
+    margin-bottom: 5px; /* Ajustez selon l'espacement désiré entre le texte et les boutons */
+    font-size: 0.8em;
+}
+
+
+/* LES LINS DES FOND DE LA PAGE */
+#presentation{
+    background-image: url('ressource/fond/etoile.png');
+}
+
+#iut{
+    background-image: url('ressource/fond/university.png');
+}
+#wests{
+    background-image: url('ressource/fond/westsOfSurvivial.png');
+   
+}
+#bmw{
+    background-image: url('ressource/fond/bmw.png');
+}
+#taff{
+    background-image: url('ressource/fond/travail.png');
+}
+
+#beau{
+    background-image: url('ressource/fond/technical.png');
+}
+#langue{
+    background-image: url('ressource/fond/langue.png');
+}
+
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Ratio 16:9 */
+    padding-top: 25px;
+    height: 0;
+    overflow: hidden;
+    margin: 20px auto; /* Centrer le conteneur */
+    max-width: 800px; /* Largeur maximale */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Ombre portée */
+    align-items: center; /* Centre les éléments horizontalement */
+    
+}
+
+/* Responsive iframe */
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+#video{
+    width: 25%; /* Ou une largeur spécifique, par exemple 800px */
+    height: 25%; /* Ajustez en fonction du ratio souhaité */
+    max-width: 100%; /* Assure que la vidéo ne dépasse pas la largeur de son conteneur */
+}
+

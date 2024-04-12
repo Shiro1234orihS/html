@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="ressource/icone/icone_site.webp">
+    <title>Portfolio</title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+
+
+<body>
+    <script src="main.js" defer></script>
+   
+    <div class="sidebar"><!--je dois peut etre changer-->
+        <a href="#home"><img src="ressource/icone/icone_accueille.png" class="icone"><span class="text">Home</span></a>
+        <!-- <a href="#job"><img src="ressource/icone/icone_job.png" class="icone"><span class="text">Job Objective</span></a> -->
+        <a href="#work"><img src="ressource/icone/icone_expe.png" class="icone"><span class="text">Work Experience</span> </a>
+        <a href="#education"><img src="ressource/icone/icone_education.png" class="icone"><span class="text">Education and Qualifications</span></a>
+        <a href="#technical"><img src="ressource/icone/icone_technical.png" class="icone"><span class="text">Technical skills</span></a>
+        <a href="#languages"><img src="ressource/icone/icone_langue.png" class="icone"><span class="text">Languages</span></a>
+        <a href="#references"><img src="ressource/icone/icone_references.png" class="icone"><span class="text">References  </span> </a>  
+
+        <table class="container-buttons">
+            <tr>
+                <td colspan="3" class="lang-title">Language</td>
+            </tr>
+            <tr>
+                <td><button class="active">EN</button></td>
+                <td><button id="francais">FR</button></td>
+                <td><button id="portugais">PT</button></td>
+                <button id="anglais" style="display: none;">Mon Bouton</button>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="ouvrirPDF()" id="pdf-button">Open my Resume</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <section id="home" class="section"  class="background">
+        <div id= "presentation"class="background" cla>
+            <ul>
+                <h2>Personal data </h2>
+                <div class="container_info_personnel"><!--Je dois mieux organiser modifier-->
+                    <div class="personal-info">
+                        <img src="ressource/photo_profil-removebg-preview.png">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name: Ricardo</h3>
+                            <h3 class="NomPrenom" >SurName: NUNES EMILIO</h3>
+                            <p>Date of Birth: 8 March 2003</p>
+                            <p>Nationality: Portuguese</p>
+                            <p>Address: 115 impasse de l’ile, Scionzier , France</p>
+                            <p>Phone: + 33 6 04 65 21 42</p>
+                            <p>Email: ricardonunesemilio@gmail.com</p>
+                            <button onclick="ouvrirPDF()" id="pdf-button">Open my Resume</button>
+                        </div>                       
+                    </div>
+                    <h2>My social media</h2>
+                    <a class="linkedin-btn" onclick="window.location.href='https://www.linkedin.com/in/ricardo-nunes-emilio/'">
+                        <img src="ressource/icone/icone_linkendin.webp" alt="LinkedIn">
+                    </a>
+                    <span class='infoIcon' data-popover='popover1'>QR code :?</span>
+                </div>
+                <h2>Job Objective</h2><!--à modifier-->
+                <span>As a recent graduate with Technical Bachelor’s Degree in Computer Science, I am eager to apply my analytical skills and technical knowledge in a challenging development role within a software company. </span>               
+            </ul>
+        </div>
+    </section>
+
+    <section id="work" class="section hidden" >
+        <h1>Jobs and Internships</h1>
+        <div id='taff' class= 'background'>
+            <ul>
+                <h2>Job</h2>
+                <div class="container_presentation">
+                    <div class="personal-info">
+                        <img src="ressource/logo_emtreprise/decremps-btp-74.svg" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name company: Decramp BTP</h3>
+                            <h3 class="NomPrenom" >Activity: Mason </h3>
+                            <p>Location : Amancy,France</p>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Internships</h2>
+                <div class="container_presentation">
+                    <div class="personal-info">
+                        <img src="ressource/logo_emtreprise/italie-gourmande.jpeg" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name company: L'Italie Gourmande</h3>
+                            <h3 class="NomPrenom" >Activity: Seller </h3>
+                            <p>Location : Cluses,France</p>
+                        </div>                       
+                    </div>
+                </div>
+            </ul>
+        </div>
+        <h1>University Projects</h1>
+        <div id='wests' class= 'background'>
+            <ul>
+                <h2>Wests Of Survivial</h2>
+
+                <div class="container_presentation">
+                    <h2>Presentation </h2>
+                    <span>Wests of survival is a suvial game created as part of a job. I created it with the help of Dulhoste Maxime and Mihoubi Maroune. 
+                        We imagined the gameplay of the game, the maps and the different designers of the map
+                        We used the C# programming language with the monogame framework
+                        </span>
+                    <h2>Trailer</h2>
+                    <div class="video-container">
+                        <iframe id="video" src="https://www.youtube.com/embed/e8ixbI230Aw?si=QuqTFhVD_96opsgP" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <div id="bmw" class= 'background'>
+            <ul>
+                <h2>bmw</h2>
+                
+                
+            </ul>
+        </div>
+    </section>
+
+    <section id="education" class="section hidden" >
+        <div id="iut" class="background">
+            <ul>
+                <div class="container_presentation">
+                    <h2>BUT Informatique(Technical Bachelor’s Degree in computer science)</h2>
+                    <div class="personal-info">
+                        <div class="info">                            
+                            <p>Location: University of Savoy / IUT Annecy – Annecy le Vieux, France</p>
+                            <p>Date: 2022-now</p>                
+                        </div>
+                    </div>
+                    <h2>French Baccalaureate SIN (High School diploma specialized in science and computerengineering)</h2>
+                    <div class="personal-info">
+                        <div class="info">                            
+                            <p>Location: Charles Poncet High School - Cluses , France</p>
+                            <p>Date: 2019-2022</p>                
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </section>
+
+    <section id="technical" class="section hidden" >
+        <div id="beau" class="background">
+            <ul>
+                <h2>Application developed :</h2>
+                
+                <div class="portfolio-item">
+                  <h3 class="nomLanguage">C#</h3>
+                  <div class="progress-bar">
+                      <div class="progress" style="width: 95%;"></div>
+                  </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">Python</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">PHP</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <h2>Designing Web pages : :</h2>
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">CSS </h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                  <h3 class="nomLanguage">HTML</h3>
+                  <div class="progress-bar">
+                      <div class="progress" style="width: 95%;"></div>
+                  </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">JavaScript</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+
+                <h2>Administrate a data base :</h2>
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">Oracle</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                  <h3 class="nomLanguage">PostgresSQL</h3>
+                  <div class="progress-bar">
+                      <div class="progress" style="width: 95%;"></div>
+                  </div>
+                </div>
+
+                
+            </ul>
+        </div>
+    </section>
+
+    <section id="languages" class="section hidden" >
+        <div id="langue" class="background">
+            <ul>
+                <h2>Mother Tongue</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxPortugal.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name: Portuguese</h3>
+                            <h3 class="NomPrenom" >Level: Mother tongue (C2)</h3>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Native speaker</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxfrance.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name: French </h3>
+                            <h3 class="NomPrenom" >Level: Native speaker (C2)</h3>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Intermediate</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxanglais.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name: English </h3>
+                            <h3 class="NomPrenom" >Level: Intermediate (B1)</h3>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Upper intermediate</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxitalia.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name: Italian </h3>
+                            <h3 class="NomPrenom" >Level: Upper intermediate (B2)</h3>
+                        </div>                       
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </section>
+
+    <section id="references" class="section hidden" >
+       <div class="background">
+            <h2>Luc Damas</h2>
+            <div class="presentation_langue">
+                <div class="personal-info">
+                    <div class="info">                            
+                        <h3 class="NomPrenom">Name: Luc Damas</h3>
+                        <p>Position : Web teacher</p>
+                        <p>Company  : University of Savoy Mont Blanc</p>
+                        <p>Town : Annecy</p>
+                        <p>Country: France</p>
+                        <p>Email: luc.damas@univ-smb.fr</p>
+                    </div>                       
+                </div>
+            </div>
+            <h2>Pascal Colin</h2>
+            <div class="presentation_langue">
+                <div class="personal-info">
+                    <div class="info">                            
+                        <h3 class="NomPrenom">Name: Pascal Colin </h3>
+                        <p>Position : SQL teacher </p>
+                        <p>Company  : University of Savoy Mont Blanc</p>
+                        <p>Town : Annecy</p>
+                        <p>Country: France</p>
+                        <p>Email: pascal.colin@univ-smb.fr</p>
+                    </div>                       
+                </div>
+            </div>
+       </div>
+    </section>
+    <div class="custom-popover" id="popover1"><div>My Linkedin :</div><img id ='QR_code' src='ressource/QR_code.png' alt='LinkedIn' style='width: 50%; height: 50%;'></div>
+</body>
+</html>

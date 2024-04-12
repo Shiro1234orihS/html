@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="ressource/icone/icone_site.webp">
+    <title>Portfolio</title>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+</head>
+
+
+
+<body>
+    <script src="main.js" defer></script>
+   
+    <div class="sidebar"><!--je dois peut etre changer-->
+        <a href="#home"><img src="ressource/icone/icone_accueille.png" class="icone"><span class="text">Accueil</span></a>
+        <!-- <a href="#job"><img src="ressource/icone/icone_job.png" class="icone"><span class="text">Job Objective</span></a> -->
+        <a href="#work"><img src="ressource/icone/icone_expe.png" class="icone"><span class="text">Experiência de trabalho</span> </a>
+        <a href="#education"><img src="ressource/icone/icone_education.png" class="icone"><span class="text">Educação e Qualificações</span></a>
+        <a href="#technical"><img src="ressource/icone/icone_technical.png" class="icone"><span class="text">Habilidades técnicas</span></a>
+        <a href="#languages"><img src="ressource/icone/icone_langue.png" class="icone"><span class="text">Línguas</span></a>
+        <a href="#references"><img src="ressource/icone/icone_references.png" class="icone"><span class="text">Referências</span> </a>  
+        
+        <table class="container-buttons">
+            <tr>
+                <td colspan="3" class="lang-title">Language</td>
+            </tr>
+            <tr>
+                <td><button id="anglais">EN</button></td>
+                <td><button id="francais">FR</button></td>
+                <td><button class="active">PT</button></td>
+                <button id="portugais" style="display: none;">Mon Bouton</button>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <button onclick="ouvrirPDF()" id="pdf-button">Open my Resume</button>
+                </td>
+            </tr>
+        </table>         
+    </div>
+
+    <section id="home" class="section"  class="background">
+        <div id= "presentation"class="background" cla>
+            <ul>
+                <h2>Personal data </h2>
+                <div class="container_info_personnel"><!--Je dois mieux organiser modifier-->
+                    <div class="personal-info">
+                        <img src="ressource/photo_profil-removebg-preview.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nome: Ricardo</h3>
+                            <h3 class="NomPrenom" >Nom de famille: NUNES EMILIO</h3>
+                            <p>Data de nascimento: 8 March 2003</p>
+                            <p>Nacionalidade: Portuguese</p>
+                            <p>Endereço: 115 impasse de l’ile, Scionzier , France</p>
+                            <p>Telefone: + 33 6 04 65 21 42</p>
+                            <p>Email: ricardonunesemilio@gmail.com</p>
+                            <button onclick="ouvrirPDF1()" id="pdf-button">Open my Resume</button>
+                        </div>                       
+                    </div>
+                    <h2>Minhas redes sociais</h2>
+                    <a class="linkedin-btn" onclick="window.location.href='https://www.linkedin.com/in/ricardo-nunes-emilio/'">
+                        <img src="ressource/icone/icone_linkendin.webp" alt="LinkedIn">
+                    </a>
+                    <span class="infoIcon" style="cursor: pointer;"  data-html="true" data-content="<h3>My Linkedin</h3> <img id ='QR_code' src='ressource/QR_code.png' alt='LinkedIn'>">QR code ❓</span> 
+                </div>
+                <h2>Objetivo do trabalho</h2><!--à modifier-->
+                <span>Como recémformado com Bacharelado Técnico em Ciência da Computação, estou ansioso para aplicar minhas habilidades analíticas e conhecimento técnico em uma função desafiadora de desenvolvimento em uma empresa de software. </span>               
+            </ul>
+        </div>
+    </section>
+
+    <section id="work" class="section hidden" >
+        <h1>Empregos e Estágios</h1>
+        <div id='taff' class= 'background'>
+            <ul>
+                <h2>Empregos</h2>
+                <div class="container_presentation">
+                    <div class="personal-info">
+                        <img src="ressource/logo_emtreprise/decremps-btp-74.svg" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nome da empresa: Decramp BTP</h3>
+                            <h3 class="NomPrenom" >Atividade: Maçom </h3>
+                            <p>Endereço : Amancy, France</p>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Internship</h2>
+                <div class="container_presentation">
+                    <div class="personal-info">
+                        <img src="ressource/logo_emtreprise/italie-gourmande.jpeg" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Name company: L'Italie Gourmande</h3>
+                            <h3 class="NomPrenom" >Activity: Vendedor </h3>
+                            <p>Endereço : Cluses, France</p>
+                        </div>                       
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <h1>Projetos Universitários</h1>
+        <div id='wests' class= 'background'>
+            <ul>
+                <h2>Wests Of Survivial</h2>
+
+                <div class="container_presentation">
+                    <h2>Apresentação </h2>
+                    <span>Wests of Survival é um jogo experimental criado como parte de um trabalho. Criei-o com a ajuda de Dulhoste Maxime e Mihoubi Maroune.
+                        Imaginamos a jogabilidade do jogo, os mapas e os diferentes designers do mapa
+                        Usamos a linguagem de programação C# com o framework monogame
+                        </span>
+                    <h2>Trailer</h2>
+                        <iframe id="video"src="https://www.youtube.com/embed/e8ixbI230Aw?si=QuqTFhVD_96opsgP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>A modifier 
+                </div>
+            </ul>
+        </div>
+
+        <div id="bmw" class= 'background'>
+            <ul>
+                <h2>BMW</h2>
+                
+                
+            </ul>
+        </div>
+    </section>
+
+    <section id="education" class="section hidden" >
+        <div id="iut" class="background">
+            <ul>
+                <div class="container_presentation">
+                    <h2>BUT Informatique</h2>
+                    <div class="personal-info">
+                        <div class="info">                            
+                            <p>Endereço: Universidade de Savoie Mont Blanc / IUT Annecy – Annecy le Vieux, France</p>
+                            <p>Data: 2022-now</p>                
+                        </div>
+                    </div>
+                    <h2>Bacharelado Francês </h2>
+                    <div class="personal-info">
+                        <div class="info">                            
+                            <p>Endereço: Escola Secundária Charles Poncet - Cluses , France</p>
+                            <p>Data: 2019-2022</p>                
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </section>
+
+    <section id="technical" class="section hidden" >
+        <div id="beau" class="background">
+            <ul>
+                <h2>Aplicativo desenvolvido:</h2>
+                
+                <div class="portfolio-item">
+                  <h3 class="nomLanguage">C#</h3>
+                  <div class="progress-bar">
+                      <div class="progress" style="width: 95%;"></div>
+                  </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">Python</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">PHP</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <h2>Projetando páginas da Web:</h2>
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">CSS </h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                  <h3 class="nomLanguage">HTML</h3>
+                  <div class="progress-bar">
+                      <div class="progress" style="width: 95%;"></div>
+                  </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">JavaScript</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+
+                <h2>Administrar um banco de dados:</h2>
+                <div class="portfolio-item">
+                    <h3 class="nomLanguage">Oracle</h3>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                  <h3 class="nomLanguage">PostgresSQL</h3>
+                  <div class="progress-bar">
+                      <div class="progress" style="width: 95%;"></div>
+                  </div>
+                </div> 
+            </ul>
+        </div>
+    </section>
+
+    <section id="languages" class="section hidden" >
+        <div id="langue" class="background">
+            <ul>
+                <h2>Língua materna</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxPortugal.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nome: Português</h3>
+                            <h3 class="NomPrenom" >Nível: Língua materna (C2)</h3>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Falante nativo</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxfrance.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nome: French </h3>
+                            <h3 class="NomPrenom" >Nível: Native speaker (C2)</h3>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Intermediário</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxanglais.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nome: Inglês </h3>
+                            <h3 class="NomPrenom" >Nível: Intermediário (B1)</h3>
+                        </div>                       
+                    </div>
+                </div>
+                <h2>Intermediário-avançado</h2>
+                <div class="presentation_langue">
+                    <div class="personal-info">
+                        <img src="ressource/drapeux/drapeuxitalia.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nome: Italiano </h3>
+                            <h3 class="NomPrenom" >Nível: Intermediário-avançado (B2)</h3>
+                        </div>                       
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </section>
+
+    <section id="references" class="section hidden" >
+       <div class="background">
+            <h2>Luc Damas</h2>
+            <div class="presentation_langue">
+                <div class="personal-info">
+                    <div class="info">                            
+                        <h3 class="NomPrenom">Nome: Luc Damas</h3>
+                        <p>Position : Professor da Web</p>
+                        <p>Empresa  : Universidade de Savoie Mont Blanc</p>
+                        <p>Cidade : Annecy</p>
+                        <p>País: France</p>
+                        <p>Email: luc.damas@univ-smb.fr</p>
+                    </div>                       
+                </div>
+            </div>
+            <h2>Pascal Colin</h2>
+            <div class="presentation_langue">
+                <div class="personal-info">
+                    <div class="info">                            
+                        <h3 class="NomPrenom">Nome: Pascal Colin </h3>
+                        <p>Position : Professor SQL</p>
+                        <p>Empresa  : Universidade de Savoie Mont Blanc</p>
+                        <p>Cidade : Annecy</p>
+                        <p>País: France</p>
+                        <p>Email: pascal.colin@univ-smb.fr</p>
+                    </div>                       
+                </div>
+            </div>
+       </div>
+    </section>
+</body>
+</html>
