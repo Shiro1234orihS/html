@@ -352,6 +352,10 @@ ul{
 #bmw{
     background-image: url('ressource/fond/bmw.png');
 }
+#bmw2{
+    background-image: url('ressource/fond/bmw2.webp');
+    background-color: #0f0f0f;
+}
 #taff{
     background-image: url('ressource/fond/travail.png');
 }
