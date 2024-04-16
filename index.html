@@ -64,10 +64,15 @@
                         </div>                       
                     </div>
                     <h2>Mes réseaux sociaux</h2>
-                    <a class="linkedin-btn" onclick="window.location.href='https://www.linkedin.com/in/ricardo-nunes-emilio/'">
-                        <img src="ressource/icone/icone_linkendin.webp" alt="LinkedIn">
-                    </a>
-                    <span class="infoIcon" style="cursor: pointer;"  data-html="true" data-content="<h3>My Linkedin</h3> <img id ='QR_code' src='ressource/QR_code.png' alt='LinkedIn'>">QR code ❓</span> 
+                    <div >
+                        <a class="linkedin-btn" onclick="window.location.href='https://www.linkedin.com/in/ricardo-nunes-emilio/'">
+                            <img src="ressource/icone/icone_linkendin.webp" alt="LinkedIn">
+                        </a>
+                        <a class="git-btn" onclick="window.location.href='https://github.com/Shiro1234orihS'">
+                            <img src="ressource/icone/icone_git.png" alt="Git">
+                        </a>
+                        <span class='infoIcon' data-popover='popover1'>QR code :?</span>
+                    </div>
                 </div>
 
                 <h2>Objectif du travail</h2><!--à modifier-->
@@ -87,6 +92,7 @@
                         <div class="info">                            
                             <h3 class="NomPrenom">Nom de la société: Decramp BTP</h3>
                             <h3 class="NomPrenom" >Activité: Maçon </h3>
+                            <p>Durée : 2 mois </p>
                             <p>Localisation : Amancy,France</p>
                         </div>                       
                     </div>
@@ -98,7 +104,24 @@
                         <div class="info">                            
                             <h3 class="NomPrenom">Nom de la société: L'Italie Gourmande</h3>
                             <h3 class="NomPrenom" >Activité: Vendre </h3>
+                            <p>Durée : 1 semaine</p>
                             <p>Localisation : Cluses,France</p>
+                        </div>                       
+                    </div>
+                </div>
+                
+            </ul>
+        </div>
+        <div id='taff' class= 'background'>
+            <ul>
+                <div class="container_presentation">
+                    <div class="personal-info">
+                        <img src="ressource/logo_emtreprise/ATMB.png" alt="">
+                        <div class="info">                            
+                            <h3 class="NomPrenom">Nom de la société: ATMB</h3>
+                            <h3 class="NomPrenom" >Activité: Chargé de Qualité Système d’Information </h3>
+                            <p>Durée : 12 semaines</p>
+                            <p>Localisation : Bonneville,France</p>
                         </div>                       
                     </div>
                 </div>
@@ -141,7 +164,7 @@
 
         <div id="bmw2" class= 'background'>
             <ul>
-                <h2>BMW Motorrad en vue.js avec </h2>
+                <h2>BMW Motorrad en vue.js et une API en ASP.NET  </h2>
                 <div class="container_presentation">
                     <h2>Le but du projet</h2>
                     <span>            
@@ -338,5 +361,6 @@
             </div>
        </div>
     </section>
+    <div class="custom-popover" id="popover1"><div>My Linkedin :</div><img id ='QR_code' src='ressource/QR_code.png' alt='LinkedIn' style='width: 50%; height: 50%;'></div>
 </body>
 </html>
