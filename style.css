@@ -397,6 +397,12 @@ a{
 #beau{
     background-image: url('ressource/fond/technical.png');
 }
+#beau2{
+    background-image: url('ressource/fond/fond_sql.webp');
+}
+#beau3{
+    background-image: url('ressource/fond/fond_site.webp');
+}
 #langue{
     background-image: url('ressource/fond/langue.png');
 }
