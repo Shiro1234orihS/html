@@ -168,12 +168,30 @@ body {
     width: 10%;
     display: inline-block;
     font-size: 16px;
-    margin-left: 40%;
+    margin-left: 2%;
     cursor: pointer;
     border-radius: 4px;    
 }
 
 .git-btn img {
+    height: 80%;
+    width: 80%;
+    margin-right: 8%;
+    vertical-align: middle;
+}
+
+.qr-btn {
+    background-color:  rgba(255,255, 255, 0);
+    height: 10%;
+    width: 10%;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 0%;
+    cursor: pointer;
+    border-radius: 4px;    
+}
+
+.qr-btn img {
     height: 80%;
     width: 80%;
     margin-right: 8%;

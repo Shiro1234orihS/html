@@ -38,7 +38,7 @@ function ouvrirPDF1() {
   }
 
 $(document).ready(function(){
-    $('.infoIcon').click(function(e) {
+    $('.qr-btn').click(function(e) {
         e.stopPropagation(); // Empêche la propagation au document
 
         var popoverId = $(this).data('popover');
