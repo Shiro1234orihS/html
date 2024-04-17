@@ -383,7 +383,9 @@ a{
 #taff{
     background-image: url('ressource/fond/travail.png');
 }
-
+#taff2{
+    background-image: url('ressource/fond/travail2.webp');
+}
 #beau{
     background-image: url('ressource/fond/technical.png');
 }
