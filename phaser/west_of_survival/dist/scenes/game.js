@@ -72,13 +72,10 @@ class Game extends Phaser.Scene {
         //Affiche les texture de collitions
         this.debug(coucheFond4);
 
-        //Création des Cactus 
-        this.creatationCactus(5 , coucheFond4);
-        //Création des Coyote 
-        this.creatationCoyote(5 , coucheFond4);
- 
         //Création de la bare de vie
         this.lifeBar = new Life(this, 70, 60, 150,15 , 0xFF0000);
+
+        
     
         // Création du style de l'écriture
         const textStyle = {
@@ -102,6 +99,11 @@ class Game extends Phaser.Scene {
         this.barre_de_vie = new TextDisplay(this, 139, 97, 'Barre de vie : ', textStyle);        
         this.score = new TextDisplay(this,590, 97, 'Score : 0', textStyle);
 
+
+        //Création des Cactus 
+        this.creatationCactus(5 , coucheFond4 , this.joueur , this.lifeBar);
+        //Création des Coyote 
+        this.creatationCoyote(5 , coucheFond4);
     }
 
     update(time, delta ) {
@@ -160,18 +162,16 @@ class Game extends Phaser.Scene {
             this.nombre2 = 0;
 
         }
-        console.log(this.nombre2)
+
         
         this.updatedeplacemen(this.balleListe,delta, this.joueur )
 
         this.joueur.deplacer(this.input.keyboard.createCursorKeys(),delta);
 
-
         this.updatedeplacement(this.castusListe,delta,  this.joueur )
 
         this.updatedeplacement(this.coyoteListe,delta,  this.joueur )
        
- 
         this.score.setText('Score: ' +  this.scoree);
     }
 
@@ -185,15 +185,18 @@ class Game extends Phaser.Scene {
         });
     }
 
-    creatationCactus(nombre ,coucheFond4 ){
+    creatationCactus(nombre ,coucheFond4 , joueur , lifeBar ){
 
         for (let castus = 0; castus < nombre; castus++) {
 
-            let min = 0;
-            let max = 2000;
+            let minX = 600;
+            let maxX = 1732;
 
-            let y = Math.floor(Math.random() * (max - min) + min);
-            let x = Math.floor(Math.random() * (max - min) + min);
+            let minY = 600;
+            let maxY = 1709;
+
+            let y = Math.floor(Math.random() * (maxY - minY) + minY);
+            let x = Math.floor(Math.random() * (maxX - minX) + minX);
           
             // Création des cactus
             let newCactus = new Castus(this, x, y, 'texture_cactus', 16);
@@ -206,6 +209,14 @@ class Game extends Phaser.Scene {
             
             // Ajoutez l'instance de Castus à la liste
             this.castusListe.push(newCactus);
+
+            // Activer les collisions entre les personnages
+            // this.physics.add.collider(this.joueur, newCactus, (joueur, cactus ,lifeBar ) => {
+            //     lifeBar.decreaseLife(10); // Suppose que decreaseLife prend un paramètre 'amount'
+            // }, null, this);
+            
+            
+            
         }
     }
 
@@ -213,11 +224,14 @@ class Game extends Phaser.Scene {
 
         for (let i = 0; i < nombre; i++) {
 
-            let min = 0;
-            let max = 2000;
+            let minX = 600;
+            let maxX = 1732;
 
-            let y = Math.floor(Math.random() * (max - min) + min);
-            let x = Math.floor(Math.random() * (max - min) + min);
+            let minY = 600;
+            let maxY = 1709;
+
+            let y = Math.floor(Math.random() * (maxY - minY) + minY);
+            let x = Math.floor(Math.random() * (maxX - minX) + minX);
           
             // Création des cactus
             let newCoyote = new Coyote(this, x, y, 'texture_coyote', 16);

@@ -29,6 +29,18 @@ export default class Life extends Phaser.GameObjects.Graphics {
         // Ajustement pour que la barre de vie ne bouge pas avec le scrolling de la caméra
         this.setScrollFactor(0);
     }
+    decreaseLife() {
+        amount = -1
+        // Réduire la largeur de la barre de vie
+        this.taille_H = Math.max(0, this.taille_H - amount);
+    
+        // Redessiner la barre de vie avec la nouvelle taille
+        this.clear(); // Efface le graphique précédent
+        this.fillStyle(this.couleur, 1);
+        this.fillRect(this.x, this.y, this.taille_H, this.taille_D);
+        this.lineStyle(2, 0x000000);
+        this.strokeRect(this.x, this.y, this.taille_H, this.taille_D);
+    }
 
     // Vous pouvez ajouter d'autres méthodes ici pour manipuler la barre de vie (par exemple, la réduire lors des dégâts)
 }

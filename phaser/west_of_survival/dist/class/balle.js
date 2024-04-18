@@ -80,7 +80,6 @@ export default class  Balle extends Phaser.Physics.Arcade.Sprite{
             // Vérifie que l'indice existe avant de supprimer
             if(indiceASupprimer !== -1){
                 tableau.splice(indiceASupprimer, 1);
-                console.log("fuighe")
                 this.destroy();
             }
         }
