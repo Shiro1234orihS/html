@@ -85,14 +85,7 @@ export default class  Balle extends Phaser.Physics.Arcade.Sprite{
         }
     }
 
-    // Autres méthodes, comme prendre des dégâts ou attaquer
-    recevoirDegats(degats) {
-        this.vie -= degats;
-        if (this.vie <= 0) {
-            this.detruire();
-        }
-    }
-
+    
     detruire() {
         // Supprimer le joueur de la scène, etc.
         this.destroy();

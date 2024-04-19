@@ -127,6 +127,10 @@ class Game extends Phaser.Scene {
                 this.physics.add.existing(balle);
                 balle.body.setGravityY(0);
                 balle.body.setSize(35, 30);
+                 // Activer les collisions entre les personnages
+                this.physics.add.collider(this.joueur, balle, (joueur, cactus ,lifeBar ) => {
+                    this.lifeBar.decreaseLife(); // Suppose que decreaseLife prend un paramètre 'amount'
+                }, null, this);
                 this.balleListe.push(balle);
             }
             if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown)
@@ -244,6 +248,11 @@ class Game extends Phaser.Scene {
             
             // Ajoutez l'instance de Castus à la liste
             this.coyoteListe.push(newCoyote);
+
+             // Activer les collisions entre les personnages
+            this.physics.add.collider(this.joueur, newCoyote, (joueur, cactus ,lifeBar ) => {
+                this.lifeBar.decreaseLife(); // Suppose que decreaseLife prend un paramètre 'amount'
+            }, null, this);
         }
     }
 
