@@ -211,9 +211,9 @@ class Game extends Phaser.Scene {
             this.castusListe.push(newCactus);
 
             // Activer les collisions entre les personnages
-            // this.physics.add.collider(this.joueur, newCactus, (joueur, cactus ,lifeBar ) => {
-            //     lifeBar.decreaseLife(10); // Suppose que decreaseLife prend un paramètre 'amount'
-            // }, null, this);
+            this.physics.add.collider(this.joueur, newCactus, (joueur, cactus ,lifeBar ) => {
+                this.lifeBar.decreaseLife(); // Suppose que decreaseLife prend un paramètre 'amount'
+            }, null, this);
             
             
             
