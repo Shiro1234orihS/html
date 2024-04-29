@@ -2,10 +2,51 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erreur 400</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #ff6347;
+        }
+        p {
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #0084ff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Erreur 400 - Demande Incorrecte</h1>
-    <p>Désolé, votre demande ne peut pas être traitée. Veuillez vérifier l'URL et réessayer.</p>
+    <div class="container">
+        <h1>Erreur 400 - Demande Incorrecte</h1>
+        <p>Désolé, votre demande ne peut pas être traitée. Veuillez vérifier l'URL et réessayer.</p>
+        <a href="/">Retour à l'accueil</a>
+    </div>
 </body>
 </html>
