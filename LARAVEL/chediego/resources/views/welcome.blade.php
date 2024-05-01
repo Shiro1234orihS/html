@@ -1,6 +1,6 @@
 @extends('layouts.herder')
 
-<link rel="stylesheet" type="text/css" href="{{ asset('style.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('/style/welcone/welcone-style.css') }}">
 
 @section('title', 'Motos')
 
@@ -11,5 +11,6 @@
         <label for="username" class="label">Username</label> <!-- Associé à l'input via 'for' -->
     </div>  
     <h1>sakl</h1>
+    
 </section>
 @endsection
