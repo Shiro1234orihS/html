@@ -1,18 +1,19 @@
 body{
     padding: 0%;
     margin: 0%;
-    background-color: rgb(49, 48, 48);
+  
 }
 header{
-    background-color: #2424248C;
+    background-color: rgba(36, 36, 36, 0); /* Gris foncé avec 30% de transparence */
     display: flex;
     justify-content: center; /* Centrage horizontal */
     align-items: center;     /* Centrage vertical */
-    height: 30% ;
+    height: 20% ;
     width:  100% ;       
 }
 
 #herder-div{
+  
     display: flex;   
     justify-content: space-between; /* Espacement entre les enfants */
     align-items: center;            /* Centrer les éléments verticalement */
