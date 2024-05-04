@@ -1,25 +1,50 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import { userStore } from '@/stores/user'
+import { ref, computed, watch  } from 'vue'
+import { useRouter } from 'vue-router'
+
+
+const user = userStore()
+const router = useRouter();
+
+const name = ref("")
+const password = ref("")
+
+
+function login() {
+  user.login({
+    name: name.value,
+    password: password.value
+  }, () => {
+    router.push({ name: 'home' }); // Redirection après la connexion
+  });
+}
+
+function logout() {
+  twitter.user = null
+}
 </script>
 
 <template>
   <main>
     <div class="login-box">
- 
-    <form>
-      <div class="user-box">
-        <input type="text" name="" required="">
-        <label>Nom utilisateur</label>
-      </div>
-      <div class="user-box">
-        <input type="password" name="" required="">
-        <label>Mot de passe</label>
-      </div><center>
-      <a href="#">
-             SEND
-         <span></span>
-      </a></center>
-    </form>
+
+        <div class="user-box">
+          <input type="text"  required="" v-model="name">
+          <label>Nom utilisateur</label>
+        </div>
+        <div class="user-box">
+          <input type="password"  required="" v-model="password">
+          <label>Mot de passe</label>
+        </div><center>
+        <a  @click="login">
+               Connection
+           <span></span>
+        </a></center>
+
+    <label class="inscrption">Vous n’avez pas de compte ?</label> 
+    <a class="inscrptiona" href="/accountcreation">Inscrivez-vous</a>
+
     </div>
   </main>
 </template>
@@ -74,7 +99,7 @@ import TheWelcome from '../components/TheWelcome.vue'
   font-size: 12px;
 }
 
-.login-box form a {
+.login-box  a {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -84,8 +109,10 @@ import TheWelcome from '../components/TheWelcome.vue'
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   letter-spacing: 4px
+  
 }
 
 .login-box a:hover {
@@ -120,5 +147,28 @@ import TheWelcome from '../components/TheWelcome.vue'
   height: 2px;
   background: linear-gradient(90deg, transparent, #03f40f);
   animation: btn-anim1 2s linear infinite;
+}
+
+.inscrption{
+  position: absolute;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  pointer-events: none;
+  transition: .5s;
+}
+.inscrptiona{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: none;
+ 
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+
 }
 </style>

@@ -1,0 +1,20 @@
+# Utilise l'image officielle de Node.js version 8 
+FROM node:8
+
+# Définit le répertoire de travail dans le conteneur.
+WORKDIR /usr/src/app
+
+# Copie les fichiers package.json et package-lock.json 
+COPY package*.json ./
+
+# Exécute la commande 'npm install' pour installer les dépendances définies dans package.json.
+RUN npm install
+
+# Copie tous les fichiers et dossiers du répertoire source (où se trouve le Dockerfile) dans le répertoire de travail dans le conteneur.
+COPY . .
+
+# Informe Docker que le conteneur écoute sur le port 8005 à l'exécution.
+EXPOSE 8005 
+
+# Définit la commande par défaut à exécuter quand le conteneur démarre.
+CMD [ "npm", "start" ]

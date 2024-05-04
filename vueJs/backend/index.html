@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation de Mon Serveur</title>
+</head>
+<body>
+    <header>
+        <h1>Bienvenue sur Mon Serveur Node.js</h1>
+    </header>
+    <section id="intro">
+        <h2>Introduction</h2>
+        <p>Ce serveur est configuré pour servir une application web développée avec Vue.Js.</p>
+    </section>
+    <section id="technologies">
+        <h2>Technologies Utilisées</h2>
+        <ul>
+            <p>Node.js pour le côté serveur</p>
+            <p>Express.js pour la gestion des routes</p>
+            <p>Mysql et PHPMyAdmin</p>
+            <p>HTML, CSS, JavaScript pour le frontend</p>
+        </ul>
+    </section>
+    <section id="projets">
+        <h2>Projets Hébergés</h2>
+        <p>Le serveur Node.js exécute les différentes requêtes pour l'application web directement sur une base de données située sur PHPMyAdmin.</p>
+    </section>
+    <section id="commande">
+        <div class="commandes-container">
+            <div is ="commande1" class="commande">
+                <h2>/followers</h2>
+                <h2>La commande followers permets API de faire une requete sql dans la table followers</h2>
+            </div>
+            <div is ="commande2" class="commande">
+                <h2>/comment</h2>
+                <h2>La commande comment permets API de faire une requete sql dans la table comment</h2>
+            </div>
+            <div is ="commande3" class="commande">
+                <h2>/following</h2>
+                <h2>La commande following permets API de faire une requete sql dans la table following</h2>
+            </div>
+            <div is ="commande4" class="commande">
+                <h2>/liked</h2>
+                <h2>La commande liked permets API de faire une requete sql dans la table liked</h2>
+            </div>
+            <div is ="commande5" class="commande">
+                <h2>/media</h2>
+                <h2>La commande media permets API de faire une requete sql dans la table media</h2>
+            </div>
+            <div is ="commande6" class="commande">
+                <h2>/post</h2>
+                <h2>La commande post permets API de faire une requete sql dans la table post</h2>
+            </div>
+            <div is ="commande7" class="commande">
+                <h2>/saved</h2>
+                <h2>La commande saved permets API de faire une requete sql dans la table saved</h2>
+            </div>
+            <div is ="commande8" class="commande">
+                <h2>/yuser</h2>
+                <h2>La commande yuser permets API de faire une requete sql dans la table yuser</h2>
+            </div>
+        </div>  
+    </section>
+</body>
+</html>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+header {
+    background-color: #16406d;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+p{
+    color: #ffffff;
+}
+section {
+    margin: 20px;
+    padding: 20px;
+    background-color: rgb(54, 51, 51);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2 {
+    color: #ffffff;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* Styles pour les commandes */
+.commandes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crée une grille avec trois colonnes */
+    gap: 10px; /* Espacement entre les éléments */
+    padding: 10px; /* Padding autour de la grille */
+}
+
+.commande {
+    background-color: #3e3e3e;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre le contenu verticalement */
+    align-items: center; /* Centre le contenu horizontalement */
+    border: solid 1px #ddd;
+}
+
+.commande h2 {
+    text-align: center;
+    font-size: 1.2em; /* Taille du texte pour le titre */
+    margin-bottom: 0.5em; /* Espacement sous le titre */
+}
+
+.commande p {
+    text-align: center;
+    font-size: 1em; /* Taille du texte pour la description */
+    margin-top: 0; /* Pas d'espacement au-dessus de la description */
+}
+
+</style>
