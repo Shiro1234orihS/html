@@ -4,11 +4,10 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'  // Importez useRouter de Vue Router
 
 
-export const userStore = defineStore('twitter', () => {
+export const userStore = defineStore('user', () => {
 
   const router = useRouter()  // Créez une instance de useRouter
   const user = ref(null)
-  const tweets = ref([])
   const url = "http://ricardonunesemilio.fr:8005/"
 
 
@@ -28,20 +27,8 @@ export const userStore = defineStore('twitter', () => {
   }
 
 
-  function post(content) {
-    // Vérifier les données
-    // -> pour l'ergonomie
-    let newTweet = {
-      content: content,
-      user: "Luc",
-      timestamp: Date.now()
-    }
-    axios.post(url+"post", newTweet).then( response => {
-      tweets.value.splice(0,0,newTweet)
-    })
-  }
 
  
 
-  return { tweets, post, user, login }
+  return {  user, login }
 })
