@@ -13,6 +13,7 @@ export const polyStore = defineStore('poly', () => {
     return axios.get(url)
       .then(response => {
         marketData.value = response.data.results; // Mettre à jour la valeur de marketData
+        console.log(marketData.value);
       })
       .catch(error => {
         console.error("Erreur lors de la récupération des données du marché:", error);

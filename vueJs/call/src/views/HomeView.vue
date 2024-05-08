@@ -5,12 +5,12 @@ import Entreprise from '@/components/Entreprise.vue'
 
 const { marketData, research } = polyStore()
 const cherche = ref("")
-const componentKey = ref(0)  // Définir componentKey ici
+const refreshKey = ref(0)  // Définir componentKey ici
 
 function recherche() {
   research(cherche.value)
     .then(() => {
-      componentKey.value++  // Incrémenter la clé pour forcer le re-rendu
+      refreshKey.value++  // Incrémenter la clé pour forcer le re-rendu
     })
     .catch(error => {
       console.error("Erreur lors de la recherche :", error);
@@ -19,7 +19,7 @@ function recherche() {
 </script>
 
 <template :key="componentKey">
-  <main :key="componentKey">
+  <main :key="refreshKey">
     <div id="bar">
       <input placeholder="Enter your text..." class="input" name="text" type="text" v-model="cherche">
       <button @click="recherche" class="button">Cherche</button>
