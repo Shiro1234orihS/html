@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import axios from 'axios';
 
-export const polyStore = defineStore('poly', () => {
+
+export const usePolyStore  = defineStore('poly', () => {
   const marketData = ref([]);
 
   function research(name) {

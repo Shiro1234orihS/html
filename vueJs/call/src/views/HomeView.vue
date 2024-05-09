@@ -1,16 +1,20 @@
 <script setup>
 import { ref } from 'vue'
-import { polyStore } from '@/stores/poly'
+import { usePolyStore  } from '@/stores/poly'
 import Entreprise from '@/components/Entreprise.vue'
+import { useRouter } from 'vue-router'
 
-const { marketData, research } = polyStore()
+const router = useRouter();
+
+const { marketData, research } = usePolyStore ()
 const cherche = ref("")
 const refreshKey = ref(0)  // Définir componentKey ici
 
 function recherche() {
   research(cherche.value)
     .then(() => {
-      refreshKey.value++  // Incrémenter la clé pour forcer le re-rendu
+      // Recharge la page après que les données ont été chargées avec succès
+      router.push({ name: 'companysearchView' }); // Redirection après la connexion
     })
     .catch(error => {
       console.error("Erreur lors de la recherche :", error);
@@ -18,8 +22,8 @@ function recherche() {
 }
 </script>
 
-<template :key="componentKey">
-  <main :key="refreshKey">
+<template >
+  <main >
     <div id="bar">
       <input placeholder="Enter your text..." class="input" name="text" type="text" v-model="cherche">
       <button @click="recherche" class="button">Cherche</button>
