@@ -1,10 +1,8 @@
-// Assurez-vous que marketData est une ref et qu'elle est mise à jour correctement.
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import axios from 'axios';
 
-
-export const usePolyStore  = defineStore('poly', () => {
+export const usePolyStore = defineStore('poly', () => {
   const marketData = ref([]);
 
   function research(name) {
@@ -13,13 +11,15 @@ export const usePolyStore  = defineStore('poly', () => {
     
     return axios.get(url)
       .then(response => {
-        marketData.value = response.data.results; // Mettre à jour la valeur de marketData
+        marketData.value = response.data.results.map(ticker => ({
+          ...ticker,
+          logo: `https://logo.clearbit.com/${ticker.ticker.toLowerCase()}.com`  // Exemple d'utilisation de Clearbit pour obtenir le logo
+        }));
         console.log(marketData.value);
       })
       .catch(error => {
         console.error("Erreur lors de la récupération des données du marché:", error);
         marketData.value = [];  // Réinitialiser en cas d'erreur
-        
       });
   }
 
