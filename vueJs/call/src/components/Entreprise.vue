@@ -1,11 +1,17 @@
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter();
 const props = defineProps({
   entreprise: Object
 });
 
 const goToPage = (entreprise)=>{
   localStorage.setItem('Idticker', entreprise.ticker); // Stocker l'ID de l'utilisateur
-   console.log(localStorage.getItem('Idticker'));
+
+  // Recharge la page après que les données ont été chargées avec succès
+  router.push({ name: 'companie' }); // Redirection après la connexion
+
 }
    
 
