@@ -25,16 +25,14 @@ export const usePolyStore = defineStore('poly', () => {
   }
 
   function fetchCompanyByTicker(ticker){
-   console.log("resr");
-    const url = `https://api.poly.io/v3/company/${ticker}?&apiKey=${apiKey}`;
-    
+  
+    const url = `https://api.polygon.io/v1/meta/symbols/${ticker}/company?apiKey=${apiKey}`;
+    console.log(url)
     return axios.get(url)
     .then(response => {
-      if (response.data && response.data.results) {
-        marketData.value = response.data.results.map(company => ({
-          ...company,
-          logo: `https://logo.clearbit.com/${company.ticker.toLowerCase()}.com` // Utilisation de Clearbit pour obtenir le logo
-        }));
+      //console.log(response.data)
+      if (response.data || response.data.results) {
+        marketData.value = response.data
         console.log(marketData.value);
       } else {
         marketData.value = []; // Gérer le cas où les résultats ne sont pas comme prévu
