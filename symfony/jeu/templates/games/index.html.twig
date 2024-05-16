@@ -1,0 +1,18 @@
+{# templates/games/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des jeux{% endblock %}
+
+{% block body %}
+<h1>Liste des Jeux</h1>
+<ul>
+    {% for game in games %}
+    <li>
+        <strong>{{ game.name }}</strong> - Sorti le : {{ game.released | date('d/m/Y') }}
+        <br>
+        Rating : {{ game.rating }} / Metacritic : {{ game.metacritic }}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

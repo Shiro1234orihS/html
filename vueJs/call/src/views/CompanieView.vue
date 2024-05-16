@@ -4,8 +4,7 @@ import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
-const polyStore = usePolyStore();
-const { marketData, fetchCompanyByTicker } = polyStore;
+const { oneData, fetchCompanyByTicker } = usePolyStore();
 
 onMounted(() => {
   setTimeout(() => {
@@ -17,17 +16,19 @@ onMounted(() => {
     } else {
       console.error('No ticker found in localStorage');
     }
-  });  // Adjust the delay as needed
+  }, 1000);  // Ajustez le délai si nécessaire
 });
 </script>
 
 <template>
-  <ul v-if="marketData && marketData.length > 0">
-    <Entreprise v-for="entreprise in marketData" :key="entreprise.ticker" :entreprise="entreprise" />
-  </ul>
+  <div v-if="oneData">
+    <p>{{ oneData.listdate }}</p>
+  </div>
   <p v-else>No data available yet.</p>
 </template>
 
 <style scoped>
-
+p {
+  color: aliceblue;
+}
 </style>

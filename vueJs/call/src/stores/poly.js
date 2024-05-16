@@ -4,6 +4,7 @@ import axios from 'axios';
 
 export const usePolyStore = defineStore('poly', () => {
   const marketData = ref([]);
+  const oneData = ref([]);
   const apiKey = '4JoXvRoJGqkmzriveyO3hBVWkLn3sgWr';
   
   function research(name) {
@@ -24,26 +25,24 @@ export const usePolyStore = defineStore('poly', () => {
       });
   }
 
-  function fetchCompanyByTicker(ticker){
-  
+  function fetchCompanyByTicker(ticker) {
     const url = `https://api.polygon.io/v1/meta/symbols/${ticker}/company?apiKey=${apiKey}`;
-    console.log(url)
+    console.log(url);
     return axios.get(url)
-    .then(response => {
-      //console.log(response.data)
-      if (response.data || response.data.results) {
-        marketData.value = response.data
-        console.log(marketData.value);
-      } else {
-        marketData.value = []; // Gérer le cas où les résultats ne sont pas comme prévu
-        console.error("Aucun résultat trouvé");
-      }
-    })
-    .catch(error => {
-      console.error("Erreur lors de la récupération des données du marché:", error);
-      marketData.value = []; // Réinitialiser en cas d'erreur
-    });
-}
+      .then(response => {
+        if (response.data) {
+          oneData.value = response.data;
+          console.log(oneData.value);
+        } else {
+          oneData.value = null; // Gérer le cas où les résultats ne sont pas comme prévu
+          console.error("Aucun résultat trouvé");
+        }
+      })
+      .catch(error => {
+        console.error("Erreur lors de la récupération des données du marché:", error);
+        oneData.value = null; // Réinitialiser en cas d'erreur
+      });
+  }
 
-  return { marketData, research,fetchCompanyByTicker };
+  return { marketData, oneData, research,fetchCompanyByTicker };
 });
