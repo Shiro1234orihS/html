@@ -20,7 +20,7 @@ function addentreprises(req, res) {
     
    
     
-    var queryStr = 'INSERT INTO `ENTREPRISE` (`IDENTREPRISE `, `NOMENTREPRISE`, `TICKETENTREPRISE`) VALUES (?, ?, ?)';
+    var queryStr = 'INSERT INTO `ENTREPRISE` ( `NOMENTREPRISE`, `TICKETENTREPRISE`) VALUES ( ?, ?)';
     var queryStr2 = 'INSERT INTO `SUIVRE` (`IDCONNCTION `, `IDENTREPRIS`) VALUES (?, ?)'
     connection.connect();
     

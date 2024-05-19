@@ -11,7 +11,7 @@ export const companiesStore = defineStore('campanies', () => {
   const url = "http://ricardonunesemilio.fr:8005/"
 
 
-  function addcompagnies() {
+  function addcompagnies(auth) {
     axios.post(url + "addentreprises", auth).then(response => {
       if (response.data) {
         console.log("test")
