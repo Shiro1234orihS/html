@@ -30,6 +30,19 @@
   filter: drop-shadow(0 0 2px #2AF);
 }
 
+/*////////////////////////////////////////////// 
+            Parametre pour INSTA 
+/////////////////////////////////////////////*/
+
+.loader .instadash path {
+  stroke: #E1306C;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  animation: dashArray var(--sped, 2s) ease-in-out infinite,
+    dashOffset var(--sped, 2s) linear infinite;
+}
+
+
 @keyframes dashArray {
   0% {
     stroke-dasharray: 0 1 359 0;
