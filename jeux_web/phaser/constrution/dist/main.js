@@ -8,7 +8,7 @@ window.config = {
             mode: Phaser.Scale.FIT,
             autoCenter: Phaser.Scale.CENTER_BOTH,
             type: Phaser.AUTO,
-            scene: [Game],//Menu , 
+            scene: [Menu ,Game], 
             backgroundColor: '#2d2d2d',
             physics: {
             default: 'arcade',

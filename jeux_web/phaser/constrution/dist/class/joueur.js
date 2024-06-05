@@ -51,6 +51,7 @@ export default class  Joueur extends Phaser.Physics.Arcade.Sprite{
          
         this.creationDeplacement_diagonale();
     }
+    
     creationDeplacement_diagonale(){
        
         this.anims.create({
@@ -85,6 +86,10 @@ export default class  Joueur extends Phaser.Physics.Arcade.Sprite{
     // Méthode pour déplacer le joueur
     deplacer(cursors , delta) {
         
+       this.x = Math.ceil(this.x);
+       this.y = Math.ceil(this.y);
+        
+
         this.setVelocityX(0);
         this.setVelocityY(0);
         let animation= 'repos';
@@ -117,6 +122,7 @@ export default class  Joueur extends Phaser.Physics.Arcade.Sprite{
         } else if (cursors.down.isDown && cursors.right.isDown) {
             animation = 'deplacement_diag_BD';
         }
+  
 
         this.anims.play(animation, true);
         
