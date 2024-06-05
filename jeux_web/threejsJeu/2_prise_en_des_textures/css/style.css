@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #453939;
+  }
+  
+canvas {
+    display: block;
+}
+body { 
+    margin: 0;
+}
+
+#container3D{ 
+    width: 100vw; height: 100vh; display: block; 
+}
