@@ -8,6 +8,7 @@ const router = useRouter();
 
 const name = ref("")
 const password = ref("")
+const confirmPassword = ref("")
 
 const nameError = ref("")
 const passwordError = ref("")
@@ -30,16 +31,26 @@ function validateForm() {
     passwordError.value = ""
   }
 
+  if (confirmPassword.value.trim() === "") {
+    confirmPasswordError.value = "La confirmation du mot de passe est requise."
+    isValid = false
+  } else if (password.value !== confirmPassword.value) {
+    confirmPasswordError.value = "Les mots de passe ne correspondent pas."
+    isValid = false
+  } else {
+    confirmPasswordError.value = ""
+  }
+
   return isValid
 }
 
-function login() {
+function register() {
   if (validateForm()) {
-    user.login({
-      name: name.value,
-      password: password.value
+    user.register({
+      NOMUTILISATEUR: name.value,
+      MOTPASSUTILISATEUR: password.value
     }, () => {
-      router.push({ name: 'home' }); // Redirection après la connexion
+      router.push({ name: 'connexion' }); // Redirection après la connexion
     });
   }
 }
@@ -52,24 +63,32 @@ function logout() {
 <template>
   <main>
     <div class="login-box">
-      <span v-if="nameError" class="error">{{ nameError }}</span>
-      <div class="user-box">
-        <input type="text" required  v-model="name">
-        <label>Nom utilisateur</label>
-      </div>
-      <span v-if="passwordError" class="error">{{ passwordError }}</span>
-      <div class="user-box">
-        <input type="password" required  v-model="password">
-        <label>Mot de passe</label>
-      </div>
-      <center>
-        <a @click="login">
-          Connexion
-          <span></span>
-        </a>
-      </center>
-      <label class="inscription">Vous n’avez pas de compte ?</label>
-      <a class="inscriptiona" href="/accountcreation">Inscrivez-vous</a>
+        <span v-if="nameError" class="error">{{ nameError }}</span>
+        <div class="user-box">
+          <input type="text" required v-model="name">
+          <label>Nom utilisateur *   </label>
+        </div>
+        <span v-if="passwordError" class="error">{{ passwordError }}</span>
+        <div class="user-box">
+           
+            <input type="password" required v-model="password">
+            <label>Mot de passe * </label>
+         
+        </div>
+        <span v-if="confirmPasswordError" class="error">{{ confirmPasswordError }}</span>
+        <div class="user-box">
+            <input type="password" required v-model="confirmPassword">
+            <label>Confirmé le mot de passe * </label>           
+        </div>
+        <center>
+            <a @click="register">
+              Création du mot de passe
+              <span></span>
+            </a>
+        </center>
+    
+        <label class="inscription">Vous avez un compte ?</label>
+        <a class="inscriptiona" href="/">Connectez-vous</a>
     </div>
   </main>
 </template>
@@ -123,6 +142,14 @@ function logout() {
   font-size: 12px;
 }
 
+.error {
+  color: #E74C3C; /* Rouge */
+  font-size: 12px;  
+  bottom: -20px;
+  left: 0;
+
+}
+
 .login-box a {
   position: relative;
   display: inline-block;
@@ -133,7 +160,7 @@ function logout() {
   text-transform: uppercase;
   overflow: hidden;
   transition: .5s;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
   letter-spacing: 4px;
 }
@@ -173,6 +200,7 @@ function logout() {
 }
 
 .inscription {
+
   padding: 10px 0;
   font-size: 16px;
   color: #fff;
@@ -184,11 +212,4 @@ function logout() {
   color: #3498DB; /* Bleu Clair */
 }
 
-.error {
-  color: #E74C3C; /* Rouge */
-  font-size: 12px;  
-  bottom: -20px;
-  left: 0;
-
-}
 </style>

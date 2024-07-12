@@ -18,12 +18,16 @@ const linkApp = ref("");
 const userApp = ref("");
 const passApp = ref("");
 const commentApp = ref("");
+const dossierApp = ref("");
 
 
 
 
 const isConnexionView = computed(() => {
-  return route.name !== 'connexion';
+  if(route.name == 'connexion' ||route.name == 'accountcreation')
+    return false ;
+  else 
+    return true
 });
 
 const toggleHiddenButtons = () => {
@@ -62,16 +66,17 @@ const setPassword = () => {
 function newApp  ()  {
   const yuserId = ref(null)
   yuserId.value = localStorage.getItem('userId');
-  console.log( yuserId.value,linkApp.value,commentApp.value,passApp.value);
+  console.log( yuserId.value,linkApp.value,commentApp.value,dossierApp.value,passApp.value);
   app.postapp({
     IDUTILISTEUR : localStorage.getItem('userId'),
     NOMAPP: linkApp.value,
     UTILISATEURAPP : userApp.value,
     COMMENTAIRE : commentApp.value,
+    Dossier : dossierApp.value,
     MOTPASSAPP : passApp.value
   })
   router.push({ name: 'loader' }); 
-
+  hiddenButtonsVisible.value = !hiddenButtonsVisible.value;
 }
 </script>
 
@@ -88,7 +93,7 @@ function newApp  ()  {
             </nav>
         </header>
         <div v-show="hiddenButtonsVisible" id="hidden-pass">
-            <button @click="toggleHiddenButtons">❌</button>
+            <button @click="toggleHiddenButtons" id="exit">❌</button>
 
             <label>
                 <input v-model="linkApp" class="input" type="text" placeholder="" required="">
@@ -131,6 +136,10 @@ function newApp  ()  {
                 <input type="text" class="input" v-model="commentApp" placeholder="" required="">
                 <span>Commentaire</span>
             </label>
+            <label>
+                <input type="text" class="input" v-model="dossierApp" placeholder="" required="">
+                <span>Nom de dossier</span>
+            </label>
             <button @click="newApp">Nouveau mot de passe</button>
         </div>
         <RouterView/>
@@ -140,189 +149,199 @@ function newApp  ()  {
 </template>
 
 <style scoped>
- /* Global Styles */
- header {
-            background: #2C3E50; /* Bleu Foncé */
-            height: 75px;
-            position: relative;
-        }
+/* Global Styles */
+header {
+  background: #2C3E50; /* Bleu Foncé */
+  height: 75px;
+  position: relative;
+}
 
-        /* Navigation Styles */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-        }
+/* Navigation Styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
 
-        .menu {
-            display: flex;
-            gap: 20px;
-            flex-grow: 1;
-            justify-content: center;
-            align-items: center;
-        }
+.menu {
+  display: flex;
+  gap: 20px;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
 
-        /* Profile Button Styles */
-        .profile-button {
-            width: 60px;
-            height: 60px;
-            margin-right: 20px;
-            border-radius: 100%;
-            border: 2px solid #E74C3C; /* Rouge */
-        }
+/* Profile Button Styles */
+.profile-button {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+  border-radius: 100%;
+  border: 2px solid #E74C3C; /* Rouge */
+}
 
-        /* Hidden Password Section Styles */
-        #hidden-pass {
-            position: fixed;
-            text-align: center;
-            left: 25%;
-            width: 50%;
-            background-color: rgba(52, 152, 219, 0.84); /* Bleu Clair */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centrer horizontalement les éléments */
-            gap: 10px;
-            z-index: 2;
-            padding: 20px;
-            border-radius: 10px;
-        }
+/* Hidden Password Section Styles */
+#hidden-pass {
+  position: fixed;
+  text-align: center;
+  top: 0%;
+  left: 25%;
+  width: 50%;
+  background-color: rgba(52, 152, 219, 0.84); /* Bleu Clair */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer horizontalement les éléments */
+  z-index: 2;
+  padding: 20px;
+  border-radius: 10px;
+}
 
-        /* Input and Form Styles */
-        #input-pass {
-            margin: 0;
-        }
+/* Input and Form Styles */
+#input-pass {
+  margin: 0;
+}
 
-        .input {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
+.input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 2x;
+}
 
-        .input div {
-            display: flex;
-            align-items: center;
-        }
+.input div {
+  display: flex;
+  align-items: center;
+}
 
-        #nb {
-            width: 50px;
-            height: 30px;
-            color: #2C3E50; /* Bleu Foncé */
-            background-color: #ECF0F1; /* Gris Clair */
-        }
+#nb {
+  width: 50px;
+  height: 30px;
+  color: #2C3E50; /* Bleu Foncé */
+  background-color: #ECF0F1; /* Gris Clair */
+}
 
-        /* Checkbox Styles */
-        .check {
-            width: 20px;
-            height: 20px;
-            border-radius: 2px;
-            appearance: none;
-            background-color: #bbb;
-            transition: all .3s;
-        }
+/* Checkbox Styles */
+.check {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  appearance: none;
+  background-color: #bbb;
+  transition: all .3s;
+}
 
-        .check::before {
-            content: '';
-            position: absolute;
-            border: solid #fff;
-            display: block;
-            width: .3em;
-            height: .6em;
-            border-width: 0 .2em .2em 0;
-            z-index: 1;
-            opacity: 0;
-            right: calc(50% - .3em);
-            top: calc(50% - .6em);
-            transform: rotate(0deg);
-            transition: all .3s;
-            transform-origin: center center;
-        }
+.check::before {
+  content: '';
+  position: absolute;
+  border: solid #fff;
+  display: block;
+  width: .3em;
+  height: .6em;
+  border-width: 0 .2em .2em 0;
+  z-index: 1;
+  opacity: 0;
+  right: calc(50% - .3em);
+  top: calc(50% - .6em);
+  transform: rotate(0deg);
+  transition: all .3s;
+  transform-origin: center center;
+}
 
-        .check:checked {
-            animation: a .3s ease-in forwards;
-            background-color: #2ECC71; /* Vert */
-        }
+.check:checked {
+  animation: a .3s ease-in forwards;
+  background-color: #2ECC71; /* Vert */
+}
 
-        .check:checked::before {
-            opacity: 1;
-            transform: rotate(405deg);
-        }
+.check:checked::before {
+  opacity: 1;
+  transform: rotate(405deg);
+}
 
-        @keyframes a {
-            0% {
-                opacity: 1;
-                transform: scale(1) rotateY(0deg);
-            }
+@keyframes a {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(.8) rotateY(180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateY(360deg);
+  }
+}
 
-            50% {
-                opacity: 0;
-                transform: scale(.8) rotateY(180deg);
-            }
+/* CSS pour les inputs actuels */
+label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer horizontalement les labels */
+  width: 100%;
+  max-width: 300px; /* Largeur maximale des inputs */
+  margin: 10px 0;
+}
 
-            100% {
-                opacity: 1;
-                transform: scale(1) rotateY(360deg);
-            }
-        }
+label .input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 20px 10px 5px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
 
-        /* CSS pour les inputs actuels */
-        label {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centrer horizontalement les labels */
-            width: 100%;
-            max-width: 300px; /* Largeur maximale des inputs */
-            margin: 10px 0;
-        }
+label .input + span {
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
 
-        label .input {
-            background-color: #333;
-            color: #fff;
-            width: 100%;
-            padding: 20px 10px 5px 10px;
-            outline: 0;
-            border: 1px solid rgba(105, 105, 105, 0.397);
-            border-radius: 10px;
-            box-sizing: border-box;
-        }
+label .input:placeholder-shown + span {
+  top: 22.5px;
+  font-size: 0.9em;
+}
 
-        label .input + span {
-            color: rgba(255, 255, 255, 0.5);
-            position: absolute;
-            left: 10px;
-            top: 5px;
-            font-size: 0.9em;
-            cursor: text;
-            transition: 0.3s ease;
-        }
+label .input:focus + span,
+label .input:valid + span {
+  color: #00bfff;
+  top: 5px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
 
-        label .input:placeholder-shown + span {
-            top: 22.5px;
-            font-size: 0.9em;
-        }
+.input {
+  font-size: medium;
+}
 
-        label .input:focus + span,
-        label .input:valid + span {
-            color: #00bfff;
-            top: 5px;
-            font-size: 0.7em;
-            font-weight: 600;
-        }
+/* Overlay Styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
 
-        .input {
-            font-size: medium;
-        }
-
-        /* Overlay Styles */
-         .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 0;
-        } 
+/* Styles pour le bouton de fermeture */
+.exit {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 24px; /* Ajustez la taille de la croix */
+  color: #ff0000; /* Rouge */
+  box-shadow: #ff000000; /* Rouge */
+}
 </style>

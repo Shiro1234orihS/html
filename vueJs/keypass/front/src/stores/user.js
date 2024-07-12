@@ -23,13 +23,28 @@ export const userStore = defineStore('user', () => {
         }
     }).catch(error => {
         console.error("Erreur de connexion", error);
-    });
-}
+    });   
+  }
 
+  function register(auth, onSuccess){
+
+    axios.post(url + "register", auth).then(response => {
+      if (response.data && response.data.length > 0) {
+          const userData = response.data[0]; // Récupérer le premier (et unique) objet utilisateur
+          user.value = userData;
+          console.log("Connexion réussie", user.value);
+          localStorage.setItem('userId', userData.IDUTILISTEUR); // Stocker l'ID de l'utilisateur
+          console.log(localStorage.getItem('userId'));
+          if (onSuccess) onSuccess();
+      }
+  }).catch(error => {
+      console.error("Erreur de connexion", error);
+  });
+  }
 
 
 
  
 
-  return {  user, login }
+  return {  user, login , register }
 })

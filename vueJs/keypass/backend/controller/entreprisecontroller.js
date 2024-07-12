@@ -7,7 +7,7 @@ var connectionOptions = {
     host:  'localhost',
     port:  '3306',
     user:  'root',
-    password:  'root',
+    password:  'bsRt(bP)*h5yTB!A',
     database: 'call'
 };
 

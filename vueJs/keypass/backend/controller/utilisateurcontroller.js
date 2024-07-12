@@ -7,7 +7,7 @@ var connectionOptions = {
     host:  'localhost',
     port:  '3306',
     user:  'root',
-    password:  'root',
+    password:  'bsRt(bP)*h5yTB!A',
     database: 'keypass'
 };
 
@@ -39,21 +39,19 @@ function register(req, res) {
     var connection = mysql.createConnection(connectionOptions);
 
     console.log(req.body)
-    
-    req.body.UTILISATEURPREMIUM = 0;
-    req.body.UTILISATEURROLE = 'UTILISATEUR';
+
     
     var queryStr = 'INSERT INTO `UTILISATEUR` (`NOMUTILISATEUR`, `MOTPASSUTILISATEUR`) VALUES (?,?)';
     
     connection.connect();
     
-    connection.query(queryStr, [req.body.UTILISATEURID, req.body.UTILISATEURPSEUDO, req.body.NOMUTILISATEUR, req.body.UTILISATEURBIRTHDAY, req.body.UTILISATEURPASSWORD, req.body.UTILISATEURROLE, req.body.UTILISATEURPREMIUM], function (error, results, fields) {
+    connection.query(queryStr, [ req.body.NOMUTILISATEUR, req.body.MOTPASSUTILISATEUR], function (error, results, fields) {
        if (error) {
           console.error('Une erreur est survenue lors de la requête à la base de données:', error);
           res.status(500).json({ error: "Une erreur interne est survenue" });
           return;
        }
-      
+       console.log(results)
        res.status(200).json({ message: "UTILISATEUR enregistré avec succès" });
     });
    

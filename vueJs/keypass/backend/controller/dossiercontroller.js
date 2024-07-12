@@ -13,40 +13,9 @@ var connectionOptions = {
 // Création d'un pool de connexions MySQL pour une meilleure gestion des ressources.
 const pool = mysql.createPool(connectionOptions);
 
-// Fonction d'ajout d'application
-function addapp(req, res) {
-    console.log(req.body);
-    var queryStr = 'INSERT INTO `APP` (`IDUTILISTEUR`,`IDDOSSIER`,`NOMAPP`, `UTILISATEURAPP`, `COMMENTAIRE`, `MOTPASSAPP`) VALUES (?,?, ?, ?, ?, ?)';
-    var queryStr2 = 'SELECT IDDOSSIER from DOSSIER WHERE NOMDOSSIER like `?`'
-    var iddossier
-    if(req.body.NOMDOSSIER == ''){
-        pool.query(queryStr2,[req.body.NOMDOSSIER], function (error, results, fields) {
-            if (error) {
-                console.error('Une erreur est survenue lors de la requête à la base de données:', error);
-                res.status(500).json({ error: "Une erreur interne est survenue" });
-                return;
-            }
-            iddossier = results[0].IDDOSSIER;
-            
-        });
-    }else{
-        iddossier = null
-    }
-   
-
-    pool.query(queryStr, [req.body.IDUTILISTEUR,iddossier, req.body.NOMAPP, req.body.UTILISATEURAPP, req.body.COMMENTAIRE, req.body.MOTPASSAPP], function (error, results, fields) {
-        if (error) {
-            console.error('Une erreur est survenue lors de la requête à la base de données:', error);
-            res.status(500).json({ error: "Une erreur interne est survenue" });
-            return;
-        }
-        res.status(200).json({ message: "Application ajoutée avec succès" });
-    });
-}
-
 // Fonction pour obtenir toutes les applications
-function getapp(req, res) {
-    var query = 'SELECT * FROM `APP`';
+function getdossier(req, res) {
+    var query = 'SELECT * FROM `DOSSIER`';
 
     pool.query(query, function (error, results, fields) {
         if (error) {
@@ -62,37 +31,64 @@ function getapp(req, res) {
 }
 
 // Fonction pour obtenir une application par ID utilisateur
-function getappid(req, res) {
-    var userId = req.params.id; // Supposant que l'ID utilisateur est passé en paramètre de la requête
-    var query = 'SELECT * FROM `APP` WHERE `IDUTILISTEUR` = ?';
+function getdossierid(req, res) {
+    var query = 'SELECT ap.IDDOSSIER ,NOMDOSSIER FROM `DOSSIER`  ap  JOIN `DETIENT` dt ON ap.IDDOSSIER = dt.IDDOSSIER JOIN `UTILISATEUR`  ut ON ut.IDUTILISTEUR = dt.IDUTILISTEUR WHERE ut.IDUTILISTEUR = ?';
+    var userId = req.params.id; 
 
-    pool.query(query, [userId], function (error, results, fields) {
+    pool.query(query,[userId], function (error, results, fields) {
         if (error) {
             console.error('Une erreur est survenue lors de la requête à la base de données:', error);
             res.status(500).json({ error: "Une erreur interne est survenue" });
+            return;
         } else if (results.length === 0) {
-            res.status(404).json({ message: "Aucune application trouvée pour cet utilisateur" });
+            res.status(404).json({ message: "Aucune application trouvée" });
         } else {
             res.status(200).json(results);
         }
     });
 }
-// Fonction pour obtenir une application par ID utilisateur
-function getappiddossier(req, res) {
-    var userId = req.params.id; // Supposant que l'ID utilisateur est passé en paramètre de la requête
-    var query = 'SELECT * FROM `APP` WHERE `IDDOSSIER` = ?';
 
-    pool.query(query, [userId], function (error, results, fields) {
+// Fonction d'ajout d'application
+function adddossier(req, res) {
+    const queryStr1 = 'INSERT INTO `DOSSIER` (`NOMDOSSIER`, `IDPAREND`) VALUES (?, ?)';
+    const queryStr2 = 'SELECT IDDOSSIER FROM DOSSIER WHERE NOMDOSSIER = ?';
+    const queryStr3 = 'INSERT INTO `DETIENT` (`IDDOSSIER`, `IDUTILISTEUR`) VALUES (?, ?)';
+
+    pool.query(queryStr1, [req.body.NOMDOSSIER, req.body.IDPAREND], function(error, results, fields) {
         if (error) {
             console.error('Une erreur est survenue lors de la requête à la base de données:', error);
             res.status(500).json({ error: "Une erreur interne est survenue" });
-        } else if (results.length === 0) {
-            res.status(404).json({ message: "Aucune application trouvée pour cet utilisateur" });
-        } else {
-            res.status(200).json(results);
+            return;
         }
+
+        // Récupérer l'ID du dossier nouvellement créé
+        pool.query(queryStr2, [req.body.NOMDOSSIER], function(error, results, fields) {
+            if (error) {
+                console.error('Une erreur est survenue lors de la requête à la base de données:', error);
+                res.status(500).json({ error: "Une erreur interne est survenue" });
+                return;
+            }
+
+            const iddossierBaseDonnes = results[0].IDDOSSIER;
+
+            // Insérer dans la table DETIENT
+            pool.query(queryStr3, [iddossierBaseDonnes, req.body.IDUTILISATEUR], function(error, results, fields) {
+                if (error) {
+                    console.error('Une erreur est survenue lors de la requête à la base de données:', error);
+                    res.status(500).json({ error: "Une erreur interne est survenue" });
+                    return;
+                }
+
+                res.status(200).json({ message: "Dossier ajouté avec succès" });
+            });
+        });
     });
 }
+
+
+
+
+
 
 // Fonction de suppression d'application
 function delectepass(req, res) {
@@ -114,15 +110,16 @@ function delectepass(req, res) {
 
 // Fonction de mise à jour d'application
 function updateApp(req, res) {
-    const { IDAPP, NOMAPP, COMMENTAIRE, MOTPASSAPP } = req.body;
+    
+    const { NOMDOSSIER, IDPAREND} = req.body;
 
-    if (!IDAPP || !NOMAPP || !COMMENTAIRE || !MOTPASSAPP) {
+    if (!NOMDOSSIER || !IDPAREND ) {
         return res.status(400).json({ error: "Tous les champs sont requis" });
     }
 
-    var queryStr = 'UPDATE `APP` SET `NOMAPP` = ?, `COMMENTAIRE` = ?, `MOTPASSAPP` = ? WHERE `IDAPP` = ?';
+    var queryStr = 'UPDATE `DOSSIER` SET `NOMDOSSIER` = ?, `IDPAREND` = ?';
     
-    pool.query(queryStr, [NOMAPP, COMMENTAIRE, MOTPASSAPP, IDAPP], function (error, results, fields) {
+    pool.query(queryStr, [NOMDOSSIER, IDPAREND], function (error, results, fields) {
         
         if (error) {
             console.error('Une erreur est survenue lors de la requête à la base de données:', error);
@@ -139,4 +136,4 @@ function updateApp(req, res) {
 }
 
 // Exporte les fonctions pour qu'elles puissent être utilisées dans d'autres fichiers du projet
-module.exports = { addapp, getapp, getappid, delectepass, updateApp,getappiddossier };
+module.exports = { getdossier , getdossierid ,adddossier};

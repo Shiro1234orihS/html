@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ConnexionView from '../views/ConnexionView.vue'
 import HomeView from '../views/HomeView.vue'
 import LoaderView from '../views/LoaderView.vue'
+import TestView from '../views/TestView.vue'
+import CreationCompte from '../views/CreationCompte.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +22,16 @@ const router = createRouter({
       path: '/loader',
       name: 'loader',
       component: LoaderView
+    },
+    {
+      path: '/accountcreation',
+      name: 'accountcreation',
+      component: CreationCompte
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestView
     },
     {
       path: '/about',

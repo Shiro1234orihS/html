@@ -21,6 +21,7 @@ export const useAppStore = defineStore('app', () => {
       console.error("Erreur de connexion", error);
     }
   }
+
   function postapp(auth, onSuccess){
     const response =  axios.post(url+"addapp",auth).then(response =>{
       if (response.data) {
@@ -32,5 +33,32 @@ export const useAppStore = defineStore('app', () => {
       });
   }
   
-  return { app, getappbyuser,postapp  };
+  function delectepass(IDAPP, onSuccess) {
+    axios.delete(url + "deleteapp/" + IDAPP)
+        .then(response => {
+            console.log("eiotjzoitjz");
+            if (response.data) {
+                console.log("Suppression réussie");
+                if (onSuccess) onSuccess();
+            }
+        })
+        .catch(error => {
+            console.error("Erreur de connexion", error);
+        });
+  }
+
+  function updateApp(auth, onSuccess) {
+    axios.put(url + "updateapp", auth)
+      .then(response => {
+        if (response.data) {
+          console.log("Mise à jour réussie");
+          if (onSuccess) onSuccess();
+        }
+      })
+      .catch(error => {
+        console.error("Erreur de connexion", error);
+      });
+  }
+
+  return { app, getappbyuser,postapp,delectepass, updateApp};
 });
