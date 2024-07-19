@@ -15,7 +15,6 @@ export default {
   },
   methods: {
     fetchPasswords() {
-      console.log('lID est ' + this.dossier.IDDOSSIER)
       this.$emit('fetch-passwords', this.dossier.IDDOSSIER);
     }
   }

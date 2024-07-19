@@ -7,6 +7,7 @@ import { useRouter } from 'vue-router'  // Importez useRouter de Vue Router
 export const userStore = defineStore('user', () => {
 
   const router = useRouter()  // Créez une instance de useRouter
+  let usertoken =  ref(null);
   const user = ref(null)
   const url = "http://ricardonunesemilio.fr:8005/"
 
@@ -16,9 +17,8 @@ export const userStore = defineStore('user', () => {
         if (response.data && response.data.length > 0) {
             const userData = response.data[0]; // Récupérer le premier (et unique) objet utilisateur
             user.value = userData;
-            console.log("Connexion réussie", user.value);
             localStorage.setItem('userId', userData.IDUTILISTEUR); // Stocker l'ID de l'utilisateur
-            console.log(localStorage.getItem('userId'));
+            localStorage.setItem('token', userData.TOKEN);
             if (onSuccess) onSuccess();
         }
     }).catch(error => {
@@ -26,25 +26,20 @@ export const userStore = defineStore('user', () => {
     });   
   }
 
-  function register(auth, onSuccess){
-
+  function register(auth, onSuccess) {
     axios.post(url + "register", auth).then(response => {
-      if (response.data && response.data.length > 0) {
-          const userData = response.data[0]; // Récupérer le premier (et unique) objet utilisateur
-          user.value = userData;
-          console.log("Connexion réussie", user.value);
-          localStorage.setItem('userId', userData.IDUTILISTEUR); // Stocker l'ID de l'utilisateur
-          console.log(localStorage.getItem('userId'));
-          if (onSuccess) onSuccess();
-      }
-  }).catch(error => {
-      console.error("Erreur de connexion", error);
-  });
+      console.log("Réponse de l'API d'inscription :", response.data);
+      if (response.data && response.data.token) {
+        if (onSuccess) return onSuccess();
+      } 
+    }).catch(error => {
+      console.error("Erreur d'inscription", error);
+    });
   }
 
 
 
  
 
-  return {  user, login , register }
+  return {  user,usertoken, login , register }
 })

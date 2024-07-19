@@ -46,12 +46,16 @@ function validateForm() {
 
 function register() {
   if (validateForm()) {
+    console.log("Validation du formulaire réussie. Tentative d'inscription...");
     user.register({
       NOMUTILISATEUR: name.value,
       MOTPASSUTILISATEUR: password.value
     }, () => {
-      router.push({ name: 'connexion' }); // Redirection après la connexion
+      console.log("Redirection après inscription");
+      router.push({ name: 'connexion' });
     });
+  } else {
+    console.log("Validation du formulaire échouée");
   }
 }
 

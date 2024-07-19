@@ -63,7 +63,7 @@ app.get('/getappid/:id', Appcontroller.getappid); // Récupération d'une app pa
 app.post('/addapp', Appcontroller.addapp); // Ajout d'une nouvelle app
 app.delete('/deleteapp/:id', Appcontroller.delectepass); // Suppression d'une app par ID
 app.put('/updateapp', Appcontroller.updateApp); // Mise à jour d'une app
-app.get('/getappiddossier/:id', Appcontroller.getappiddossier); //
+app.get('/getappiddossier/:id/:id2', Appcontroller.getappiddossier); //
 
 // Routes pour la gestion des dossier
 app.get('/dossier', Dossiercontroller.getdossier); // Récupération de la liste des dossier
