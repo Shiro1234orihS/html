@@ -1,0 +1,31 @@
+$boule-color: #3f3e3e;
+$shadow-color: #757373;
+
+body{
+    display: flex;
+  
+    .left-boule {
+        width: 30%;
+        height: 115%; /* Fonctionne car l'élément parent a une hauteur définie */
+        box-shadow: 0 4px 8px $shadow-color;
+        border-radius: 10px;
+        background-color: $boule-color;
+        overflow: hidden;
+        margin: 2% 0% 0% 2%;
+        
+    }
+    
+    .right-boule{
+        width: 65%;
+        height: 115%; /* Fonctionne car l'élément parent a une hauteur définie */
+        box-shadow: 0 4px 8px $shadow-color;
+        border-radius: 10px;
+        background-color: $boule-color;
+        overflow: hidden;
+        margin: 2% 0% 2% 2%;
+    }
+    
+    p{
+        color: aqua;
+    }
+}
