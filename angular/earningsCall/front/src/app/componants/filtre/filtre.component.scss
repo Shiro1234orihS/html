@@ -1,0 +1,8 @@
+.top-boule{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    input{
+        width: calc(100% / 4);
+    }
+}

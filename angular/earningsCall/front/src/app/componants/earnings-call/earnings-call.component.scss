@@ -1,0 +1,115 @@
+body {
+    background-color: white;
+  }
+  
+  .calendar {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  #reset {
+    width: 100%;
+    height: 10%;
+  }
+  
+  .month {
+    text-align: center;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .miseenforme {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .case {
+    width: calc(100% / 7);
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #000000;
+    vertical-align: top;
+  }
+  
+  #disabled {
+    color: gray;
+  }
+  
+  #today {
+    background-color: yellow;
+  }
+  
+  .selected {
+    background-color: blue;
+    color: white;
+  }
+  
+  /* Ajouter des styles pour le calendrier */
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .calendar-table th,
+  .calendar-table td {
+    border: 1px solid #ddd;
+    width: calc(100% / 7);
+    height: 80px;
+    text-align: center;
+    vertical-align: top;
+  }
+  
+  .calendar-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .calendar-table td {
+    cursor: pointer;
+  }
+  
+  .calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .calendar-controls button {
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .calendar-controls button:hover {
+    background-color: #2980b9;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  
