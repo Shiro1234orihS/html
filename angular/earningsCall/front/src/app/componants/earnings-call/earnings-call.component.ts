@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FinnhubService } from '../../service/apiFinhub/finnhub.service';
 import { Entreprise } from '../../models/entreprisemodel/entreprise.model';
+import { EntrepriseService } from '../../service/entreprise/entreprise.service';
 
 @Component({
   selector: 'app-earnings-call',
@@ -23,7 +24,7 @@ export class EarningsCallComponent implements OnInit, AfterViewInit {
   public days: HTMLCollectionOf<HTMLTableCellElement> | undefined;
   public daysLen: number | undefined;
 
-  constructor(private finnhubService: FinnhubService) { }
+  constructor(private finnhubService: FinnhubService, private entrepriseService: EntrepriseService) { }
 
   ngOnInit(): void {
     this.finnhubService.RechercheLesEarningCall().then(() => {
@@ -100,11 +101,22 @@ export class EarningsCallComponent implements OnInit, AfterViewInit {
         if (dayDate.getFullYear() === entrepriseDate.getFullYear() &&
             dayDate.getMonth() === entrepriseDate.getMonth() &&
             dayDate.getDate() === entrepriseDate.getDate()) {
-          const logoHtml = `<div class="logo-container"><img src="${entreprise.image}" alt="${entreprise.nom}" class="image-icone"></div>`;
-          this.days![j].innerHTML += logoHtml;
+          const logoElement = document.createElement('img');
+          logoElement.src = entreprise.image;
+          logoElement.alt = entreprise.nom;
+          logoElement.classList.add('icone-entreprise');
+          logoElement.addEventListener('click', () => {
+            this.viewEntrepriseDetails(entreprise.symbol);
+          });
+          this.days![j].appendChild(logoElement);
         }
       });
     }
+  }
+
+  viewEntrepriseDetails(symbol: string): void {
+    console.log(`Fetching details for ${symbol}`); // Ajoutez ceci pour vérifier si la méthode est appelée
+    this.entrepriseService.RechercherInfoEntreprise(symbol);
   }
 
   clickDay(o: HTMLTableCellElement): void {

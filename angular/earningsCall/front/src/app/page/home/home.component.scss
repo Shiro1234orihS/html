@@ -5,7 +5,7 @@ body{
     display: flex;
   
     .left-boule {
-        width: 30%;
+        width: 20%;
         height: 115%; /* Fonctionne car l'élément parent a une hauteur définie */
         box-shadow: 0 4px 8px $shadow-color;
         border-radius: 10px;
@@ -16,7 +16,7 @@ body{
     }
     
     .right-boule{
-        width: 65%;
+        width: 75%;
         height: 115%; /* Fonctionne car l'élément parent a une hauteur définie */
         box-shadow: 0 4px 8px $shadow-color;
         border-radius: 10px;

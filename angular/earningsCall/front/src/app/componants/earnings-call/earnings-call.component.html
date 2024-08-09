@@ -1,36 +1,35 @@
 <div class="calendar">
-    <div class="calendar-header">
-      <span class="head-day"></span>
-      <span class="head-month"></span>
-    </div>
-    <div class="calendar-controls">
-      <button class="pre-button">Previous</button>
-      <button class="next-button">Next</button>
-      <button id="reset">Reset</button>
-    </div>
-    <table class="calendar-table">
-      <thead>
-        <tr>
-          <th>Sun</th>
-          <th>Mon</th>
-          <th>Tue</th>
-          <th>Wed</th>
-          <th>Thu</th>
-          <th>Fri</th>
-          <th>Sat</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let week of [0,1,2,3,4,5]">
-          <td class="case"></td>
-          <td class="case"></td>
-          <td class="case"></td>
-          <td class="case"></td>
-          <td class="case"></td>
-          <td class="case"></td>
-          <td class="case"></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="calendar-header">
+    <span class="head-day"></span>
+    <span class="head-month"></span>
   </div>
-  
+  <div class="calendar-controls">
+    <button class="pre-button">Previous</button>
+    <button class="next-button">Next</button>
+    <button id="reset">Reset</button>
+  </div>
+  <table class="calendar-table">
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of [0,1,2,3,4,5]">
+        <td class="case"></td>
+        <td class="case"></td>
+        <td class="case"></td>
+        <td class="case"></td>
+        <td class="case"></td>
+        <td class="case"></td>
+        <td class="case"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

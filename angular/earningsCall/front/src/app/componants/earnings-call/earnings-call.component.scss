@@ -65,7 +65,7 @@ body {
     border-collapse: collapse;
   }
   
-  .calendar-table th,
+  
   .calendar-table td {
     border: 1px solid #ddd;
     width: calc(100% / 7);
@@ -78,9 +78,7 @@ body {
     background-color: #f2f2f2;
   }
   
-  .calendar-table td {
-    cursor: pointer;
-  }
+
   
   .calendar-controls {
     display: flex;

@@ -14,7 +14,7 @@ export class FinnhubService {
 
   // Définir les dates de début et de fin pour la plage de dates souhaitée
   private startDate: string = '2024-07-26';
-  private endDate: string = '2024-09-25';
+  private endDate: string = '2024-08-25';
 
   private earningsUrl = `https://finnhub.io/api/v1/calendar/earnings?from=${this.startDate}&to=${this.endDate}&token=${this.apiKey}`;
 
@@ -38,7 +38,7 @@ export class FinnhubService {
 
         this.ListeEntreprise = sortedEarnings.map(earning => {
           const companyInfo = earning.companyInfo!;
-          return new Entreprise(companyInfo.name, companyInfo.logo, earning.date);
+          return new Entreprise(companyInfo.name, companyInfo.logo,earning.symbol, earning.date);
         });
 
         console.log(this.ListeEntreprise);
@@ -71,7 +71,7 @@ export class FinnhubService {
 
         this.ListeEntreprise = sortedEarnings.map(earning => {
           const companyInfo = earning.companyInfo!;
-          return new Entreprise(companyInfo.name, companyInfo.logo, earning.date);
+          return new Entreprise(companyInfo.name, companyInfo.logo,earning.symbol, earning.date);
         });
 
         console.log(this.ListeEntreprise);

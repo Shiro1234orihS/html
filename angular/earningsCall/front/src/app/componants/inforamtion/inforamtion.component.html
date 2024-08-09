@@ -1,1 +1,5 @@
-<p>inforamtion works!</p>
+<div *ngIf="entreprise">
+  <h2>{{ entreprise.nom }}</h2>
+  <img *ngIf="entreprise.image" [src]="entreprise.image" alt="{{ entreprise.nom }}" width="100" height="100">
+  <p *ngIf="entreprise.dateEarningsCall">Date des résultats : {{ entreprise.dateEarningsCall }}</p>
+</div>
