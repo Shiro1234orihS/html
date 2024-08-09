@@ -27,7 +27,8 @@ export class EntrepriseService {
         try {
           const response = await fetch(earningsUrl);
           const data: CompanyInfo = await response.json();
-          this.entreprise = new Entreprise(data.name, symbol, data.logo, "test");
+          this.entreprise = new Entreprise(data.name,  data.logo ,symbol, "test");
+          console.log(this.entreprise.image)
           this.changeEntreprise(this.entreprise);
           resolve(data);
         } catch (error) {
