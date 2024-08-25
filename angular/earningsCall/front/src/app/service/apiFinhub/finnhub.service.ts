@@ -38,7 +38,7 @@ export class FinnhubService {
 
         this.ListeEntreprise = sortedEarnings.map(earning => {
           const companyInfo = earning.companyInfo!;
-          return new Entreprise(companyInfo.name, companyInfo.logo,earning.symbol, earning.date);
+          return new Entreprise(companyInfo.name, companyInfo.logo,earning.symbol, earning.date , "test");
         });
 
         console.log(this.ListeEntreprise);
@@ -71,7 +71,7 @@ export class FinnhubService {
 
         this.ListeEntreprise = sortedEarnings.map(earning => {
           const companyInfo = earning.companyInfo!;
-          return new Entreprise(companyInfo.name, companyInfo.logo,earning.symbol, earning.date);
+          return new Entreprise(companyInfo.name, companyInfo.logo,earning.symbol, earning.date, 'test');
         });
 
         console.log(this.ListeEntreprise);

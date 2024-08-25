@@ -115,7 +115,6 @@ export class EarningsCallComponent implements OnInit, AfterViewInit {
   }
 
   viewEntrepriseDetails(symbol: string): void {
-    console.log(`Fetching details for ${symbol}`); // Ajoutez ceci pour vérifier si la méthode est appelée
     this.entrepriseService.RechercherInfoEntreprise(symbol);
   }
 

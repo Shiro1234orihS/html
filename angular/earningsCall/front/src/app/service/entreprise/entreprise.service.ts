@@ -10,7 +10,7 @@ export class EntrepriseService {
   constructor() { }
 
   private apiKey: string = 'cqh9bv9r01qm46d7drkgcqh9bv9r01qm46d7drl0';
-  public entreprise: Entreprise = new Entreprise('test', 'test', 'test', 'test');
+  public entreprise: Entreprise = new Entreprise('test', 'test', 'test', 'test', "test");
 
   private entrepriseSource = new BehaviorSubject<Entreprise | null>(null);
   currentEntreprise = this.entrepriseSource.asObservable();
@@ -27,8 +27,8 @@ export class EntrepriseService {
         try {
           const response = await fetch(earningsUrl);
           const data: CompanyInfo = await response.json();
-          this.entreprise = new Entreprise(data.name,  data.logo ,symbol, "test");
-          console.log(this.entreprise.image)
+          console.log(data)
+          this.entreprise = new Entreprise(data.name,  data.logo ,symbol, "test" , data.country);
           this.changeEntreprise(this.entreprise);
           resolve(data);
         } catch (error) {
@@ -45,4 +45,5 @@ interface CompanyInfo {
   marketCapitalization: number;
   exchange: string;
   logo: string;
+  country : string;
 }
