@@ -1,12 +1,16 @@
-
+/* ajoute des front pour l'écriture */
+ 
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     background-color: #111111;
     cursor:none ;
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 700; 
+    font-style: normal;
 }
-
 
 .custom-cursor{
     position: fixed;
@@ -37,10 +41,6 @@ body {
     z-index: 999999998;
     pointer-events: none; /* Empêcher l'interaction avec les curseurs personnalisés */
 }
-
-
-
-
 
 button:hover ~ .custom-cursor,
 button:hover ~ .custom-cursor-before {
@@ -237,7 +237,7 @@ button:hover ~ .custom-cursor-before {
     vertical-align: middle;
 }
 
-h1{
+.titre{
     font-size: 32px;
     font-family:Arial, Helvetica, sans-serif;
     color: white;
@@ -287,12 +287,11 @@ span{
     color: #ffffff;
     font-size: 14px;
 }
-ul{
+.container{
     background: rgba(57, 53, 53, 0.6); 
     list-style-type: none;
     width: 96%; 
     height: 96%;
-   
     position: absolute; 
     top: 0;
     left: 0;
@@ -335,33 +334,6 @@ a{
     margin: auto;
     overflow: hidden;
 }
-
-/* Style pour la popover personnalisée */
-.custom-popover {
-    position: absolute;
-    background: #000;
-    color: #fff;
-    border-radius: 3px;
-    padding: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    display: none; /* caché par défaut */
-    z-index: 10;
-    width: 250px; /* Largeur du popover */
-    font-size: 0.9em;
-}
-
-/* Flèche au-dessus du popover */
-.custom-popover:before {
-    content: "";
-    position: absolute;
-    top: -20px; /* Ajustez si nécessaire */
-    left: 50%;
-    margin-left: -10px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent #000 transparent;
-}
-
 
 @media screen and (max-width: 600px) {
     .sidebar {

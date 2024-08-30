@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/stylecv/style.css">
     <link rel="stylesheet" href="/stylecv/styleproject.css">
     <link rel="stylesheet" href="/stylecv/home/homeStyle.css">
+    <link rel="stylesheet" href="/stylecv/into/into.css">
     <link rel="icon" type="image/png" href="ressource/icone/icone_site.webp">
     <title>Portfolio</title>
 
@@ -17,6 +18,7 @@
 
 <body>
     <script src="main.js" defer></script>
+    <script src="/stylecv/test/main.js" defer></script>
     <div class="custom-cursor-before"></div>
     <div class="custom-cursor"></div>
 
@@ -28,7 +30,6 @@
         <a href="#technical"><img src="ressource/icone/icone_technical.png" class="icone"><span class="text">Compétences techniques</span></a>
         <a href="#languages"><img src="ressource/icone/icone_langue.png" class="icone"><span class="text">Langues</span></a>
         <a href="#references"><img src="ressource/icone/icone_references.png" class="icone"><span class="text">Références</span></a>  
-        
         <table class="container-buttons">
             <tr>
                 <td colspan="3" class="lang-title">Langue</td>
@@ -46,10 +47,18 @@
             </tr>
         </table>        
     </div>
-
-    <section id="home" class="section">
+    <section  id="fond" class="section ">
+        <div id="containerBonjour">
+            <h1 id="Bonjour">Bienvenue sur mon portfolio !</h1>  
+        </div>
+        <div>
+            <img src="./ressource/pageInto/flechegauche.png" alt="Flèche gauche" style="transform: rotate(180deg); width: 30%; ">
+            <p style=" font-size: 20px;">Utilisez ce menu pour naviguer dans mon portfolio.</p>
+        </div>
+    </section>
+    <section id="home" class="section hidden">
         <div id="presentation" class="background">
-            <ul>
+            <ul class="container">
                 <h2>Données personnelles</h2>
                 <div class="container_info_personnel"><!--Je dois mieux organiser et modifier-->
                     <div class="personal-info">
@@ -93,7 +102,7 @@
 
     <section id="education" class="section hidden">
         <div id="iut" class="background">
-            <ul>
+            <ul class="container">
                 <div class="container_presentation">
                     <h2>BUT Informatique</h2>
                     <div class="personal-info">
@@ -113,11 +122,11 @@
             </ul>
         </div>
     </section>
-
+    
     <section id="work" class="section hidden">
-        <h1>Travaux et Stages</h1>
+        <h1 class="titre">Travaux et Stages</h1>
         <div id='taff' class='background'>
-            <ul>
+            <ul class="container">
                 <h2>Travaux</h2>
                 <div class="container_presentation">
                     <div class="personal-info">
@@ -145,7 +154,7 @@
             </ul>
         </div>
         <div id='taff2' class='background'>
-            <ul>
+            <ul class="container">
                 <div class="container_presentation">
                     <div class="personal-info">
                         <img src="ressource/logo_emtreprise/ATMB.png" alt="">
@@ -162,9 +171,9 @@
     </section>
 
     <section id="project" class="section hidden"> 
-        <h1>Projets universitaires</h1>
+        <h1 class="titre">Projets universitaires</h1>
         <div id='wests' class='background'>
-            <ul>
+            <ul class="container">
                 <h2>Wests Of Survival</h2>
 
                 <div class="container_presentation">
@@ -182,7 +191,7 @@
         </div>
 
         <div id="bmw" class='background'>
-            <ul>
+            <ul class="container">
                 <h2>BMW Motorrad</h2>
                 <div class="container_presentation">
                     <h2>Le but du projet avec Laravel</h2>
@@ -196,7 +205,7 @@
         </div>
 
         <div id="bmw2" class='background'>
-            <ul>
+            <ul class="container">
                 <h2>BMW Motorrad en Vue.js et une API en ASP.NET</h2>
                 <div class="container_presentation">
                     <h2>Le but du projet</h2>
@@ -223,7 +232,7 @@
         </div>
 
         <div id="docker" class='background'>
-            <ul>
+            <ul class="container">
                 <h2>Twitter en Vue.js</h2>
                 <div class="container_presentation">
                     <h2>Le but du projet</h2>
@@ -249,9 +258,9 @@
                 </div>
             </ul>
         </div>
-        <h1>Projets Personnels</h1>
+        <h1 class="titre">Projets Personnels</h1>
         <div class='background'>
-            <ul>
+            <ul class="container">
                 <h2>Création des logos des différents réseaux sociaux</h2>
                 <div class="logo-container">
                 
@@ -340,7 +349,7 @@
 
     <section id="technical" class="section hidden">
         <div id="beau" class="background">
-            <ul>
+            <ul class="container">
                 <h2>Développement d'application</h2>
                 <div class="portfolio-item">
                   <h3 class="nomLanguage">C#</h3>
@@ -366,7 +375,7 @@
         </div>
 
         <div id="beau3" class="background">
-            <ul>
+            <ul class="container">
                 <h2>Conception de pages Web</h2>
                 <div class="portfolio-item">
                     <h3 class="nomLanguage">CSS</h3>
@@ -403,7 +412,7 @@
         </div>
 
         <div id="beau2" class="background">
-            <ul>
+            <ul class="container">
                 <h2>Administration de base de données</h2>
                 <div class="portfolio-item">
                     <h3 class="nomLanguage">Oracle</h3>
@@ -422,7 +431,7 @@
         </div>
 
         <div id="beau2" class="background">
-            <ul>
+            <ul class="container">
                 <h2>Outils et Technologies Maîtrisés</h2>
                 <div class="portfolio-item">
                     <h3 class="nomLanguage">Visual Studio Code</h3>
@@ -466,7 +475,7 @@
 
     <section id="languages" class="section hidden">
         <div id="langue" class="background">
-            <ul>
+            <ul class="container">
                 <h2>Langue maternelle</h2>
                 <div class="presentation_langue">
                     <div class="personal-info">
@@ -507,7 +516,7 @@
                         </div>                       
                     </div>
                 </div>
-            </ul>
+            </ul class="container">
         </div>
     </section>
 
@@ -541,6 +550,9 @@
             </div>
        </div>
     </section>
-    <div class="custom-popover" id="popover1"><div>Mon LinkedIn :</div><img id='QR_code' src='ressource/QR_code.webp' alt='LinkedIn' style='width: 50%; height: 50%;'></div>
+
+   
+    
+
 </body>
 </html>
