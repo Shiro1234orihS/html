@@ -13,7 +13,23 @@
   </td>
   <td>
     <div class="placement-logo" :id="`app-password-${app.IDAPP}`">
-      <p>{{ app.MOTPASSAPP }}</p>
+       <!-- Affichage conditionnel du mot de passe -->
+      <p>{{ isPasswordVisible ? app.MOTPASSAPP : '******' }}</p>
+      <!-- Bouton pour afficher/masquer le mot de passe -->
+      <img 
+        v-if="isPasswordVisible" 
+        src="./../assets/img/hide.webp" 
+        alt="cacher" 
+        @click="togglePasswordVisibility" 
+        class="image"
+      >
+      <img 
+        v-else 
+        src="./../assets/img/show.webp" 
+        alt="afficher" 
+        @click="togglePasswordVisibility" 
+        class="image"
+      >
       <img src="./../assets/img/copie.webp" alt="copie" @click="copierTexte(`app-password-${app.IDAPP}`)" class="image">
     </div>
   </td>
@@ -35,6 +51,7 @@
     <button @click="deleteApp">OUI</button>
     <button @click="annulerDelete">Non</button>
   </div>
+  
   <div v-show="hiddenButtonsVisible2" id="hidden-pass-update">
     <button @click="toggleHiddenButtons" id="exit">❌</button>
 
@@ -93,11 +110,13 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,watchEffect } from 'vue';
 import Clipboard from 'clipboard';
 import { useAppStore } from './../stores/app';
 import { useRouter } from 'vue-router';
 import { useDossierStore } from '@/stores/dossier';
+
+
 
 export default {
   props: {
@@ -122,6 +141,16 @@ export default {
     const includeUppercase = ref(false);
     const includeNumbers = ref(false);
     const dossierStore = useDossierStore();
+
+    const isPasswordVisible = ref(false);
+
+    watchEffect(() => {
+      linkApp.value = props.app.NOMAPP;
+      userApp.value = props.app.UTILISATEURAPP;
+      passApp.value = props.app.MOTPASSAPP;
+      commentApp.value = props.app.COMMENTAIRE || 'N/A';
+    });
+  
 
     const suppIcone = () => {
       hiddenButtonsVisible.value = !hiddenButtonsVisible.value;
@@ -194,6 +223,10 @@ export default {
       });
     };
 
+    const togglePasswordVisibility = () => {
+      isPasswordVisible.value = !isPasswordVisible.value;
+    };
+
     onMounted(() => {
       new Clipboard('.image', {
         target: function(trigger) {
@@ -213,6 +246,7 @@ export default {
       includeSpecialChars,
       includeUppercase,
       includeNumbers,
+      isPasswordVisible,
       toggleHiddenButtons,
       generatePassword,
       setPassword,
@@ -223,6 +257,7 @@ export default {
       annulerDelete,
       annulerUpdate,
       selectedDossier,
+      togglePasswordVisibility,
       dossierStore
     };
   },
@@ -263,6 +298,7 @@ p {
 .image {
   height: 50px;
   cursor: pointer;
+  width: 50px;
 }
 
 table, th, td {
