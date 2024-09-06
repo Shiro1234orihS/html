@@ -1,0 +1,124 @@
+#carousel {
+    position: absolute;
+    display: flex;
+    left: 10%;
+    width: 540%; /* Augmenté pour correspondre à la largeur totale des items */
+    height: 100%;
+    transition: transform 0.5s ease;
+    
+}
+
+.itemCarousel {
+    position: relative;
+    width: 16.666%; /* Ajusté pour 6 items */
+    height: 100%;
+}
+
+#menu {
+    position: fixed;
+    left: 47%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1%;
+    width: 20%;
+    background-color: #0011ff65;
+    border-radius: 25px;
+    z-index: 2;
+    
+}
+
+#menu img {
+    cursor: pointer;
+}
+
+.carousel-button {
+    background-color: white;
+    border: none;
+    margin: 0 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carousel-button.active {
+    background-color: gray; /* Indicateur de l'élément actif */
+}
+
+#item1 {
+    background-color: #00ff3336;
+    color: aliceblue;
+}
+.persojeu{
+    width: 70%;
+}
+#indicationJeu{
+    width: 20%;
+    display: flex;
+    position: absolute; /* Fixe la position de l'élément par rapport à la fenêtre */
+    bottom: 0%; /* Positionne l'élément à 0 pixels du bas de la page */
+    right: 13%; 
+    z-index: 44;
+}
+.presentationProjet{
+    position: relative;
+    top: 10%;
+    height: 90%;
+    width: 100%;
+    padding: 2%;
+}
+#video{
+    width: 28%; /* Ou une largeur spécifique, par exemple 800px */
+    height: 28%; /* Ajustez en fonction du ratio souhaité */
+    max-width: 100%; /* Assure que la vidéo ne dépasse pas la largeur de son conteneur */
+    border: 5px solid #333; /* Bordure autour de l'iframe */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce autour de l'iframe */
+    margin: 20px auto; /* Centrer l'iframe horizontalement avec un espacement vertical */
+    display: block; /* Assure que l'iframe est affiché comme un bloc pour l'alignement */
+}
+
+.presentationjeu{
+   position: relative;  
+   top: 7%;
+}
+#indicationtrailet{
+     
+    width: 20%;
+    display: flex;
+    position: absolute; /* Fixe la position de l'élément par rapport à la fenêtre */
+    bottom: 0%; /* Positionne l'élément à 0 pixels du bas de la page */
+    left: 0%; 
+    z-index: 49;
+}
+canvas {
+    border: 2px solid black;
+    display: block;
+    margin: 0 auto;
+}
+#item2 {
+    background-color: #0066B1;
+    color: aliceblue;
+}
+
+#item3 {
+    background-color: #ff00f7;
+    color: aliceblue;
+}
+
+#item4 {
+    background-color: #0011ff;
+    color: aliceblue;
+}
+
+#item5 {
+    background-color: #ff00aa;
+    color: aliceblue;
+}
+
+#item6 {
+    background-color: #fffb00;
+    color: aliceblue;
+}
+
