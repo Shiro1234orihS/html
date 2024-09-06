@@ -64,27 +64,26 @@
 .presentationProjet{
     position: relative;
     top: 10%;
-    height: 90%;
+    height: 80%;
     width: 100%;
     padding: 2%;
 }
-#video{
-    width: 28%; /* Ou une largeur spécifique, par exemple 800px */
-    height: 28%; /* Ajustez en fonction du ratio souhaité */
-    max-width: 100%; /* Assure que la vidéo ne dépasse pas la largeur de son conteneur */
-    border: 5px solid #333; /* Bordure autour de l'iframe */
-    border-radius: 10px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce autour de l'iframe */
-    margin: 20px auto; /* Centrer l'iframe horizontalement avec un espacement vertical */
-    display: block; /* Assure que l'iframe est affiché comme un bloc pour l'alignement */
-}
+/* #video{
+    width: 28%; /* Ou une largeur spécifique, par exemple 800px 
+    height: 28%; /* Ajustez en fonction du ratio souhaité 
+    max-width: 100%; /* Assure que la vidéo ne dépasse pas la largeur de son conteneur 
+    border: 5px solid #333; /* Bordure autour de l'iframe 
+    border-radius: 10px; /* Coins arrondis 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre douce autour de l'iframe 
+    margin: 20px auto; /* Centrer l'iframe horizontalement avec un espacement vertical 
+    display: block; /* Assure que l'iframe est affiché comme un bloc pour l'alignement 
+} */
 
 .presentationjeu{
    position: relative;  
    top: 7%;
 }
 #indicationtrailet{
-     
     width: 20%;
     display: flex;
     position: absolute; /* Fixe la position de l'élément par rapport à la fenêtre */
@@ -92,11 +91,7 @@
     left: 0%; 
     z-index: 49;
 }
-canvas {
-    border: 2px solid black;
-    display: block;
-    margin: 0 auto;
-}
+
 #item2 {
     background-color: #0066B1;
     color: aliceblue;
@@ -111,6 +106,128 @@ canvas {
     background-color: #0011ff;
     color: aliceblue;
 }
+
+#container3D{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 50%; /* Remplacez par la largeur souhaitée */
+    height: 70%; /* Remplacez par la hauteur souhaitée */
+    border: 1px solid #ccc; /* Optionnel, juste pour voir le contour */
+}
+#containerLogo{
+    position: relative; 
+    left: 60%; 
+    width: 40%;
+}
+.logo-containerbas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: -200px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+  
+  
+.loader {
+    display: block;
+    width: 12em;
+    height: 12em;
+    overflow: visible;
+}
+  
+  
+.loader .dash path {
+  stroke: #2AF;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  animation: dashArray var(--sped, 2s) ease-in-out infinite,
+    dashOffset var(--sped, 2s) linear infinite;
+}
+  
+svg{
+    margin: 1%;
+}
+
+/*////////////////////////////////////////////// 
+            Parametre pour Linke 
+/////////////////////////////////////////////*/
+.loader .linkdash path {
+  stroke: #2AF;
+  stroke-width: 100px;
+  stroke-linecap: round;
+  animation: dashArray var(--sped, 2s) ease-in-out infinite,
+    dashOffset var(--sped, 2s) linear infinite;
+}
+
+/*////////////////////////////////////////////// 
+            Parametre pour INSTA 
+/////////////////////////////////////////////*/
+
+.loader .instadash path {
+  stroke: #E1306C;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  animation: dashArray var(--sped, 2s) ease-in-out infinite,
+    dashOffset var(--sped, 2s) linear infinite;
+}
+.loader .instadashicone path {
+  stroke: #E1306C;
+  stroke-width: 40;
+  stroke-linecap: round;
+  animation: dashArray1 var(--sped, 1s) ease-in-out infinite,
+  dashArray1 var(--sped, 1s) linear infinite;
+}
+
+/*////////////////////////////////////////////// 
+            Parametre pour GITHUB 
+/////////////////////////////////////////////*/
+
+.loader .githubdash path {
+  stroke: #2ff63c;
+  stroke-width: 40px;
+  stroke-linecap: round;
+  animation: dashArray var(--sped, 2s) ease-in-out infinite,
+    dashOffset var(--sped, 2s) linear infinite;
+}
+.loader .githubiconcdash path {
+  stroke: #2ff63c;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  animation: dashArray var(--sped, 2s) ease-in-out infinite,
+    dashOffset var(--sped, 2s) linear infinite;
+}
+@keyframes dashArray1 {
+ 
+
+  50% {
+    stroke-dasharray: 0 359 1 0;
+    }
+  
+    100% {
+      stroke-dasharray: 359 1 0 0;
+    }
+  }
+  @keyframes dashArray {
+    0% {
+      stroke-dasharray: 0 1 359 0;
+    }
+  
+    50% {
+      stroke-dasharray: 0 359 1 0;
+    }
+  
+    100% {
+      stroke-dasharray: 359 1 0 0;
+    }
+  }
+  
+  
 
 #item5 {
     background-color: #ff00aa;
