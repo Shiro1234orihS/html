@@ -179,6 +179,7 @@
             <button class="carousel-button" data-target="item4"></button>
             <button class="carousel-button" data-target="item5"></button>
             <button class="carousel-button" data-target="item6"></button>
+            <button class="carousel-button" data-target="item7"></button>
             <img id="next" src="./ressource/projet/flecheDroite.webp" alt="flechedroite" style="height:5%; width: 15%;">
         </div>
         <div id="carousel">
@@ -215,14 +216,9 @@
                             </div>
                         </div>
                         <img src="./ressource/projet/item1/iconeMonogame.webp" alt="iconeMonogame" style="width:20%;">
-                    </div>
-                   
-                    
-                    <!-- <h2>Bande-annonce</h2>
-                    <iframe id="video" src="https://www.youtube.com/embed/e8ixbI230Aw?si=QuqTFhVD_96opsgP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>À modifier -->
-                     
-                   
-                    
+                    </div>                    
+                    <h2>Bande-annonce</h2>
+                    <iframe id="video" src="https://www.youtube.com/embed/e8ixbI230Aw?si=QuqTFhVD_96opsgP" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>    
                 </div>
                
                 <div id="indicationJeu">
@@ -240,21 +236,62 @@
                     <h2>Les différentes logiciels et Frameworks utilisé</h2>
                     <p>
                         Pour les différentes documentations (cas d'utilisation, diagramme de séquence, etc.).</br>J'ai réalisé un MCD (Modèle Conceptuel de Données), un MLD (Modèle Logique de Données), ainsi qu'un script de base de données en utilisant PowerAMC.</br> La base de données a été construite avec la technologie PostgreSQL.  
-                    </br>Pour la création du site, j'ai utilisé Laravel pour me connecter à la base de données, ce qui m'a permis d'afficher les différentes données aux différents utilisateurs.
+                        Pour la création du site, j'ai utilisé Laravel pour me connecter à la base de données, ce qui m'a permis d'afficher les différentes données aux différents utilisateurs.
                     </p>
+                    <h2>Achitecture du projet :</h2>
+                    <img src="./ressource/projet/item2/communicationDuSite.webp" alt="communicationDuSite" style="margin-left: 10% ; width: 80%;">
+                </div>
+                <div>
+                   
                 </div>
             </div>
             <div id="item3" class="itemCarousel">
                 <div class="presentationProjet">
-                    <h1 class="title">Twitter en Vue.j</h1>
+                    <h1 class="title">Reconstruction du site BMW Motorrad avec VUE.js et une API web ASP.NET core</h1>
+                    <h2>Presentation du projet</h2>
+                    <p> L'objectif du projet BMW est de reproduire les différentes fonctionnalités du site web de <a href="https://www.bmw-motorrad.fr/">BMW Motorrad</a>.</p>
+                    <h2>Les différentes logiciels et Frameworks:</h2>
+                    <h3>Basse de données</h3>
+                    <ul>
+                        <li>PostgreSQL</li>
+                    </ul>
+                    <h3>Pour l'API :</h3>
+                    <ul> 
+                        <li>API web ASP.NET core</li>
+                        <li>EntityFrameworkCore</li>
+                        <li>Moq</li>
+                    </ul>
+                    <h3>Pour la création du site web :</h3>
+                    <ul>
+                        <li>Vue.js</li>
+                        <li>Pinia</li>
+                    </ul>
+                    <h3>Hébergement :</h3>
+                    <ul>
+                        <li>Azure Dev Ops</li>
+                    </ul>
                 </div>
             </div>
-            
             <div id="item4" class="itemCarousel">
                 <div class="presentationProjet">
+                    <h1 class="title">Dockerization du site X</h1>
+                    <h2>Presentation du projet</h2>
+                    <p>
+                        L'objectif du projet était de créer un site web <a href="https://x.com/?lang=fr">X</a> qui puisse être lancé sur n'importe quel PC. 
+                        <br>Pour mener ce projet à bien, nous avons utilisé Docker, une solution de virtualisation légère qui permet de créer des environnements isolés et reproductibles,<br> facilitant le déploiement du site web sur différentes machines sans se soucier des configurations spécifiques de chaque PC.
+                    </p>
+                    <h2>Achitecture du projet :</h2>
+                    <img src="./ressource/projet/item4/archi.png" alt="communicationDuSite" style="margin-left: 10% ; width: 80%; background-color: white;">
+                </div>
+            </div>
+
+            <div id="item5" class="itemCarousel">
+                <div class="presentationProjet">
                     <h1 class="title">Mes mini projet personnel</h1>
-                    <div class="presentationjeu">
+                    <div class="presentationjeu" style="display: grid;">
+                        <h2>Mise en place de différents models 3D en Tree.js :</h2>
                         <div id="container3D"></div>
+                        <h2 style="position: absolute; top: 100%;">Mise en place de différents models 3D en Tree.js :</h2>
                         <div id="containerLogo">
                             <div class="logo-containerbas">
                                 <svg class="loader" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
@@ -330,12 +367,12 @@
                     </div>       
                </div>
             </div>
-            <div id="item5" class="itemCarousel">
+            <div id="item6" class="itemCarousel">
                 <div class="presentationProjet">
                     <h1 class="title">Créations un site de gestion de keypass en vue.js</h1>
-               </div>>
+               </div>
             </div>
-            <div id="item6" class="itemCarousel">
+            <div id="item7" class="itemCarousel">
                 <div class="presentationProjet">
                     <h1 class="title">Créations un site pour voir les différents eanings call des entreprise en Angular.</h1>
                </div>

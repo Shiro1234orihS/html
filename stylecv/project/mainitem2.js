@@ -18,7 +18,7 @@ let mouseX = 0, mouseY = 0; // Variables pour stocker la position de la souris
 // Chargement du modèle GLTF
 const loader = new GLTFLoader();
 loader.load(
-    './../../ressource/projet/item 2/models/scene.gltf',
+    './../../ressource/projet/item5/models/scene.gltf',
     function (gltf) {
         object = gltf.scene;
         scene.add(object); // Ajout de l'objet à la scène

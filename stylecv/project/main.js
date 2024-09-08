@@ -3,7 +3,7 @@ const buttons = document.querySelectorAll('.carousel-button');
 let currentIndex = 0;
 
 function updateCarousel(index) {
-    carousel.style.transform = `translateX(-${index * 16.666}% )`; // Ajusté pour 6 items
+    carousel.style.transform = `translateX(-${index * 14.285}% )`; // Ajusté pour 6 items
     buttons.forEach((button, i) => {
         button.classList.toggle('active', i === index);
     });

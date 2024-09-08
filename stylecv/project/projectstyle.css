@@ -2,7 +2,7 @@
   position: absolute;
   display: flex;
   left: 10%;
-  width: 540%; /* Augmenté pour correspondre à la largeur totale des items */
+  width: 630%; /* Augmenté pour correspondre à la largeur totale des items */
   height: 200%;
   transition: transform 0.5s ease;
 }
@@ -97,44 +97,51 @@
   overflow-wrap: break-word; /* Permet au texte de se découper sur plusieurs lignes si nécessaire */
 }
 #item2 {
-    background-color: #0066B1;
-    color: aliceblue;
+  background-color: #0066B1;
+  color: aliceblue;
+  overflow-wrap: break-word;
 }
 
 #item3 {
-    background-color: #ff00f7;
-    color: aliceblue;
+  background-color: #35495e;
+  color: aliceblue;
+  overflow-wrap: break-word;
 }
 
 #item4 {
-    background-color: #0011ff;
-    color: aliceblue;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  overflow-wrap: break-word;
 }
 
 #container3D{
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    width: 50%; /* Remplacez par la largeur souhaitée */
-    height: 70%; /* Remplacez par la hauteur souhaitée */
-    border: 1px solid #ccc; /* Optionnel, juste pour voir le contour */
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50%; /* Remplacez par la largeur souhaitée */
+  height: 70%; /* Remplacez par la hauteur souhaitée */
+  border: 1px solid #ccc; /* Optionnel, juste pour voir le contour */
 }
 #containerLogo{
-    position: relative; 
-    left: 60%; 
-    width: 40%;
+  position: relative;
+  display: flex;
+  margin-left: 25%;
+  top: 140%;
+  width: 40%;
 }
 .logo-containerbas{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: -200px;
+  margin: 0 5% 0 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
   
   
@@ -231,15 +238,20 @@ svg{
     }
   }
   
-  
+
 
 #item5 {
-    background-color: #ff00aa;
-    color: aliceblue;
+  background-color: #ff00aa;
+  color: aliceblue;
+  overflow-wrap: break-word;
 }
 
 #item6 {
-    background-color: #fffb00;
-    color: aliceblue;
+  background-color: #fffb00;
+  color: aliceblue;
+  overflow-wrap: break-word;
 }
 
+p{
+  overflow-wrap: break-word;
+}
