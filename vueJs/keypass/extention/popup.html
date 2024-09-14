@@ -6,33 +6,52 @@
 </head>
 <body>
   <div class="wrapper">
-    <h1>Keypass by Ricardo</h1>
-    <div class="container">
-      <input required type="text" name="name" class="input">
-      <label class="label">Nom d'utilisateur</label>
+    <div class="connecter">
+      <h1>Keypass by Ricardo</h1>
+      <p id="erreurDeConnection">Attention il y a une erreur dans le mots de passe ou login</p>
+      <div class="container">
+        <input required type="text" name="name" class="input">
+        <label class="label">Nom d'utilisateur</label>
+      </div>
+      <div class="container">
+        <input required type="text" name="pass" class="input">
+        <label class="label">Mots de passe</label>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <input type="checkbox" name="resteci" id="restconnecte">
+        <p>Reste connecter</p>
+      </div>
+      <button id="connection">Se connecter</button>
     </div>
-    <div class="container">
-      <input required type="text" name="pass" class="input">
-      <label class="label">Mots de passe</label>
+    
+
+
+
+    <div class="ajoutPass">
+      <button id="deconnection">Deconnection</button>
+      <h2 id="bonjour">Bienvenue</h2>
+      <div class="container">
+        <input required type="text" name="link" class="input">
+        <label class="label">Link</label>
+      </div>
+      <div class="container">
+        <input required type="text" name="username" class="input">
+        <label class="label">Username</label>
+      </div>
+      <div class="container">
+        <input required type="text" name="password" class="input">
+        <label class="label">Password</label>
+      </div>
+      <div class="container">
+        <input required type="text" name="commentaire" class="input">
+        <label class="label">Commentaire</label>
+      </div>
+      <select name="Choixfichier" id="selectfichieer">
+        <option value="null">Pas Ajouter à un dossier</option>
+      </select>
+      <button id="myButton">Click me</button>
+      
     </div>
-    <button id="connection">Se connecter</button>
-    <div class="container">
-      <input required type="text" name="link" class="input">
-      <label class="label">Link</label>
-    </div>
-    <div class="container">
-      <input required type="text" name="username" class="input">
-      <label class="label">Username</label>
-    </div>
-    <div class="container">
-      <input required type="text" name="password" class="input">
-      <label class="label">Password</label>
-    </div>
-    <div class="container">
-      <input required type="text" name="commentaire" class="input">
-      <label class="label">Commentaire</label>
-    </div>
-    <button id="myButton">Click me</button>
   </div>
   <script src="popup.js"></script>
 </body>

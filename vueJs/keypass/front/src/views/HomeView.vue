@@ -40,10 +40,10 @@
       <input v-model="nomNewDossier" class="input" type="text" placeholder="" required="">
       <span>Nom du dossier</span>
     </label>
-    <label>
+    <!-- <label>
       <input v-model="userApp" class="input" type="text" placeholder="" required="">
       <span>Dossier parent</span>
-    </label>
+    </label> -->
     <button @click="updateApp">Création du dossier</button>
   </div>
   <div v-show="hiddenButtonsVisible" class="overlay"></div>
