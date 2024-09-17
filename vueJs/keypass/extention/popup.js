@@ -2,7 +2,7 @@
 //          Initialize Variables            //
 //-------------------------------------------//
 let iduser;
-
+let token;
 //-------------------------------------------//
 //       Initialize at Extension Load        //
 //-------------------------------------------//
@@ -48,9 +48,10 @@ document.getElementById('connection').addEventListener('click', () => {
       if (data.length > 0 && data[0].IDUTILISTEUR) { // Check if data is returned and IDUTILISTEUR exists
         console.log('Success:', data);
         iduser = data[0].IDUTILISTEUR;
+        token =  data[0].TOKEN;
         alert('Login successful');
         changeDisplayOnSuccess(username); // Call function to change display
-        saveCredentials(iduser, username , data[0].token); 
+        saveCredentials(iduser, username , token); 
       } else {
         alert('Login failed');
         erreurDeConnection(); 
@@ -75,7 +76,9 @@ function saveCredentials(IDUTILISTEUR, USERNAME, TOKEN) {
     }
   }, function () {
     alert("Les informations de connexion ont été enregistrées.");
+    console.log(TOKEN);
   });
+ 
 }
 
 //-------------------------------------------//
@@ -87,16 +90,23 @@ document.getElementById('myButton').addEventListener('click', () => {
   const username = document.querySelector('input[name="username"]').value;
   const password = document.querySelector('input[name="password"]').value;
   const commentaire = document.querySelector('input[name="commentaire"]').value;
+  let iddonsier = document.getElementById('selectfichieer').value;
 
+  if (iddonsier ==="null") {
+    iddonsier = null
+  }
   // Create data object
   const data = {
     IDUTILISTEUR: iduser,
+    IDDOSSIER: iddonsier,
     NOMAPP: link,
     UTILISATEURAPP: username,
+    COMMENTAIRE: commentaire,
     MOTPASSAPP: password,
-    COMMENTAIRE: commentaire
+    TOKEN : token 
   };
 
+  console.log('Success:', data);
   // Send data to the API
   fetch('http://ricardonunesemilio.fr:8005/addapp', { // Replace with your API URL
     method: 'POST',
@@ -111,7 +121,7 @@ document.getElementById('myButton').addEventListener('click', () => {
       alert('Data sent successfully');
     })
     .catch((error) => {
-      console.error('Error:', error);
+     
       alert('Failed to send data');
     });
 });
@@ -149,6 +159,7 @@ function getCredentials(callback) {
   chrome.storage.local.get(['credentials'], function (result) {
     if (result.credentials && result.credentials.username) {
       iduser = result.credentials.iduser;
+      token = result.credentials.token;
       callback(result.credentials.username); // Call callback with the username
     } else {
       callback(null); // No credentials found
@@ -177,7 +188,9 @@ function chercheDossier(iduser) {
     })
     .catch(error => console.error('Erreur:', error)); // Gérer les erreurs éventuelles
 }
-
+//-------------------------------------------//
+//         Deconection du compte             //
+//-------------------------------------------//
 document.getElementById("deconnection").addEventListener("click",()=>{
     // Hide the login fields
     document.querySelector('.connecter').style.display = 'block';
@@ -189,4 +202,31 @@ document.getElementById("deconnection").addEventListener("click",()=>{
       container.style.display = 'none';
     });
     chrome.storage.local.remove('credentials')
+});
+
+
+document.getElementById('setPassword').addEventListener("click", () => {
+  const length = parseInt(document.getElementById('nb').value); // Convertit la valeur en entier
+  let charset = "abcdefghijklmnopqrstuvwxyz";
+  
+  // Vérifie si la checkbox pour les majuscules est cochée
+  if (document.getElementById('maj').checked) {
+    charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  }
+  // Vérifie si la checkbox pour les nombres est cochée
+  if (document.getElementById('nb2').checked) {
+    charset += "0123456789";
+  }
+  // Vérifie si la checkbox pour les caractères spéciaux est cochée
+  if (document.getElementById('cs').checked) {
+    charset += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+  }
+
+  let password = "";
+  for (let i = 0; i < length; ++i) {
+    password += charset.charAt(Math.floor(Math.random() * charset.length));
+  }
+
+  // Assigne le mot de passe généré à l'élément avec l'ID 'pass'
+  document.getElementById('pass').value = password;
 });
