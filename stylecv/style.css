@@ -474,8 +474,9 @@ a{
 
 
 .title {
-    position: absolute; /* Positionne le titre de manière absolue par rapport à son parent positionné */
-    top: 0%; /* Place le titre à 50% de la hauteur du conteneur */
+    position: absolute;
+    overflow: hidden; /* Masque les débordements pour que la barre soit partiellement cachée */
+    top: 1%; /* Place le titre à 50% de la hauteur du conteneur */
     left: 50%; /* Place le titre à 50% de la largeur du conteneur */
     transform: translate(-50%, -50%); /* Centre le titre précisément au centre */
 }

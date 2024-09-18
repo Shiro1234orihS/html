@@ -41,8 +41,28 @@
 }
 
 .carousel-button.active {
-    background-color: gray; /* Indicateur de l'élément actif */
+  background-color: gray; /* Indicateur de l'élément actif */
 }
+
+.barreVisuel {
+  position: absolute;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  animation: btn-anim1 1s linear infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 
 #item1 {
     background-color: #00ff3336;
@@ -251,7 +271,7 @@ svg{
 
 
 #item5 {
-  background-color: #ff00aa;
+  background-color: #500150;
   color: aliceblue;
   overflow-wrap: break-word;
 }
@@ -260,6 +280,13 @@ svg{
   background-color: #2C3E50;
   color: aliceblue;
   overflow-wrap: break-word;
+}
+#visuel{
+  position: relative; 
+  height: 30%;
+}
+#extension{
+  display: flex;
 }
 #item7{
   background-color: #35495e;
