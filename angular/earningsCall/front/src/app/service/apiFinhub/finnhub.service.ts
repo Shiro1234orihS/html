@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Entreprise } from '../../models/entreprisemodel/entreprise.model';
+import { addMonths, format } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,15 @@ export class FinnhubService {
 
   private apiKey: string = 'cqh9bv9r01qm46d7drkgcqh9bv9r01qm46d7drl0';
 
+  private aujourdhui: Date = new Date();
+  private dateISO: string = this.aujourdhui.toISOString().split('T')[0];
+
+  private dateDansUnMois: Date = addMonths(this.aujourdhui, 1);
+  private dateFormatee: string = format(this.dateDansUnMois, 'yyyy-MM-dd');
+
   // Définir les dates de début et de fin pour la plage de dates souhaitée
-  private startDate: string = '2024-07-26';
-  private endDate: string = '2024-08-25';
+  private startDate: string = this.dateISO;
+  private endDate: string = this.dateFormatee;
 
   private earningsUrl = `https://finnhub.io/api/v1/calendar/earnings?from=${this.startDate}&to=${this.endDate}&token=${this.apiKey}`;
 
