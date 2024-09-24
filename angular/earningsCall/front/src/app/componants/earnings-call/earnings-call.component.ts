@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FinnhubService } from '../../service/apiFinhub/finnhub.service';
 import { Entreprise } from '../../models/entreprisemodel/entreprise.model';
 import { EntrepriseService } from '../../service/entreprise/entreprise.service';
+import { Subscription } from 'rxjs';
+import { addMonths, format } from 'date-fns';
 
 @Component({
   selector: 'app-earnings-call',
@@ -11,7 +13,7 @@ import { EntrepriseService } from '../../service/entreprise/entreprise.service';
   templateUrl: './earnings-call.component.html',
   styleUrls: ['./earnings-call.component.scss']
 })
-export class EarningsCallComponent implements OnInit, AfterViewInit {
+export class EarningsCallComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public entreprises: Entreprise[] = [];
   public today: Date = new Date();
@@ -24,14 +26,19 @@ export class EarningsCallComponent implements OnInit, AfterViewInit {
   public days: HTMLCollectionOf<HTMLTableCellElement> | undefined;
   public daysLen: number | undefined;
 
-  constructor(private finnhubService: FinnhubService, private entrepriseService: EntrepriseService) { }
+  private subscription: Subscription = new Subscription();
+
+  constructor(private finnhubService: FinnhubService, private entrepriseService: EntrepriseService) {}
 
   ngOnInit(): void {
-    this.finnhubService.RechercheLesEarningCall().then(() => {
-      this.entreprises = this.finnhubService.ListeEntreprise;
-      this.days = document.getElementsByTagName('td');
-      this.daysLen = this.days.length;
-      this.draw();
+    // S'abonner aux changements de date provenant du service
+    this.subscription = this.finnhubService.dateRange$.subscribe(dates => {
+      this.finnhubService.RechercheLesEarningCall(dates.startDate, dates.endDate).then(() => {
+        this.entreprises = this.finnhubService.ListeEntreprise;
+        this.days = document.getElementsByTagName('td');
+        this.daysLen = this.days.length;
+        this.draw(); // Redessiner les éléments avec les nouvelles entreprises
+      });
     });
   }
 
@@ -46,6 +53,13 @@ export class EarningsCallComponent implements OnInit, AfterViewInit {
 
     for (let i = 0; i < this.daysLen!; i++) {
       this.days![i].addEventListener('click', () => { this.clickDay(this.days![i]); });
+    }
+  }
+
+  ngOnDestroy(): void {
+    // On se désabonne lorsque le composant est détruit
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 

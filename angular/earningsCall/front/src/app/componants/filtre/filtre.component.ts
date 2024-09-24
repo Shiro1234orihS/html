@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { addMonths, format } from 'date-fns';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FinnhubService } from '../../service/apiFinhub/finnhub.service';
 
 @Component({
   selector: 'app-filtre',
@@ -16,7 +17,7 @@ export class FiltreComponent {
   public datedeFin: FormControl;
   public nbentreprise: FormControl;
 
-  constructor(){
+  constructor( private finnhubService: FinnhubService){
     const aujourdhui = new Date();
     const startDate: string = aujourdhui.toISOString().split('T')[0];
 
@@ -29,4 +30,22 @@ export class FiltreComponent {
     this.nbentreprise = new FormControl(60);
   }
 
+  // Fonction appelée lorsque l'utilisateur clique sur le bouton pour rechercher des entreprises
+  chercheentreprise() {
+    const startDate = this.dateduJour.value;  // Date de début
+    const endDate = this.datedeFin.value;     // Date de fin
+
+    // Utilisation du service pour mettre à jour la plage de dates
+    this.finnhubService.setDateRange(startDate, endDate);
+
+    // Log pour vérifier les valeurs des dates (facultatif)
+    console.log('Dates sélectionnées:', startDate, endDate);
+  }
 }
+
+
+    
+
+
+
+ 
