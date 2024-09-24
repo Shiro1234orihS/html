@@ -11,20 +11,21 @@ export class FinnhubService {
   private apiKey: string = 'cqh9bv9r01qm46d7drkgcqh9bv9r01qm46d7drl0';
 
   // Utilisation d'un BehaviorSubject pour partager les dates
-  private dateRangeSubject = new BehaviorSubject<{ startDate: string, endDate: string }>({
+  private dateRangeSubject = new BehaviorSubject<{ startDate: string, endDate: string , nb: number }>({
     startDate: new Date().toISOString().split('T')[0],
-    endDate: format(addMonths(new Date(), 1), 'yyyy-MM-dd')
+    endDate: format(addMonths(new Date(), 1), 'yyyy-MM-dd'),
+    nb: 60
   });
 
   // Observable qui permettra aux composants de s'abonner aux changements de dates
   public dateRange$ = this.dateRangeSubject.asObservable();
 
   // Permet de mettre à jour la plage de dates
-  public setDateRange(startDate: string, endDate: string) {
-    this.dateRangeSubject.next({ startDate, endDate });
+  public setDateRange(startDate: string, endDate: string ,nb : number) {
+    this.dateRangeSubject.next({ startDate, endDate , nb });
   }
 
-  async RechercheLesEarningCall(debut: string, fin: string): Promise<void> {
+  async RechercheLesEarningCall(debut: string, fin: string , nb: number): Promise<void> {
     try {
       const response = await fetch(`https://finnhub.io/api/v1/calendar/earnings?from=${debut}&to=${fin}&token=${this.apiKey}`);
       const data = await response.json();
@@ -38,7 +39,7 @@ export class FinnhubService {
         const sortedEarnings = earningsWithInfo
           .filter(item => item.companyInfo && item.companyInfo.marketCapitalization)
           .sort((a, b) => b.companyInfo!.marketCapitalization - a.companyInfo!.marketCapitalization)
-          .slice(0, 10);
+          .slice(0, nb);
 
         this.ListeEntreprise = sortedEarnings.map(earning => {
           const companyInfo = earning.companyInfo!;

@@ -33,7 +33,7 @@ export class EarningsCallComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     // S'abonner aux changements de date provenant du service
     this.subscription = this.finnhubService.dateRange$.subscribe(dates => {
-      this.finnhubService.RechercheLesEarningCall(dates.startDate, dates.endDate).then(() => {
+      this.finnhubService.RechercheLesEarningCall(dates.startDate, dates.endDate , dates.nb).then(() => {
         this.entreprises = this.finnhubService.ListeEntreprise;
         this.days = document.getElementsByTagName('td');
         this.daysLen = this.days.length;

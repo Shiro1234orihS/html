@@ -34,12 +34,9 @@ export class FiltreComponent {
   chercheentreprise() {
     const startDate = this.dateduJour.value;  // Date de début
     const endDate = this.datedeFin.value;     // Date de fin
-
+    const nb = this.nbentreprise.value;
     // Utilisation du service pour mettre à jour la plage de dates
-    this.finnhubService.setDateRange(startDate, endDate);
-
-    // Log pour vérifier les valeurs des dates (facultatif)
-    console.log('Dates sélectionnées:', startDate, endDate);
+    this.finnhubService.setDateRange(startDate, endDate ,nb );
   }
 }
 
