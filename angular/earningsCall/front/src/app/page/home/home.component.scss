@@ -6,7 +6,7 @@ body{
   
     .left-boule {
         width: 20%;
-        height: 115%; /* Fonctionne car l'élément parent a une hauteur définie */
+        height: 130%; /* Fonctionne car l'élément parent a une hauteur définie */
         box-shadow: 0 4px 8px $shadow-color;
         border-radius: 10px;
         background-color: $boule-color;
@@ -17,7 +17,7 @@ body{
     
     .right-boule{
         width: 75%;
-        height: 115%; /* Fonctionne car l'élément parent a une hauteur définie */
+        height: 130%; /* Fonctionne car l'élément parent a une hauteur définie */
         box-shadow: 0 4px 8px $shadow-color;
         border-radius: 10px;
         background-color: $boule-color;

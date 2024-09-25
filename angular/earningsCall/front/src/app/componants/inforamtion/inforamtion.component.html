@@ -1,8 +1,10 @@
 <div *ngIf="entreprise">
-  <div id="PressentationEntreprise">
+  <div id="titre-entreprise">
     <img *ngIf="entreprise.image" [src]="entreprise.image" alt="{{ entreprise.nom }}" width="100" height="100">
-    <h2>Nom entreprise {{ entreprise.nom }}</h2>
+    <h2>Nom entreprise : <p>{{ entreprise.nom }}</p></h2>
   </div>
   <p *ngIf="entreprise.dateEarningsCall">Date des résultats : {{ entreprise.dateEarningsCall }}</p>
   <p>Localisation de l'entreprise : {{ entreprise.pays }}</p>
+  <p>Capital boursiere de l'entreprise :</p>
+  <p>Nombre d'employés :</p>
 </div>

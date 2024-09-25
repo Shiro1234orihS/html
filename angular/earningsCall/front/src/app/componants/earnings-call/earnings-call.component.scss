@@ -55,10 +55,13 @@ body {
   /* Ajouter des styles pour le calendrier */
   .calendar-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
+    align-items: center;     /* Centre les éléments horizontalement */
+    justify-content: center; /* Centre le contenu verticalement */
+    text-align: center;      /* Centrer le texte dans les éléments enfants */
+    background-color: #3498db;
+    color: white;
   }
+  
   
   .calendar-table {
     width: 100%;
@@ -83,14 +86,16 @@ body {
   .calendar-controls {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+   
   }
   
   .calendar-controls button {
     padding: 5px 10px;
+    margin: 1px;
+    width: calc(100%/3);
     background-color: #3498db;
     color: white;
-    border: none;
+    border: #000000 1px solid;
     border-radius: 5px;
     cursor: pointer;
   }

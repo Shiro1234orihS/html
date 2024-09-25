@@ -1,7 +1,18 @@
 <div class="top-boule">
-    <input id="date" type="date" [formControl]="dateduJour">
-    <input id="date" type="date" [formControl]="datedeFin">
-    <input type="number" [formControl]="nbentreprise">
+    <div class="containt-input">
+        <div >
+            <p>Date du début:</p>
+            <input id="date" type="date" [formControl]="dateduJour">
+        </div>
+        <div>
+            <p>Date du fin:</p>
+            <input id="date" type="date" [formControl]="datedeFin">
+        </div>
+        
+    </div>
+    <div id="input">
+        <p>Nb d'entreprises:</p>
+        <input type="number" [formControl]="nbentreprise" min="1" max="60" >
+    </div>
     <button (click)="chercheentreprise()">Recherche</button>
 </div>
-

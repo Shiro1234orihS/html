@@ -1,8 +1,50 @@
 .top-boule{
-    margin-top: 5px;
+    margin: 5px;
+    display: block;
+    color: white;
+    button{
+        width: 100%;
+    }
+    .containt-input{
+        display: flex;
+        margin: 5px;
+        div{
+            width: calc(100% / 2);
+            input {         
+                border: 2px solid #4CAF50; /* Bordure verte */
+                border-radius: 5px; /* Coins arrondis */
+                color: #333; /* Couleur du texte */
+                background-color: #f9f9f9; /* Couleur de fond */
+                width:90% ;
+            }
+    
+            /* Couleur de fond et bordure lorsqu'il est en focus */
+            input:focus {
+                background-color: #f0f8ff; /* Fond bleu clair au focus */
+                border-color: #008CBA; /* Bordure bleue au focus */
+                outline: none; /* Supprimer le contour par défaut */
+            }
+    
+            /* Changement de bordure au survol */
+            input:hover {
+                border-color: #008CBA; /* Changement de couleur au survol */
+            }
+    
+            /* Placeholder si nécessaire (mais pour les dates c'est moins utilisé) */
+            input[type="date"]::placeholder {
+                color: #888;
+                font-style: italic;
+            }
+        }
+    }
+}
+
+#input{
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    align-items: center; 
     input{
-        width: calc(100% / 4);
+        margin-left: 10%;
+        height: 5%;
     }
 }
