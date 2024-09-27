@@ -116,13 +116,18 @@
   margin-top: 20px;
 }
 
-.sprite {
+#cowboy {
   width: 48px; /* largeur d'une frame */
   height: 44px; /* hauteur d'une frame */
   background: url('./../../ressource/projet/item1/spriteM.png') 0 0;
   position: absolute;
 }
-
+#cactus {
+  width: 40px; /* largeur d'une frame */
+  height: 40px; /* hauteur d'une frame */
+  background: url('./../../ressource/projet/item1/Cactus_Sheet.png') 0 0;
+  position: absolute;
+}
 
 
 
@@ -146,10 +151,10 @@
 
 #container3D{
   position: absolute;
-  top: 10%;
-  left: 25%;
-  width: 50%; /* Remplacez par la largeur souhaitée */
-  height: 70%; /* Remplacez par la hauteur souhaitée */
+  top: 15%;
+  left: 5%;
+  width: 90%; /* Remplacez par la largeur souhaitée */
+  height: 100%; /* Remplacez par la hauteur souhaitée */
   border: 1px solid #ccc; /* Optionnel, juste pour voir le contour */
 }
 #containerLogo{
@@ -297,3 +302,6 @@ svg{
 p{
   overflow-wrap: break-word;
 }
+
+
+

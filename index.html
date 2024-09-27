@@ -18,7 +18,6 @@
     <script src="main.js" defer></script>
     <script src="/stylecv/test/main.js" defer></script> 
     <script src="/stylecv/project/main.js" defer></script> 
-    <script type="module" src="./stylecv/project/mainitem2.js"></script>
     <script type="module" src="./stylecv/project/mainExtraiJeu.js"></script>
     <div class="custom-cursor-before"></div>
     <div class="custom-cursor"></div>
@@ -48,13 +47,13 @@
             </tr>
         </table>        
     </div>
-    <section  id="fond" class="section hidden">
+    <section  id="fond" class="section">
         <div id="containerBonjour">
             <h1 id="Bonjour">Bienvenue sur mon portfolio !</h1>  
         </div>
         <div>
             <img src="./ressource/pageInto/flechegauche.png" alt="Flèche gauche" style="transform: rotate(180deg); width: 25%; ">
-            <p style=" font-size: 20px;">Naviguez dans mon portfolio et choisissez la langue <br>de votre préférence grâce à ce menu.</p>
+            <p style=" font-size: 20px; color:white">Naviguez dans mon portfolio et choisissez la langue <br>de votre préférence grâce à ce menu.</p>
         </div>
     </section>
     <section id="home" class="section hidden">
@@ -171,7 +170,7 @@
         </div>
     </section>
 
-    <section id="project" class="section"> 
+    <section id="project" class="section hidden">
         <div id="menu">
             <img id="prev" src="./ressource/projet/flecheGauche.webp" alt="flechegauche" style="height:10%; width: 15%;">
             <button class="carousel-button" data-target="item1"></button>
@@ -227,6 +226,7 @@
                         <img src="./ressource/projet/item1/fondJeu.svg" alt="fondJeu" style="position: absolute; height: 31%; width: 93%; border-radius: 25px;  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.672); ">
                         <div class="sprite-container">
                             <div id="cowboy" class="sprite"></div>
+                            <div id="cactus" class="sprite"></div>
                         </div>
                     </div> 
                 </div>
@@ -314,7 +314,8 @@
                     <div class="presentationjeu" style="display: grid;">
                         <h2>Mise en place de différents models 3D en Tree.js :</h2>
                         <div id="container3D"></div>
-                        <h2 style="position: absolute; top: 100%;">Mise en place de différents models 3D en Tree.js :</h2>
+                        <script type="module" src="./stylecv/project/mainitem2.js"></script>
+                        <h2 style="position: absolute; top: 110%;">Mise en place de différents models 3D en Tree.js :</h2>
                         <div id="containerLogo">
                             <div class="logo-containerbas">
                                 <svg class="loader" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24">
