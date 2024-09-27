@@ -10,14 +10,10 @@ const spriteData = {
 };
 
 const spriteDataCactus = {
-    "repos_droite": { "frames": [1, 2, 3, 4, 5], "isLooping": true, "frameDuration": 200 },
-    "deplacement_droite": { "frames": [6, 7, 8, 9, 10, 11, 12, 13, 14], "isLooping": true, "frameDuration": 200 },
-    "tir_droite": { "frames": [15, 16, 17, 18, 19], "isLooping": true, "frameDuration": 200 },
-    "repos_gauche": { "frames": [20, 21, 22, 23, 24], "isLooping": true, "frameDuration": 200 },
-    "deplacement_gauche": { "frames": [25, 26, 27, 28, 29, 30, 31, 32, 33], "isLooping": true, "frameDuration": 200 },
-    "tir_gauche": { "frames": [34, 35, 36, 37, 38, 39], "isLooping": true, "frameDuration": 200 },
-    "repos": { "frames": [40, 41, 42, 43, 44], "isLooping": true, "frameDuration": 200 },
-    "morts": { "frames": [58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71], "isLooping": true, "frameDuration": 200 }
+    "deplacement_droite": { "frames": [1, 2, 3, 4], "isLooping": true, "frameDuration": 200 },
+    "deplacement_gauche": { "frames": [5, 6, 7, 8, 9, 10, 11, 12, 13,14,15], "isLooping": true, "frameDuration": 200 },
+    "deplacement_bas": { "frames": [ 16, 17, 18, 19, 20, 21], "isLooping": true, "frameDuration": 200 },
+    "repos": {"frames": [1, 2, 3, 4], "isLooping": true, "frameDuration": 200 },
 };
 
 // Variables pour le cow-boy

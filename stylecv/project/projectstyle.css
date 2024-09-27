@@ -125,7 +125,7 @@
 #cactus {
   width: 40px; /* largeur d'une frame */
   height: 40px; /* hauteur d'une frame */
-  background: url('./../../ressource/projet/item1/Cactus_Sheet.png') 0 0;
+  background: url('./../../ressource/projet/item1/Cactus_SheetMini.png') 0 0;
   position: absolute;
 }
 
