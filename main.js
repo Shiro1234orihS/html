@@ -59,39 +59,6 @@ function ouvrirPDF1() {
     window.open('ressource/cv/cv_français.pdf');
 }
 
-$(document).ready(function(){
-    $('.qr-btn').click(function(e) {
-        e.stopPropagation(); // Empêche la propagation au document
-
-        var popoverId = $(this).data('popover');
-        var $popover = $('#' + popoverId);
-
-        // Calculer la position de la popover
-        var offset = $(this).offset();
-        $popover.css({
-            top: offset.top + $(this).outerHeight() + 10, // 10px pour l'espace au-dessus de l'icône
-            left: offset.left + $(this).outerWidth() / 2 - $popover.outerWidth() / 2,
-            display: 'block'
-        });
-
-        $('.custom-popover').not($popover).hide(); // Cache les autres popovers
-    });
-
-    $(document).click(function() {
-        $('.custom-popover').hide(); // Cache toutes les popovers quand on clique ailleurs
-    });
-
-    $('.custom-popover').click(function(e) {
-        e.stopPropagation(); // Empêche la propagation au document quand on clique sur la popover
-    });
-
-    // Ferme les popovers avec la touche ESC
-    $(document).keyup(function(e) {
-        if (e.key === "Escape") {
-            $('.custom-popover').hide();
-        }
-    });
-});
 
 document.getElementById('francais').addEventListener('click', function() {
     window.location.href = 'index.html'; // Redirige vers la version français
