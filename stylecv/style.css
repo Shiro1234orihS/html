@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #111111;
+    background-color: #000000;
     
     font-family: "Playfair Display", serif;
     font-optical-sizing: auto;
@@ -249,21 +249,23 @@ button:hover ~ .custom-cursor-before {
     
 }
 
-.sousTitre{ /* Supposons que vous ayez ajouté un titre <h1> */
+.sousTitre{ 
+    width: 95%;
     font-size: 24px; /* Taille de la police */
     color: #ffffff; /* Couleur de la police */
-    background-color: rgba(0, 0, 0, 0.5);; /* Couleur de l'arrière-plan */
+    background-color: #03224c; /* Couleur de l'arrière-plan */
     padding: 10px; /* Espacement intérieur */
     border-radius: 5px; /* Coins arrondis */
     text-align: center; /* Centrer le texte */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre portée */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.521); /* Ombre portée */
     font-family: 'Arial', sans-serif; /* Police de caractères */
     margin-bottom: 20px; /* Marge en dessous du titre */
+   
 }
 #sous-titreh3{ /* Supposons que vous ayez ajouté un titre <h1> */
     font-size: 15px; /* Taille de la police */
     color: #ffffff; /* Couleur de la police */
-    background-color: rgba(0, 0, 0, 0.5);; /* Couleur de l'arrière-plan */
+    background-color: rgb(0, 0, 0);; /* Couleur de l'arrière-plan */
     padding: 5px; /* Espacement intérieur */
     border-radius: 5px; /* Coins arrondis */
     text-align: center; /* Centrer le texte */
@@ -287,16 +289,16 @@ span{
     color: #ffffff;
     font-size: 14px;
 }
+
 .container{
-    background: rgba(57, 53, 53, 0.6); 
-    list-style-type: none;
-    width: 92%; 
-    height: 96%;
-    position: absolute; 
-    top: 0;
-    left: 2%;
-    border: none;
+    position: relative; 
+    background: #111111;
+    margin-left: 12%;
+    width: 84%; 
+
+    border: 1px white solid;
     border-radius: 25px;
+    /* box-shadow: ; */
 }
 a{
     color: rgb(51, 255, 0);
