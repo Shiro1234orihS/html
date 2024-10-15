@@ -167,6 +167,9 @@ function delectepass(req, res) {
 // Fonction de mise à jour d'application
 function updateApp(req, res) {
     const { IDAPP, NOMAPP, COMMENTAIRE, MOTPASSAPP , IDDOSSIER} = req.body;
+    var token = req.body.TOKEN;    
+    var motsdepasseCrypte ;
+    motsdepasseCrypte = methodecrypto.encrypt(MOTPASSAPP , token)
 
     if (!IDAPP || !NOMAPP || !COMMENTAIRE || !MOTPASSAPP ) {
         return res.status(400).json({ error: "Tous les champs sont requis" });
@@ -174,7 +177,7 @@ function updateApp(req, res) {
 
     var queryStr = 'UPDATE `APP` SET `IDDOSSIER` = ? ,`NOMAPP` = ?, `COMMENTAIRE` = ?, `MOTPASSAPP` = ? WHERE `IDAPP` = ?';
     
-    pool.query(queryStr, [IDDOSSIER ,NOMAPP, COMMENTAIRE, MOTPASSAPP, IDAPP], function (error, results, fields) {
+    pool.query(queryStr, [IDDOSSIER ,NOMAPP, COMMENTAIRE, motsdepasseCrypte, IDAPP], function (error, results, fields) {
         
         if (error) {
             console.error('Une erreur est survenue lors de la requête à la base de données:', error);
@@ -189,6 +192,8 @@ function updateApp(req, res) {
         }
     });
 }
+
+
 
 // Exporte les fonctions pour qu'elles puissent être utilisées dans d'autres fichiers du projet
 module.exports = { addapp, getapp, getappid, delectepass, updateApp,getappiddossier };

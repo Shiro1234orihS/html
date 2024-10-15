@@ -208,9 +208,11 @@ export default {
 
     const updateApp = () => {
       const dossierId = selectedDossier.value ? selectedDossier.value.IDDOSSIER : null;
+      const token = localStorage.getItem('token');
       const payload = {
         IDAPP: props.app.IDAPP,
         IDDOSSIER: dossierId,
+        TOKEN : token,
         NOMAPP: linkApp.value,
         UTILISATEURAPP: userApp.value,
         COMMENTAIRE: commentApp.value,
