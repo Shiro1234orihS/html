@@ -1,4 +1,26 @@
-*{
-  margin: 0%;
-  padding: 0%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #007BFF;
+  --color-secondary: #FF5722;
+  --color-background: #20232A;
+  --color-surface: #282C34;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B0BEC5;
+  --color-input-bg: #444950;
+  --color-input-border: #5C636A;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
