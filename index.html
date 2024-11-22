@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylecv/style.css">
+    <link rel="stylesheet" href="/stylecv/style.css">
     <link rel="stylesheet" href="/stylecv/styleproject.css">
     <link rel="stylesheet" href="/stylecv/home/homeStyle.css">
     <link rel="stylesheet" href="/stylecv/into/into.css">
@@ -249,6 +250,15 @@
                     </p>
                     <h2>Achitecture du projet :</h2>
                     <img src="./ressource/projet/item2/communicationDuSite.webp" alt="communicationDuSite" style="margin-left: 10% ; width: 80%;">
+                    <div class="competences">
+                        <div>
+                            <h5>Titre de la compentences</h5>
+                            <div class="progress-bar">
+                                <div class="progressold" style="width: 70%;" ></div>
+                                <div class="progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="item3" class="itemCarousel">
@@ -282,23 +292,65 @@
 
                     
                 </div>
+                <div>
+                    <h2>Bilan</h2>
+                    <p></p>
+                </div>
+                <div class="competences">
+                    <div>
+                        <h3 id="sous-titreh3" class="nomLanguage">Vue.js</h3>
+                        <div class="progress-bar">
+                            <div class="progressold" style="width: 80%;" ></div>
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 id="sous-titreh3" class="nomLanguage">Node.js</h3>
+                        <div class="progress-bar">
+                            <div class="progressold" style="width: 80%;" ></div>
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    
+                </div>
             </div>
+
             <div id="item4" class="itemCarousel">
                 <div class="presentationProjet">
                     <div class="title">
                         <h1>Dockerization du site X</h1>
                         <span class="barreVisuel" style="background: linear-gradient(90deg, transparent, #333333);"></span>
                     </div>
-                    <h2>Presentation du projet</h2>
+                    <h2>Présentation du projet</h2>
                     <p>
                         L'objectif du projet était de créer un site web <a href="https://x.com/?lang=fr">X</a> qui puisse être lancé sur n'importe quel PC. 
                         <br>Pour mener ce projet à bien, nous avons utilisé Docker, une solution de virtualisation légère qui permet de créer des environnements isolés et reproductibles,<br> facilitant le déploiement du site web sur différentes machines sans se soucier des configurations spécifiques de chaque PC.
                     </p>
-                    <h2>Achitecture du projet :</h2>
-                    <img src="./ressource/projet/item4/archi.png" alt="communicationDuSite" style="margin-left: 30% ; width: 50%; background-color: white;">
+                    <h3>Méthodologie</h3>
+                    <ul>
+                        <li><strong>Création de conteneurs Docker :</strong> Conteneur pour l'application web, gestion des dépendances spécifiques et définition des environnements via des fichiers Dockerfile.</li>
+                        <li><strong>Architecture du Projet :</strong> Approche modulaire facilitant maintenance et mises à jour, illustrée par l'image fournie.</li>
+                        <li><strong>Lien avec le site :</strong> Intégration d'un accès direct au site web via le lien <a href="https://x.com/?lang=fr">X</a>.</li>
+                    </ul>
+                    <h2>Architecture du projet :</h2>
+                    <img src="./ressource/projet/item4/archi.png" alt="communicationDuSite" style="margin-left: 30%; width: 50%; background-color: white;">
+            
+                    <h2>Bilan du projet</h2>
+                    <h3>Résultats</h3>
+                    <p>
+                        - Flexibilité : Le site peut être exécuté sur différents systèmes sans installation complexe.<br>
+                        - Fiabilité : Les environnements reproductibles réduisent les erreurs liées aux dépendances ou incompatibilités.<br>
+                        - Apprentissage : Renforcement des compétences sur Docker et la gestion des environnements virtualisés.
+                    </p>
+            
+                    <div>
+                        Le code est disponible à ce lien : <a href="https://github.com/phtuongvy/virtualisation_X">https://github.com/phtuongvy/virtualisation_X</a>
+                        Le site est disponible au lien suivant : <a href="?????">??????</a>
+                    </div>
                 </div>
-
-            </div>
+            </div>            
 
             <div id="item5" class="itemCarousel">
                 <div class="presentationProjet">
@@ -309,7 +361,7 @@
                     <div class="presentationjeu" style="display: grid;">
                         <h2>Mise en place de différents models 3D en Tree.js :</h2>
                         <div id="container3D"></div>
-                        <!-- <script type="module" src="./stylecv/project/mainitem2.js"></script> -->
+                        <script type="module" src="./stylecv/project/mainitem2.js"></script> 
                         <h2 style="position: absolute; top: 110%;">Mise en place de différents models 3D en Tree.js :</h2>
                         <div id="containerLogo">
                             <div class="logo-containerbas">
