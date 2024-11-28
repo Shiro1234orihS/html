@@ -23,6 +23,9 @@ const selectMode = (mode) => {
 </template>
 
 <style scoped>
+body{
+  display: block;
+}
 #menu {
   position: absolute;
   background-color: green;

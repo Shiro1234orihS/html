@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ConnectionView from '@/views/CreationCompteView.vue'
+import ConnectionView from '@/views/ConnectionView.vue'
 import CreationCompteView from '@/views/CreationCompteView.vue'
 
 const router = createRouter({
@@ -8,13 +8,13 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
-    },
-    {
-      path: '/connection',
       name: 'connection',
       component: ConnectionView,
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: HomeView,
     },
     {
       path: '/creation',

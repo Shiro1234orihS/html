@@ -2,35 +2,35 @@
 </script>
 
 <template>
-    <div id="contraint-connection">
-        <div class="contraint-input">
-            <input type="text" id="username" placeholder=" ">
-            <label class="floating-label" for="username">Nom utilisateur</label>
-        </div>
+    <div class="page-flex">
+        <div id="contraint-connection">
+            <div class="contraint-input">
+                <input type="text" id="username" placeholder=" ">
+                <label class="floating-label" for="username">Nom utilisateur</label>
+            </div>
 
-        <div class="contraint-input">
-            <input type="password" id="password" placeholder=" ">
-            <label class="floating-label" for="password">Mot de passe</label>
-        </div>
+            <div class="contraint-input">
+                <input type="password" id="password" placeholder=" ">
+                <label class="floating-label" for="password">Mot de passe</label>
+            </div>
         
-        <div class="div-flex">
-            <input type="checkbox" id="remember-me">
-            <label for="remember-me">Souvenir mot de passe</label>
-        </div>
+            <div class="div-flex">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Souvenir mot de passe</label>
+            </div>
         
-        <button>Connexion</button>
-        <div class="forgot-password">
-            <button>Mot de passe oublié</button>
+            <button>Connexion</button>
+            <div class="forgot-password">
+                <button>Mot de passe oublié</button>
+            </div>
         </div>
     </div>
+   
 </template>
 
 <style scoped>
-* {
-    margin: 0;
-    padding: 0;
-    
-}
+
+
 
 #contraint-connection {
     background-color: var(--color-surface);

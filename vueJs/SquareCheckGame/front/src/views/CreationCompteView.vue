@@ -16,29 +16,33 @@
 
 
 <template>
-    <div id="contraint-connection">
-        <h1>Création du compte</h1>
-        <div class="contraint-input">
-            <input type="text" id="email" placeholder=" ">
-            <label class="floating-label" for="email">E-mail *</label>
-            <p id="email-error" style="color: red; display: none;">Veuillez entrer un email valide.</p>
-        </div>
+    <div class="page-flex">
+        <div id="contraint-connection">
+            <h1>Création du compte</h1>
+            <div class="contraint-input">
+                <input type="text" id="email" placeholder=" ">
+                <label class="floating-label" for="email">E-mail *</label>
+                <p id="email-error" style="color: red; display: none;">Veuillez entrer un email valide.</p>
+            </div>
 
-        <div class="contraint-input">
-            <input type="text" id="username" placeholder=" ">
-            <label class="floating-label" for="username">Nom utilisateur *</label>
-        </div>
+            <div class="contraint-input">
+                <input type="text" id="username" placeholder=" ">
+                <label class="floating-label" for="username">Nom utilisateur *</label>
+            </div>
 
-        <div class="contraint-input">
-            <input type="password" id="password" placeholder=" ">
-            <label class="floating-label" for="password">Mot de passe *</label>
+            <div class="contraint-input">
+                <input type="password" id="password" placeholder=" ">
+                <label class="floating-label" for="password">Mot de passe *</label>
+            </div>
+            <button onclick="validateEmail">Création du compte</button>
+            <p>Les champs avec une $ sont obligatoire</p>
         </div>
-        <button onclick="validateEmail">Création du compte</button>
-        <p>Les champs avec une $ sont obligatoire</p>
     </div>
+    
 </template>
   
 <style>
+
 
 #contraint-connection {
     background-color: var(--color-surface);
