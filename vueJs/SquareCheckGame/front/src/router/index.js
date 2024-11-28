@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ConnectionView from '@/views/ConnectionView.vue'
 import CreationCompteView from '@/views/CreationCompteView.vue'
+import AllServerView from '@/views/AllServerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/creation',
       name: 'creation',
       component: CreationCompteView,
+    },
+    {
+      path: '/allServer',
+      name: 'allServer',
+      component: AllServerView,
     },
     {
       path: '/about',
