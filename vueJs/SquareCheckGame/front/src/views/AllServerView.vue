@@ -1,6 +1,4 @@
 <template>
-  <button @click="getAllServer">Mettre à jour</button>
-
   <div class="separateurRelatif">
     <div id="game">
       <div id="menu">
@@ -15,10 +13,7 @@
         <h1>Les différentes parties disponibles</h1>
         <ul v-if="state.allserver.length" class="serveur">
           <li v-for="server in state.allserver" :key="server.id">
-            <p>Nom du serveur : {{ server.name }}</p>
-            <p>Joueurs : {{ server.players.length }} / 2</p>
-            <p>Statut : {{ server.status }}</p>
-            <button>Rejoindre le serveur</button>
+            <ServerDetails :server="server" />
           </li>
         </ul>
         <p v-else>Aucune partie disponible.</p>
@@ -47,9 +42,13 @@
 <script>
 import { ref, onMounted, reactive } from 'vue';
 import { usesocketStore } from '@/stores/socket';
-
+import ServerDetails from '@/components/ServerDetails.vue'
 export default {
   name: 'AllServer',
+  components: {
+    ServerDetails,
+   
+  },
   setup() {
     const showNewServer = ref(false);
     const namServer = ref("");
