@@ -7,57 +7,37 @@
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
 </head>
 <body>
-    <h1>Jeu Multijoueur</h1>
+    <h1>Liste des Parties</h1>
+    <ul id="gameList"></ul>
 
-    <!-- Création de partie -->
-    <div>
-        <input id="gameName" type="text" placeholder="Nom de la partie">
-        <button id="createGameBtn">Créer une partie</button>
-    </div>
-
-    <!-- Liste des parties -->
-    <h2>Parties disponibles</h2>
-    <ul id="gamesList"></ul>
-
+    <!-- Votre script ici -->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script>
-        const socket = io();
+        // Connexion au serveur Socket.IO
+        const socket = io('http://localhost:3000');
 
-        // Écouter les mises à jour des parties
-        socket.on('update-games', (games) => {
-            const gamesList = document.getElementById('gamesList');
-            gamesList.innerHTML = ''; // Réinitialiser la liste
-            Object.values(games).forEach((game) => {
-                const li = document.createElement('li');
-                li.textContent = `${game.name} (${game.players.length}/2) - ${game.status}`;
+        // Recevoir les données initiales et les afficher
+        socket.on('initial-data', (games) => {
+            const gameList = document.getElementById('gameList');
+            if (gameList) {
+                gameList.innerHTML = ''; // Réinitialiser la liste
 
-                if (game.status === 'waiting') {
-                    const joinBtn = document.createElement('button');
-                    joinBtn.textContent = 'Rejoindre';
-                    joinBtn.onclick = () => {
-                        socket.emit('join-game', game.id);
-                    };
-                    li.appendChild(joinBtn);
-                }
-                gamesList.appendChild(li);
-            });
+                games.forEach((game) => {
+                    const li = document.createElement('li');
+                    li.textContent = `${game.name} - ${game.status}`;
+                    gameList.appendChild(li);
+                });
+            }
         });
 
-        // Création de partie
-        document.getElementById('createGameBtn').addEventListener('click', () => {
-            const gameName = document.getElementById('gameName').value;
-            socket.emit('create-game', { name: gameName });
+        socket.on('connect', () => {
+            console.log('Connecté au serveur');
         });
 
-        // Notification de la création de la partie
-        socket.on('game-created', (game) => {
-            alert(`Partie créée : ${game.name}`);
-        });
-
-        // Notification du démarrage de la partie
-        socket.on('game-start', (game) => {
-            alert(`La partie ${game.name} commence !`);
-            // Vous pouvez rediriger ou charger l'interface du jeu ici
+        socket.on('disconnect', () => {
+            console.log('Déconnecté du serveur');
         });
     </script>
 </body>
+
 </html>

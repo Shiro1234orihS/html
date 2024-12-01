@@ -6,19 +6,33 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ['http://example.com', 'http://another-site.com'], // Autorise les domaines spécifiques
+        origin: ['http://localhost:5173', 'http://ricardonunesemilio.fr'],// Autorise les domaines spécifiques
         methods: ['GET', 'POST'], // Autorise ces méthodes HTTP
     },
 });
 
 app.use(express.static('public'));
 
-let games = {}; // Stocker les parties
+// let games = {}; // Stocker les parties
 let gameIdCounter = 1;
+const games = {
+    '1': { id: '1', name: 'Partie 1', status: 'waiting', players: [] },
+    '2': { id: '2', name: 'Partie 2', status: 'playing', players: [] },
+};
 
 io.on('connection', (socket) => {
-    console.log('Un utilisateur est connecté :', socket.id);
+    console.log('Un utilisateur s\'est connecté :', socket.id);
 
+    // Convertir les parties en tableau et les envoyer
+    const gamesArray = Object.values(games); // Conversion de l'objet `games` en tableau
+    console.log('Envoi des jeux actuels :', gamesArray); // Log pour vérifier les données
+    socket.emit('update-games', gamesArray);
+
+    socket.on('request-games', () => {
+        console.log('Demande de mise à jour des parties reçue');
+        socket.emit('update-games', Object.values(games)); // Envoie l'état actuel des parties
+    });
+    
     // Création d'une nouvelle partie
     socket.on('create-game', (data) => {
         const gameId = `game-${gameIdCounter++}`;

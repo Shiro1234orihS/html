@@ -1,92 +1,98 @@
 <template>
-  
-    <!-- Main Content -->
-    <div class="separateurRelatif">
-      <div id="game">
-        <!-- Menu -->
-        <div id="menu">
-          <h1>Création de Partie</h1>
-          <div>
-            <button @click="refreshPage">Actualiser la page</button>
-            <button @click="toggleHiddenNewServer">Créer une partie multiple</button>
-          </div>
-        </div>
+  <button @click="getAllServer">Mettre à jour</button>
 
-        <!-- Liste des serveurs -->
-        <div id="list-serveur">
-          <h1>Les différentes parties disponibles</h1>
-          <ul class="serveur">
-            <li>Nom du serveur : server.name</li>
-            <li>Joueurs : server.players / server.maxPlayers</li>
+  <div class="separateurRelatif">
+    <div id="game">
+      <div id="menu">
+        <h1>Création de Partie</h1>
+        <div>
+          <button @click="getAllServer">Actualiser la page</button>
+          <button @click="toggleHiddenNewServer">Créer une partie multiple</button>
+        </div>
+      </div>
+
+      <div id="list-serveur">
+        <h1>Les différentes parties disponibles</h1>
+        <ul v-if="state.allserver.length" class="serveur">
+          <li v-for="server in state.allserver" :key="server.id">
+            <p>Nom du serveur : {{ server.name }}</p>
+            <p>Joueurs : {{ server.players.length }} / 2</p>
+            <p>Statut : {{ server.status }}</p>
             <button>Rejoindre le serveur</button>
-            <li>Type : server.type</li>
-          </ul>
-        </div>
+          </li>
+        </ul>
+        <p v-else>Aucune partie disponible.</p>
       </div>
-
-      <!-- Création de serveur -->
-      <div v-show="showNewServer" class="fondNoir">
-        <div id="creationServer">
-          <button @click="toggleHiddenNewServer">ferme</button>
-          <h2>Créer un nouveau serveur</h2>
-          <p>Nom du serveur :</p>
-          <input type="text" v-model="namServer" placeholder="Entrez le nom du serveur" />
-          <p>Nombre de joueurs :</p>
-          <input type="number" v-model="playerCount" placeholder="Nombre max de joueurs" />
-          <p>Serveur Privé :</p>
-          <input type="checkbox" id="privateServer" v-model="isPrivate" />
-          <label for="privateServer">Activer</label>
-          <button @click="newServer">Créer le serveur</button>
-        </div>
-      </div>
-      <div v-show="showNewServer" class="overlay"></div>
     </div>
-  
+
+    <div v-show="showNewServer" class="fondNoir">
+      <div id="creationServer">
+        <button @click="toggleHiddenNewServer">Fermer</button>
+        <h2>Créer un nouveau serveur</h2>
+        <p>Nom du serveur :</p>
+        <input type="text" v-model="namServer" placeholder="Entrez le nom du serveur" />
+        <p>Nombre de joueurs :</p>
+        <input type="number" v-model="playerCount" placeholder="Nombre max de joueurs" />
+        <p>Serveur Privé :</p>
+        <input type="checkbox" id="privateServer" v-model="isPrivate" />
+        <label for="privateServer">Activer</label>
+        <button @click="newServer">Créer le serveur</button>
+      </div>
+    </div>
+    <div v-show="showNewServer" class="overlay"></div>
+  </div>
 </template>
 
 
 <script>
 import { ref, onMounted, reactive } from 'vue';
+import { usesocketStore } from '@/stores/socket';
 
 export default {
-    name: 'AllServer',
-    setup() {
-        const showNewServer = ref(false);
-        const showNewPassWord = ref(false);
-        const namServer = ref("");
-        const state = reactive({
-            allserver: []
-        });
+  name: 'AllServer',
+  setup() {
+    const showNewServer = ref(false);
+    const namServer = ref("");
+    const socket = usesocketStore();
+    const state = reactive({
+      allserver: [],
+    });
+    const playerCount = ref(0); // Nombre de joueurs maximum
+    const isPrivate = ref(false); // Statut privé/public
 
-        const getAllServer = () => {
-          // Simulez une requête pour obtenir la liste des serveurs
-        };
+    const getAllServer = async () => {
+      try {
+        const servers = await socket.update(); // Attente des données
+        if (servers) {
+          state.allserver = servers; // Mise à jour de l'état
+          console.log("Serveurs récupérés :", state.allserver);
+        } else {
+          console.warn("Aucun serveur trouvé.");
+        }
+      } catch (error) {
+        console.error("Erreur lors de la récupération des serveurs :", error.message);
+      }
+    };
 
-        const updateAllServer = () => {
-          getAllServer();
-        };
+    const toggleHiddenNewServer = () => {
+      showNewServer.value = !showNewServer.value;
+    };
 
-        const newServer = () => {
-            // Ajoutez ici la logique pour créer un nouveau serveur
-        };
+    onMounted(() => {
 
-        const toggleHiddenNewServer = () => {    
-          showNewServer.value = !showNewServer.value; 
-        };
+      getAllServer();
+    });
 
-        onMounted(() => {
-          getAllServer();
-        });
-
-        return {
-          namServer,
-          showNewPassWord,
-          showNewServer,
-          updateAllServer,
-          newServer,
-          toggleHiddenNewServer,
-        };
-    },
+    return {
+      namServer,
+      playerCount, // Ajout de `playerCount`
+      isPrivate, // Ajout de `isPrivate`
+      showNewServer,
+      getAllServer,
+      toggleHiddenNewServer,
+      state,
+    };
+  },
 };
 </script>
 
