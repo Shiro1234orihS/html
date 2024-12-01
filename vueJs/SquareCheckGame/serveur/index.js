@@ -16,8 +16,8 @@ app.use(express.static('public'));
 // let games = {}; // Stocker les parties
 let gameIdCounter = 1;
 const games = {
-    '1': { id: '1', name: 'Partie 1', status: 'waiting', players: [] },
-    '2': { id: '2', name: 'Partie 2', status: 'playing', players: [] },
+    '1': { id: '1', name: 'Partie 1', status: 'waiting', players: [], nombre: 3 },
+    '2': { id: '2', name: 'Partie 2', status: 'playing', players: [],nombre: 3 },
 };
 
 io.on('connection', (socket) => {
@@ -36,44 +36,57 @@ io.on('connection', (socket) => {
     // Création d'une nouvelle partie
     socket.on('create-game', (data) => {
         const gameId = `game-${gameIdCounter++}`;
+        const maxPlayers = 10; // Limite globale pour éviter les abus
         games[gameId] = {
             id: gameId,
             name: data.name || `Partie ${gameId}`,
-            status: 'waiting', // 'waiting' = En attente de joueurs, 'playing' = En cours
-            players: [socket.id], // Le créateur de la partie
+            status: 'waiting',
+            players: [socket.id],
+            nombre: Math.min(Math.max(data.nombre || 3, 1), maxPlayers), // Limite entre 1 et maxPlayers
         };
+    
         socket.join(gameId);
-        console.log(`Partie créée : ${gameId}`);
-        io.emit('update-games', games); // Notifie tous les clients de la mise à jour des parties
-        socket.emit('game-created', games[gameId]); // Notifie le créateur de la partie
+        console.log(`Partie créée : ${gameId}`, games[gameId]);
+        io.emit('update-games', Object.values(games)); // Notifie tous les clients
+        socket.emit('game-created', games[gameId]); // Notifie le créateur
     });
 
     // Rejoindre une partie
     socket.on('join-game', (gameId) => {
         const game = games[gameId];
-        if (game && game.players.length < 2) {
-            game.players.push(socket.id);
-            game.status = 'playing'; // La partie commence si deux joueurs sont présents
-            socket.join(gameId);
-            io.to(gameId).emit('game-start', game); // Notifie tous les joueurs de la partie qu'elle a démarré
-            io.emit('update-games', games); // Met à jour la liste des parties
+    
+        if (game) {
+            if (game.players.length < game.nombre) {
+                game.players.push(socket.id);
+    
+                if (game.players.length === game.nombre) {
+                    game.status = 'playing'; // Change le statut si la partie est complète
+                }
+    
+                socket.join(gameId);
+                io.to(gameId).emit('game-start', game); // Notifie les joueurs de la partie
+                io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
+            } else {
+                socket.emit('error', `La partie ${game.name} est pleine.`);
+            }
         } else {
-            socket.emit('error', 'Impossible de rejoindre la partie.');
+            socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
         }
     });
 
-    // Déconnexion d'un joueur
     socket.on('disconnect', () => {
         Object.keys(games).forEach((gameId) => {
             const game = games[gameId];
             game.players = game.players.filter((player) => player !== socket.id);
+    
             if (game.players.length === 0) {
                 delete games[gameId]; // Supprime la partie si aucun joueur n'est présent
-            } else if (game.players.length === 1) {
-                game.status = 'waiting'; // Retour à "en attente"
+            } else {
+                game.status = 'waiting'; // Retour à "en attente" si la partie n'est plus complète
             }
         });
-        io.emit('update-games', games); // Notifie tous les clients
+    
+        io.emit('update-games', Object.values(games)); // Notifie tous les clients
         console.log(`Utilisateur déconnecté : ${socket.id}`);
     });
 });

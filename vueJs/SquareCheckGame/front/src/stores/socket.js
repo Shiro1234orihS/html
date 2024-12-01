@@ -30,5 +30,46 @@ export const usesocketStore = defineStore('socket', () => {
     });
   }
 
-  return { update };
+  function join(gameId) {
+    console.log(`Tentative de rejoindre la partie ${gameId}`);
+    return new Promise((resolve, reject) => {
+      // Écoute les réponses du serveur
+      socket.once('game-start', (game) => {
+        console.log(`Vous avez rejoint la partie ${game.id}`);
+        resolve(game);
+      });
+  
+      socket.once('error', (error) => {
+        console.error(`Erreur lors de la tentative de rejoindre la partie : ${error}`);
+        reject(new Error(error));
+      });
+  
+      // Émet l'événement pour rejoindre la partie
+      socket.emit('join-game', gameId);
+    });
+  }
+
+  function create(data) {
+    console.log("Création d'une nouvelle partie");
+    return new Promise((resolve, reject) => {
+      // Écoute la confirmation du serveur pour la création
+      socket.once('game-created', (game) => {
+        console.log(`Partie créée avec succès : ${game.id}`);
+        resolve(game);
+      });
+  
+      socket.once('error', (error) => {
+        console.error(`Erreur lors de la création de la partie : ${error}`);
+        reject(new Error(error));
+      });
+  
+      // Émet l'événement pour créer une nouvelle partie
+      socket.emit('create-game', data);
+    });
+  }
+
+  
+
+  return { create, update, join };
+
 });

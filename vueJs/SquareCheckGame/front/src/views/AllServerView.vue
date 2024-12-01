@@ -125,7 +125,7 @@ body {
 
 #menu {
   border-radius: 5px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-background);
   padding: 1em;
   margin-bottom: 2%;
   color: var(--color-text-primary);
@@ -164,8 +164,8 @@ body {
   border: 1px solid var(--color-primary);
   border-radius: 5px;
   list-style: none;
+  text-align: center;
 }
-
 .serveur li {
   margin: 0.5em 0;
 }
@@ -183,6 +183,7 @@ body {
 .serveur button:hover {
   background-color: var(--color-secondary);
 }
+
 
 #creationServer {
   margin-top: 2em;
