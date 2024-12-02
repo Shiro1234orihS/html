@@ -1,3 +1,13 @@
+class Player{
+    constructor( id, pseudo ,etats ){
+        this.idPlayer = id;
+        this.pseudo = pseudo;
+        this.etats = etats;
+    }
+
+
+}
+
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -15,9 +25,22 @@ app.use(express.static('public'));
 
 // let games = {}; // Stocker les parties
 let gameIdCounter = 1;
+
 const games = {
-    '1': { id: '1', name: 'Partie 1', status: 'waiting', players: [], nombre: 3 },
-    '2': { id: '2', name: 'Partie 2', status: 'playing', players: [],nombre: 3 },
+    '1': { 
+        id: '1', 
+        name: 'Partie 1', 
+        status: 'waiting', 
+        players: [new Player(1, "RIRI", "Pas prêt"), new Player(2, "Evan", "Prêt")], 
+        nombreMaxJoueur: 3 
+    },
+    '2': { 
+        id: '2', 
+        name: 'Partie 2', 
+        status: 'playing', 
+        players: [], 
+        nombreMaxJoueur: 3 
+    },
 };
 
 io.on('connection', (socket) => {
@@ -30,7 +53,7 @@ io.on('connection', (socket) => {
 
     socket.on('request-games', () => {
         console.log('Demande de mise à jour des parties reçue');
-        socket.emit('update-games', Object.values(games)); // Envoie l'état actuel des parties
+        // socket.emit('update-games', Object.values(games)); // Envoie l'état actuel des parties
     });
     
     // Création d'une nouvelle partie
@@ -52,26 +75,47 @@ io.on('connection', (socket) => {
     });
 
     // Rejoindre une partie
-    socket.on('join-game', (gameId) => {
-        const game = games[gameId];
-    
-        if (game) {
-            if (game.players.length < game.nombre) {
-                game.players.push(socket.id);
-    
-                if (game.players.length === game.nombre) {
-                    game.status = 'playing'; // Change le statut si la partie est complète
-                }
-    
-                socket.join(gameId);
-                io.to(gameId).emit('game-start', game); // Notifie les joueurs de la partie
-                io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
-            } else {
-                socket.emit('error', `La partie ${game.name} est pleine.`);
-            }
-        } else {
-            socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
+    socket.on('join-game', (gameId, pseudo) => {
+        const game = games[gameId]; // Récupérer la partie par ID
+        if (!game) {
+            return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
         }
+    
+        if (game.players.length >= game.nombreMaxJoueur) {
+            return socket.emit('error', `La partie ${game.name} est pleine.`);
+        }
+    
+        // Ajouter le joueur comme instance de `Player`
+        const newPlayer = new Player(socket.id, pseudo || `Joueur-${socket.id}`, "Pas prêt");
+        game.players.push(newPlayer);
+    
+        // Vérifier si la partie est complète
+        if (game.players.length === game.nombreMaxJoueur) {
+            game.status = 'playing'; // Change le statut si la partie est complète
+        }
+    
+        socket.join(gameId); // Le joueur rejoint la salle
+        io.to(gameId).emit('game-start', game); // Notifie les joueurs dans la salle
+        io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
+        console.log(`Joueur ${socket.id} a rejoint la partie ${gameId}`);
+    });
+
+    socket.on('update-status', (gameId, etats) => {
+        const game = games[gameId];
+        if (!game) {
+            return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
+        }
+    
+        const player = game.players.find((p) => p.idPlayer === socket.id);
+        if (!player) {
+            return socket.emit('error', `Le joueur n'est pas dans cette partie.`);
+        }
+    
+        // Met à jour le statut du joueur
+        player.etats = etats;
+        io.to(gameId).emit('player-status-updated', { playerId: socket.id, etats });
+        io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
+        console.log(`Le statut du joueur ${socket.id} a été mis à jour : ${etats}`);
     });
 
     socket.on('disconnect', () => {
@@ -86,7 +130,7 @@ io.on('connection', (socket) => {
             }
         });
     
-        io.emit('update-games', Object.values(games)); // Notifie tous les clients
+        // io.emit('update-games', Object.values(games)); // Notifie tous les clients
         console.log(`Utilisateur déconnecté : ${socket.id}`);
     });
 });
@@ -94,3 +138,6 @@ io.on('connection', (socket) => {
 server.listen(3000, () => {
     console.log('Serveur en écoute sur http://localhost:3000');
 });
+
+
+
