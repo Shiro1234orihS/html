@@ -10,6 +10,8 @@ const props = defineProps({
 const selectMode = (mode) => {
   console.log(`Mode sélectionné : ${mode}`);
 };
+
+
 </script>
 
 <template>

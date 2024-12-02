@@ -33,18 +33,19 @@ export const usesocketStore = defineStore('socket', () => {
   function join(gameId) {
     console.log(`Tentative de rejoindre la partie ${gameId}`);
     return new Promise((resolve, reject) => {
-      // Écoute les réponses du serveur
+      // Écoute le début de la partie (confirmation du serveur)
       socket.once('game-start', (game) => {
         console.log(`Vous avez rejoint la partie ${game.id}`);
         resolve(game);
       });
   
+      // Écoute les erreurs envoyées par le serveur
       socket.once('error', (error) => {
-        console.error(`Erreur lors de la tentative de rejoindre la partie : ${error}`);
+        console.error(`Erreur : ${error}`);
         reject(new Error(error));
       });
   
-      // Émet l'événement pour rejoindre la partie
+      // Émet l'événement pour rejoindre une partie
       socket.emit('join-game', gameId);
     });
   }

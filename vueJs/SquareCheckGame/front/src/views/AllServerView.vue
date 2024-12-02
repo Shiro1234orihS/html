@@ -9,14 +9,27 @@
         </div>
       </div>
 
-      <div id="list-serveur">
+      <div id="list-serveur" v-show="viewServers">
         <h1>Les différentes parties disponibles</h1>
         <ul v-if="state.allserver.length" class="serveur">
           <li v-for="server in state.allserver" :key="server.id">
-            <ServerDetails :server="server" />
+            <p>Nom du serveur : {{ server.name }}</p>
+            <p>Joueurs : {{ server.players.length }} / {{ server.nombreMaxJoueur }}</p>
+            <p>Statut : {{ server.status }}</p>
+            <ul>
+              <li v-for="player in server.players" :key="player.idPlayer">
+                {{ player.pseudo }} - {{ player.etats }}
+              </li>
+            </ul>
+            <button @click="joinServeur(server.id)">Rejoindre le serveur</button>
           </li>
         </ul>
         <p v-else>Aucune partie disponible.</p>
+      </div>
+
+      <div id="list-serveur" v-show="!viewServers">
+        <h1>Info de la partie :</h1>
+    
       </div>
     </div>
 
@@ -52,12 +65,17 @@ export default {
   setup() {
     const showNewServer = ref(false);
     const namServer = ref("");
+    const viewServers = ref(true);
     const socket = usesocketStore();
     const state = reactive({
       allserver: [],
     });
     const playerCount = ref(0); // Nombre de joueurs maximum
     const isPrivate = ref(false); // Statut privé/public
+    
+    const toggleHiddenViewServers = () => {
+      viewServers.value = !viewServers.value;
+    };
 
     const getAllServer = async () => {
       try {
@@ -73,9 +91,21 @@ export default {
       }
     };
 
+    const joinServeur = async (id) => {
+      try {
+        const game = await socket.join(id); // Appel à la méthode du store
+        toggleHiddenViewServers();
+        console.log(`Vous avez rejoint la partie ${game.id}`);
+      } catch (error) {
+        console.error(`Impossible de rejoindre la partie : ${error.message}`);
+      }
+    };
+
     const toggleHiddenNewServer = () => {
       showNewServer.value = !showNewServer.value;
     };
+
+  
 
     onMounted(() => {
 
@@ -84,12 +114,14 @@ export default {
 
     return {
       namServer,
+      viewServers,
       playerCount, // Ajout de `playerCount`
       isPrivate, // Ajout de `isPrivate`
       showNewServer,
       getAllServer,
       toggleHiddenNewServer,
       state,
+      joinServeur,
     };
   },
 };
@@ -110,11 +142,11 @@ body {
 }
 
 
-
 .separateurRelatif {
-  flex-grow: 1;
+  flex-grow: 2;
   padding: 2%;
 }
+
 
 #game {
   border: 1px solid var(--color-primary);

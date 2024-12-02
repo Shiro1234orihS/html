@@ -1,20 +1,24 @@
 <template>
     <div id="infoServer">
         <p>Nom du serveur : {{ server.name }}</p>
-        <p>Joueurs : {{ server.players.length }} / 2</p>
+        
         <p>Statut : {{ server.status }}</p>
-        <p>Nombre de joueur : {{ server.nombre }}/4</p>
-        <button>Rejoindre le serveur</button>
+        <p>Nombre de joueur : {{ server.players.length }} / {{ server.nombreMaxJoueur }}</p>
+        
     </div>
 </template>
 
 <script setup>
+import { usesocketStore } from '@/stores/socket';
+const socket = usesocketStore();
 defineProps({
   server: {
     type: Object,
     required: true
   }
 });
+
+
 </script>
 
 <style scoped>
