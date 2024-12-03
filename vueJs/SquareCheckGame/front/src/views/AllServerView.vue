@@ -54,7 +54,7 @@
         <p>Serveur Privé :</p>
         <input type="checkbox" id="privateServer" v-model="isPrivate" />
         <label for="privateServer">Activer</label>
-        <button @click="newServer">Créer le serveur</button>
+        <button @click="createGame()">Créer le serveur</button>
       </div>
     </div>
     <div v-show="showNewServer" class="overlay"></div>
@@ -75,6 +75,7 @@ export default {
     const viewServers = ref(true); // Affichage des listes ou détails
     const idServeur = ref(null); // ID de la partie active
     const socket = usesocketStore();
+    const isCreatingGame = ref(false);
     const state = reactive({
       allserver: [], // Liste des serveurs
     });
@@ -144,6 +145,23 @@ export default {
         console.error("Erreur lors de la déconnexion :", error.message);
       }
     };
+    const createGame = async () => {
+      if (isCreatingGame.value) return; // Éviter les appels multiples
+      isCreatingGame.value = true;    
+
+      try {
+        const data = {
+          name: namServer.value,
+          nombre: playerCount.value,
+        };
+        await socket.create(data);
+        console.log("Création réussie");
+      } catch (error) {
+        console.error("Erreur lors de la création :", error.message);
+      } finally {
+        isCreatingGame.value = false;
+      }
+    };
 
     // Charger les serveurs au montage du composant
     onMounted(() => {
@@ -165,6 +183,7 @@ export default {
       toggleHiddenViewServers,
       disconnecte,
       changeState,
+      createGame,
     };
   },
 };

@@ -59,19 +59,20 @@ io.on('connection', (socket) => {
     // Création d'une nouvelle partie
     socket.on('create-game', (data) => {
         const gameId = `game-${gameIdCounter++}`;
-        const maxPlayers = 10; // Limite globale pour éviter les abus
+        if (games[gameId]) return; // Évite la recréation d'une partie existante
+      
         games[gameId] = {
-            id: gameId,
-            name: data.name || `Partie ${gameId}`,
-            status: 'waiting',
-            players: [socket.id],
-            nombre: Math.min(Math.max(data.nombre || 3, 1), maxPlayers), // Limite entre 1 et maxPlayers
+          id: gameId,
+          name: data.name || `Partie ${gameId}`,
+          status: 'waiting',
+          players: [socket.id],
+          nombre: data.nombre || 3,
         };
-    
+      
         socket.join(gameId);
-        //console.log(`Partie créée : ${gameId}`, games[gameId]);
+        console.log(`Partie créée : ${gameId}`, games[gameId]);
+        socket.emit('game-created', games[gameId]); // Notifie uniquement le créateur
         io.emit('update-games', Object.values(games)); // Notifie tous les clients
-        socket.emit('game-created', games[gameId]); // Notifie le créateur
     });
 
     // Rejoindre une partie
