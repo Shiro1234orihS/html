@@ -4,7 +4,7 @@ import { io } from 'socket.io-client'; // Import correct
 
 
 export const usesocketStore = defineStore('socket', () => {
-  const socket = io('http://10.0.2.15:3001/', {
+  const socket = io('http://ricardonunesemilio.fr:3001', { //http://10.0.2.15:3001/
     withCredentials: true,
     transports: ['websocket'], // Utilisez WebSocket directement si disponible
   });
@@ -51,10 +51,26 @@ export const usesocketStore = defineStore('socket', () => {
     });
   }
 
-  function updateStatePlayer(gameId)
-  {
-
+  function updateStatePlayer(gameId) {
+    console.log(`Changement du statut dans la partie ${gameId}`);
+    return new Promise((resolve, reject) => {
+      // Écoute la confirmation du serveur pour le changement de statut
+      socket.once('player-status-updated', (player) => {
+        console.log(`Statut mis à jour pour le joueur ${player.playerId} : ${player.etats}`);
+        resolve(player);
+      });
+  
+      // Écoute les erreurs envoyées par le serveur
+      socket.once('error', (error) => {
+        console.error(`Erreur lors du changement de statut : ${error}`);
+        reject(new Error(error));
+      });
+  
+      // Émet l'événement pour demander le changement de statut
+      socket.emit('updateState-player', gameId);
+    });
   }
+  
   // Déconnexion d'une partie
   function disconnect(gameId) {
     console.log(`Tentative de déconnexion de la partie ${gameId}`);
@@ -96,6 +112,6 @@ export const usesocketStore = defineStore('socket', () => {
 
   
 
-  return { create, update, join,disconnect };
+  return { create, update, join,disconnect, updateStatePlayer };
 
 });

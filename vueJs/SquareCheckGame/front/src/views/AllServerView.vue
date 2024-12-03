@@ -35,8 +35,8 @@
                   {{ player.pseudo }} - {{ player.etats }}
                 </li>
               </ul>
-              <button @click="changeState">Pret !</button>
-              <button @click="disconnecte(server.id)">Quittez la partie</button>
+              <button @click="changeState">{{ status }}</button>
+              <button @click="disconnecte(server.id)">Quitter la partie</button>
             </div>
           </li>
         </ul>
@@ -65,40 +65,40 @@
 <script>
 import { ref, onMounted, reactive } from 'vue';
 import { usesocketStore } from '@/stores/socket';
-import ServerDetails from '@/components/ServerDetails.vue'
+
 export default {
   name: 'AllServer',
-  components: {
-    ServerDetails,
-   
-  },
   setup() {
     const showNewServer = ref(false);
     const namServer = ref("");
-    const viewServers = ref(true);
+    const status = ref("Pas prêt");
+    const viewServers = ref(true); // Affichage des listes ou détails
+    const idServeur = ref(null); // ID de la partie active
     const socket = usesocketStore();
-    const idServeur = ref(null);
     const state = reactive({
-      allserver: [],
+      allserver: [], // Liste des serveurs
     });
+
     const playerCount = ref(0); // Nombre de joueurs maximum
     const isPrivate = ref(false); // Statut privé/public
-    
+
+    // Basculer entre vue des serveurs et détails
     const toggleHiddenViewServers = () => {
       viewServers.value = !viewServers.value;
       console.log("Valeur actuelle de viewServers:", viewServers.value);
     };
 
-
+    // Basculer l'affichage du formulaire de création de serveur
     const toggleHiddenNewServer = () => {
       showNewServer.value = !showNewServer.value;
     };
 
+    // Récupérer tous les serveurs
     const getAllServer = async () => {
       try {
-        const servers = await socket.update(); // Attente des données
+        const servers = await socket.update();
         if (servers) {
-          state.allserver = servers; // Mise à jour de l'état
+          state.allserver = servers;
           console.log("Serveurs récupérés :", state.allserver);
         } else {
           console.warn("Aucun serveur trouvé.");
@@ -108,40 +108,54 @@ export default {
       }
     };
 
+    // Rejoindre un serveur
     const joinServeur = async (id) => {
       idServeur.value = id;
       try {
-        const game = await socket.join(id); // Appel à la méthode du store
+        await socket.join(id);
         toggleHiddenViewServers();
         console.log(`Vous avez rejoint la partie ${id}`);
       } catch (error) {
         console.error(`Impossible de rejoindre la partie : ${error.message}`);
       }
     };
-    const changeState = async (id) => {
-      
-    }
+
+    // Changer le statut du joueur
+    const changeState = async () => {
+      try {
+        const player = await socket.updateStatePlayer(idServeur.value);
+        console.log(`Statut mis à jour : ${player.etats}`);
+        status.value = status.value === "Pas prêt" ? "Prêt !" : "Pas prêt";
+        await getAllServer(); // Rafraîchir les données après mise à jour
+       
+      } catch (error) {
+        console.error(`Erreur lors du changement de statut : ${error.message}`);
+      }
+    };
+
+    // Quitter une partie
     const disconnecte = async (id) => {
       console.log("Tentative de déconnexion de la partie", id);
       try {
         toggleHiddenViewServers();
         await socket.disconnect(id);
-        console.log("Déconnexion réussie, basculement de l'affichage");
-        
+        console.log("Déconnexion réussie, retour à la liste des serveurs");
       } catch (error) {
         console.error("Erreur lors de la déconnexion :", error.message);
       }
     };
 
+    // Charger les serveurs au montage du composant
     onMounted(() => {
       getAllServer();
     });
 
     return {
+      status,
       namServer,
       viewServers,
-      playerCount, // Ajout de `playerCount`
-      isPrivate, // Ajout de `isPrivate`
+      playerCount,
+      isPrivate,
       showNewServer,
       getAllServer,
       toggleHiddenNewServer,
@@ -149,7 +163,8 @@ export default {
       joinServeur,
       idServeur,
       toggleHiddenViewServers,
-      disconnecte
+      disconnecte,
+      changeState,
     };
   },
 };

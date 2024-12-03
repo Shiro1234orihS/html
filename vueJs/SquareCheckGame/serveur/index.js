@@ -102,27 +102,24 @@ io.on('connection', (socket) => {
         io.emit('update-games', Object.values(games)); // Met à jour la liste des parties pour tous les clients
         //console.log(`Joueur ${newPlayer.pseudo} a rejoint la partie ${gameId}`);
     });
+
     socket.on('updateState-player', (gameId) => {
-        const game = games[gameId]; // Récupérer la partie par ID
-        if (!game) {
-            return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
-        }
-    
-        // Trouver l'index du joueur
-        const playerIndex = game.players.findIndex((p) => p.idPlayer === socket.id);
-    
-        if (playerIndex === -1) {
-            return socket.emit('error', `Le joueur avec l'ID ${socket.id} n'est pas dans cette partie.`);
-        }
-    
-        // Mettre à jour l'état du joueur
-        const player = game.players[playerIndex];
-        player.etats = player.etats === "Pas prêt" ? "Prêt !" : "Pas prêt";
-    
-        // Notifier tous les joueurs de la mise à jour
-        io.to(gameId).emit('player-status-updated', { playerId: player.idPlayer, etats: player.etats });
-    
-        console.log(`Le statut du joueur ${player.idPlayer} a été mis à jour : ${player.etats}`);
+      const game = games[gameId];
+      if (!game) {
+        return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
+      }
+  
+      const playerIndex = game.players.findIndex((p) => p.idPlayer === socket.id);
+  
+      if (playerIndex === -1) {
+        return socket.emit('error', `Le joueur avec l'ID ${socket.id} n'est pas dans cette partie.`);
+      }
+  
+      const player = game.players[playerIndex];
+      player.etats = player.etats === "Pas prêt" ? "Prêt !" : "Pas prêt";
+  
+      io.to(gameId).emit('player-status-updated', { playerId: player.idPlayer, etats: player.etats });
+      console.log(`Statut mis à jour pour le joueur ${player.idPlayer} : ${player.etats}`);
     });
     
     socket.on('disconnect-game', (gameId) => {
