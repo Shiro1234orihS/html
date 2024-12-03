@@ -100,6 +100,33 @@ io.on('connection', (socket) => {
         console.log(`Joueur ${socket.id} a rejoint la partie ${gameId}`);
     });
 
+    socket.on('disconnect-game', (gameId) => {
+        const game = games[gameId]; // Récupérer la partie par ID
+        if (!game) {
+            return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
+        }
+    
+        // Trouver le joueur à supprimer
+        const playerIndex = game.players.findIndex((p) => p.idPlayer === socket.id);
+    
+        if (playerIndex === -1) {
+            return socket.emit('error', `Le joueur avec l'ID ${socket.id} n'est pas dans cette partie.`);
+        }
+    
+        // Supprimer le joueur
+        game.players.splice(playerIndex, 1);
+    
+        // Vérifier le statut de la partie
+        if (game.players.length < game.nombreMaxJoueur) {
+            game.status = 'waiting'; // Change le statut si la partie n'est plus complète
+        }
+    
+        socket.leave(gameId); // Le joueur quitte la salle
+        io.to(gameId).emit('player-left', { gameId, playerId: socket.id }); // Notifie les joueurs dans la salle
+        io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
+        console.log(`Joueur ${socket.id} a quitté la partie ${gameId}`);
+    });
+
     socket.on('update-status', (gameId, etats) => {
         const game = games[gameId];
         if (!game) {

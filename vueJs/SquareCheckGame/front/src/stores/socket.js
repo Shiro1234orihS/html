@@ -50,6 +50,10 @@ export const usesocketStore = defineStore('socket', () => {
     });
   }
 
+  function disconnect(gameId, idPlayer){
+    
+  }
+
   function create(data) {
     console.log("Création d'une nouvelle partie");
     return new Promise((resolve, reject) => {
