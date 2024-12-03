@@ -77,6 +77,7 @@ io.on('connection', (socket) => {
     // Rejoindre une partie
     socket.on('join-game', (gameId, pseudo) => {
         const game = games[gameId]; // Récupérer la partie par ID
+    
         if (!game) {
             return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
         }
@@ -85,21 +86,23 @@ io.on('connection', (socket) => {
             return socket.emit('error', `La partie ${game.name} est pleine.`);
         }
     
-        // Ajouter le joueur comme instance de `Player`
+        // Créer une instance de Player pour le joueur qui rejoint
         const newPlayer = new Player(socket.id, pseudo || `Joueur-${socket.id}`, "Pas prêt");
-        game.players.push(newPlayer);
     
+        // Ajouter le joueur à la partie
+        game.players.push(newPlayer);
+        console.log('liste de jouer :' , newPlayer)
         // Vérifier si la partie est complète
         if (game.players.length === game.nombreMaxJoueur) {
             game.status = 'playing'; // Change le statut si la partie est complète
         }
     
         socket.join(gameId); // Le joueur rejoint la salle
-        io.to(gameId).emit('game-start', game); // Notifie les joueurs dans la salle
-        io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
-        console.log(`Joueur ${socket.id} a rejoint la partie ${gameId}`);
+        io.to(gameId).emit('player-joined', newPlayer); // Notifie les joueurs de la salle qu'un nouveau joueur a rejoint
+        io.emit('update-games', Object.values(games)); // Met à jour la liste des parties pour tous les clients
+        console.log(`Joueur ${newPlayer.pseudo} a rejoint la partie ${gameId}`);
     });
-
+    
     socket.on('disconnect-game', (gameId) => {
         const game = games[gameId]; // Récupérer la partie par ID
         if (!game) {
@@ -162,7 +165,7 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3000, () => {
+server.listen(3001, () => {
     console.log('Serveur en écoute sur http://localhost:3000');
 });
 
