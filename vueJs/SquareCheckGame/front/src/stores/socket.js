@@ -51,6 +51,10 @@ export const usesocketStore = defineStore('socket', () => {
     });
   }
 
+  function updateStatePlayer(gameId)
+  {
+
+  }
   // Déconnexion d'une partie
   function disconnect(gameId) {
     console.log(`Tentative de déconnexion de la partie ${gameId}`);
