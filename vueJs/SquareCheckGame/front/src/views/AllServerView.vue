@@ -9,21 +9,20 @@
         </div>
       </div>
 
-      <div id="list-serveur" v-show="viewServers">
+      <div id="list-serveurs-disponibles" v-if="viewServers" :key="viewServers">
         <h1>Les différentes parties disponibles</h1>
         <ul v-if="state.allserver.length" class="serveur">
           <li v-for="server in state.allserver" :key="server.id">
             <p>Nom du serveur : {{ server.name }}</p>
             <p>Joueurs : {{ server.players.length }} / {{ server.nombreMaxJoueur }}</p>
             <p>Statut : {{ server.status }}</p>
-           
             <button @click="joinServeur(server.id)">Rejoindre le serveur</button>
           </li>
         </ul>
         <p v-else>Aucune partie disponible.</p>
       </div>
 
-      <div id="list-serveur" v-show="!viewServers">
+      <div id="list-serveurs-details" v-if="!viewServers" :key="viewServers">
         <h1>Info de la partie :</h1>
         <ul v-if="state.allserver.length" class="serveur">
           <li v-for="server in state.allserver" :key="server.id">
@@ -36,10 +35,11 @@
                   {{ player.pseudo }} - {{ player.etats }}
                 </li>
               </ul>
+              <button @click="changeState">Pret !</button>
+              <button @click="disconnecte(server.id)">Quittez la partie</button>
             </div>
           </li>
         </ul>
-        <button @click="toggleHiddenViewServers(0)">Quittez la partie</button>
       </div>
     </div>
 
@@ -84,10 +84,14 @@ export default {
     const playerCount = ref(0); // Nombre de joueurs maximum
     const isPrivate = ref(false); // Statut privé/public
     
-    const toggleHiddenViewServers = (serverId) => {
-     viewServers.value = !viewServers.value;
-     idServeur.value = serverId; // Affectez la valeur à la propriété réactive
-     console.log("ID est : ", idServeur.value);
+    const toggleHiddenViewServers = () => {
+      viewServers.value = !viewServers.value;
+      console.log("Valeur actuelle de viewServers:", viewServers.value);
+    };
+
+
+    const toggleHiddenNewServer = () => {
+      showNewServer.value = !showNewServer.value;
     };
 
     const getAllServer = async () => {
@@ -105,17 +109,28 @@ export default {
     };
 
     const joinServeur = async (id) => {
+      idServeur.value = id;
       try {
         const game = await socket.join(id); // Appel à la méthode du store
-        toggleHiddenViewServers(id);
-        console.log(`Vous avez rejoint la partie ${game.id}`);
+        toggleHiddenViewServers();
+        console.log(`Vous avez rejoint la partie ${id}`);
       } catch (error) {
         console.error(`Impossible de rejoindre la partie : ${error.message}`);
       }
     };
-
-    const toggleHiddenNewServer = () => {
-      showNewServer.value = !showNewServer.value;
+    const changeState = async (id) => {
+      
+    }
+    const disconnecte = async (id) => {
+      console.log("Tentative de déconnexion de la partie", id);
+      try {
+        toggleHiddenViewServers();
+        await socket.disconnect(id);
+        console.log("Déconnexion réussie, basculement de l'affichage");
+        
+      } catch (error) {
+        console.error("Erreur lors de la déconnexion :", error.message);
+      }
     };
 
     onMounted(() => {
@@ -134,6 +149,7 @@ export default {
       joinServeur,
       idServeur,
       toggleHiddenViewServers,
+      disconnecte
     };
   },
 };

@@ -92,6 +92,6 @@ export const usesocketStore = defineStore('socket', () => {
 
   
 
-  return { create, update, join };
+  return { create, update, join,disconnect };
 
 });
