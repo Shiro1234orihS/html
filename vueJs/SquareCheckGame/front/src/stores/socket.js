@@ -4,7 +4,7 @@ import { io } from 'socket.io-client'; // Import correct
 
 
 export const usesocketStore = defineStore('socket', () => {
-  const socket = io('http://ricardonunesemilio.fr:3001', { //http://10.0.2.15:3001/
+  const socket = io('http://ricardonunesemilio.fr:3002', { //http://10.0.2.15:3001/
     withCredentials: true,
     transports: ['websocket'], // Utilisez WebSocket directement si disponible
   });

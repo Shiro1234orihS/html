@@ -10,7 +10,8 @@
       </div>
 
       <div id="list-serveurs-disponibles" v-if="viewServers" :key="viewServers">
-        <h1>Les différentes parties disponibles</h1>
+        <h1 v-if="connectionError" class="erreur">{{ connectionError }}</h1> <!-- Message d'erreur -->
+        <h1 v-else>Les différentes parties disponibles</h1>
         <ul v-if="state.allserver.length" class="serveur">
           <li v-for="server in state.allserver" :key="server.id">
             <p>Nom du serveur : {{ server.name }}</p>
@@ -62,6 +63,7 @@
 </template>
 
 
+
 <script>
 import { ref, onMounted, reactive } from 'vue';
 import { usesocketStore } from '@/stores/socket';
@@ -79,6 +81,7 @@ export default {
     const state = reactive({
       allserver: [], // Liste des serveurs
     });
+    const connectionError = ref(null); // Nouvelle variable pour gérer les erreurs de connexion
 
     const playerCount = ref(0); // Nombre de joueurs maximum
     const isPrivate = ref(false); // Statut privé/public
@@ -86,7 +89,7 @@ export default {
     // Basculer entre vue des serveurs et détails
     const toggleHiddenViewServers = () => {
       viewServers.value = !viewServers.value;
-      console.log("Valeur actuelle de viewServers:", viewServers.value);
+      //console.log("Valeur actuelle de viewServers:", viewServers.value);
     };
 
     // Basculer l'affichage du formulaire de création de serveur
@@ -100,11 +103,14 @@ export default {
         const servers = await socket.update();
         if (servers) {
           state.allserver = servers;
-          console.log("Serveurs récupérés :", state.allserver);
+          connectionError.value = null; // Réinitialiser l'erreur si la connexion réussit
+          //console.log("Serveurs récupérés :", state.allserver);
         } else {
-          console.warn("Aucun serveur trouvé.");
+          connectionError.value = "Aucun serveur trouvé."; // Message d'erreur si aucun serveur n'est trouvé
+          //console.warn("Aucun serveur trouvé.");
         }
       } catch (error) {
+        connectionError.value = "Problème de connexion au serveur, veuillez réessayer plus tard."; // Message d'erreur
         console.error("Erreur lors de la récupération des serveurs :", error.message);
       }
     };
@@ -115,9 +121,9 @@ export default {
       try {
         await socket.join(id);
         toggleHiddenViewServers();
-        console.log(`Vous avez rejoint la partie ${id}`);
+        //console.log(`Vous avez rejoint la partie ${id}`);
       } catch (error) {
-        console.error(`Impossible de rejoindre la partie : ${error.message}`);
+        //console.error(`Impossible de rejoindre la partie : ${error.message}`);
       }
     };
 
@@ -125,43 +131,55 @@ export default {
     const changeState = async () => {
       try {
         const player = await socket.updateStatePlayer(idServeur.value);
-        console.log(`Statut mis à jour : ${player.etats}`);
+        //console.log(`Statut mis à jour : ${player.etats}`);
         status.value = status.value === "Pas prêt" ? "Prêt !" : "Pas prêt";
         await getAllServer(); // Rafraîchir les données après mise à jour
        
       } catch (error) {
-        console.error(`Erreur lors du changement de statut : ${error.message}`);
+        //console.error(`Erreur lors du changement de statut : ${error.message}`);
       }
     };
 
     // Quitter une partie
     const disconnecte = async (id) => {
-      console.log("Tentative de déconnexion de la partie", id);
+      //console.log("Tentative de déconnexion de la partie", id);
       try {
         toggleHiddenViewServers();
         await socket.disconnect(id);
-        console.log("Déconnexion réussie, retour à la liste des serveurs");
+        //console.log("Déconnexion réussie, retour à la liste des serveurs");
       } catch (error) {
         console.error("Erreur lors de la déconnexion :", error.message);
       }
     };
+
+    // Créer une partie
+    // Créer une partie
     const createGame = async () => {
       if (isCreatingGame.value) return; // Éviter les appels multiples
-      isCreatingGame.value = true;    
+      isCreatingGame.value = true;        
 
       try {
         const data = {
           name: namServer.value,
           nombre: playerCount.value,
         };
-        await socket.create(data);
-        console.log("Création réussie");
+        const newGame = await socket.create(data); // Crée le serveur
+        //console.log("Création réussie :", data.nombre);
+        
+        if (newGame && newGame.id) {
+          await joinServeur(newGame.id); // Rejoindre la partie immédiatement
+        } else {
+          console.error("Erreur : ID de la partie introuvable");
+        }
+        
       } catch (error) {
         console.error("Erreur lors de la création :", error.message);
       } finally {
         isCreatingGame.value = false;
+        toggleHiddenNewServer();
       }
     };
+
 
     // Charger les serveurs au montage du composant
     onMounted(() => {
@@ -184,10 +202,12 @@ export default {
       disconnecte,
       changeState,
       createGame,
+      connectionError, // Retourner connectionError pour l'utiliser dans le template
     };
   },
 };
 </script>
+
 
 <style scoped>
 
@@ -311,5 +331,14 @@ body {
   background-color: var(--color-secondary);
 }
 
-
+.erreur {
+  background-color: rgba(226, 37, 30, 0.589);
+  color: red;
+  border: 5px solid rgb(75, 47, 47);
+  border-radius: 25px;
+  padding: 1em;
+  margin-top: 1em;
+  text-align: center;
+  font-weight: bold;
+}
 </style>

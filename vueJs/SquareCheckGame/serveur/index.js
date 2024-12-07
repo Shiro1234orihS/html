@@ -58,21 +58,23 @@ io.on('connection', (socket) => {
     
     // Création d'une nouvelle partie
     socket.on('create-game', (data) => {
-        const gameId = `game-${gameIdCounter++}`;
-        if (games[gameId]) return; // Évite la recréation d'une partie existante
-      
-        games[gameId] = {
-          id: gameId,
-          name: data.name || `Partie ${gameId}`,
-          status: 'waiting',
-          players: [socket.id],
-          nombre: data.nombre || 3,
-        };
-      
-        socket.join(gameId);
-        console.log(`Partie créée : ${gameId}`, games[gameId]);
-        socket.emit('game-created', games[gameId]); // Notifie uniquement le créateur
-        io.emit('update-games', Object.values(games)); // Notifie tous les clients
+      const gameId = `game-${gameIdCounter++}`;
+      if (games[gameId]) return; // Évite la recréation d'une partie existante
+     
+      games[gameId] = {
+        id: gameId, // **Assurez-vous que l'ID est correctement défini ici**
+        name: data.name || `Partie ${gameId}`,
+        status: 'waiting',
+        players: [socket.id],
+        nombreMaxJoueur: data.nombre || 3,
+      };
+     
+      socket.join(gameId);
+      console.log(`Partie créée : ${gameId}`, games[gameId]);
+     
+      // On envoie bien l'objet contenant l'id de la partie
+      socket.emit('game-created', games[gameId]); // Notifie uniquement le créateur
+      io.emit('update-games', Object.values(games)); // Notifie tous les clients
     });
 
     // Rejoindre une partie
@@ -187,7 +189,7 @@ io.on('connection', (socket) => {
     // });
 });
 
-server.listen(3001, () => {
+server.listen(3002, () => {
     //console.log('Serveur en écoute sur http://localhost:3000');
 });
 
