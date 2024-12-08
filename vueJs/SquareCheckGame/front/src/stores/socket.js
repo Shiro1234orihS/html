@@ -4,7 +4,7 @@ import { io } from 'socket.io-client'; // Import correct
 
 
 export const usesocketStore = defineStore('socket', () => {
-  const socket = io('http://ricardonunesemilio.fr:3001', { //http://10.0.2.15:3001/
+  const socket = io('http://ricardonunesemilio.fr:3002', { //http://10.0.2.15:3001/
     withCredentials: true,
     transports: ['websocket'], // Utilisez WebSocket directement si disponible
   });
@@ -113,6 +113,25 @@ export const usesocketStore = defineStore('socket', () => {
       socket.emit('create-game', data);
     });
   }
+
+  function startGame(gameId) {
+    console.log(`Lancement de la partie ${gameId}`);
+    return new Promise((resolve, reject) => {
+      // Écoute la confirmation du serveur pour le démarrage de la partie
+      socket.once('game-started', (game) => {
+        console.log(`La partie ${game.id} a démarré`);
+        resolve(game);
+      });
+  
+      socket.once('error', (error) => {
+        console.error(`Erreur lors du lancement de la partie : ${error}`);
+        reject(new Error(error));
+      });
+  
+      // Émet l'événement pour demander le démarrage de la partie
+      socket.emit('start-game', gameId);
+    });
+  }
   //Ecoute evenement 
 
   // Événement : mise à jour globale de la liste des serveurs
@@ -142,7 +161,7 @@ export const usesocketStore = defineStore('socket', () => {
   });
 
 
-  return { create, update, join,disconnect, updateStatePlayer, state, socket };
+  return { create, update, join,disconnect, updateStatePlayer, startGame ,state, socket };
 
 });
 

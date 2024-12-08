@@ -32,12 +32,23 @@
               <p>Joueurs : {{ server.players.length }} / {{ server.nombreMaxJoueur }}</p>
               <p>Statut : {{ server.status }}</p>
               <ul>
-                <li v-for="player in server.players" :key="player.idPlayer">
+                <li v-for="(player, index) in server.players" :key="player.idPlayer">
                   {{ player.pseudo }} - {{ player.etats }}
                 </li>
               </ul>
+
+              <!-- Bouton pour changer le statut du joueur -->
               <button @click="changeState">{{ status }}</button>
+
+              <!-- Bouton pour quitter la partie -->
               <button @click="disconnecte(server.id)">Quitter la partie</button>
+            
+              <!-- Bouton de lancement de la partie -->
+              <button 
+                v-if="server.players[0]?.idPlayer === socket.socket.id && server.players.every(player => player.etats === 'Prêt !')" 
+                @click="startGame(server.id)">
+                Lancer la partie
+              </button>
             </div>
           </li>
         </ul>
@@ -185,7 +196,14 @@ export default {
         toggleHiddenNewServer();
       }
     };
-
+    const startGame = async (id) => {
+      try {
+        await socket.startGame(id); // Envoie l'ordre au serveur de démarrer la partie
+        console.log(`La partie ${id} a été lancée`);
+      } catch (error) {
+        console.error(`Erreur lors du lancement de la partie : ${error.message}`);
+      }
+    };
 
     // Charger les serveurs au montage du composant
     onMounted(() => {
@@ -209,6 +227,8 @@ export default {
       changeState,
       createGame,
       connectionError, // Retourner connectionError pour l'utiliser dans le template
+      startGame,
+      socket
     };
   },
 };

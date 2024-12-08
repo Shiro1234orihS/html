@@ -181,9 +181,36 @@ io.on('connection', (socket) => {
     //     // io.emit('update-games', Object.values(games)); // Notifie tous les clients
     //     //console.log(`Utilisateur déconnecté : ${socket.id}`);
     // });
+
+    socket.on('start-game', (gameId) => {
+        const game = games[gameId];
+        if (!game) {
+          return socket.emit('error', `La partie avec l'ID ${gameId} n'existe pas.`);
+        }
+    
+        // Vérifier que le joueur est le premier dans la liste
+        const firstPlayer = game.players[0];
+        if (!firstPlayer || firstPlayer.idPlayer !== socket.id) {
+          return socket.emit('error', 'Seul le premier joueur peut lancer la partie.');
+        }
+    
+        // Vérifier que tous les joueurs sont "Prêt !"
+        const allPlayersReady = game.players.every(player => player.etats === 'Prêt !');
+        if (!allPlayersReady) {
+          return socket.emit('error', 'Tous les joueurs doivent être prêts pour lancer la partie.');
+        }
+    
+        // Changer le statut de la partie à "playing"
+        game.status = 'playing';
+        console.log(`La partie ${gameId} a démarré !`);
+    
+        // Notifie tous les joueurs de la salle que la partie a commencé
+        io.to(gameId).emit('game-started', game);
+        io.emit('update-games', Object.values(games)); // Met à jour la liste des parties
+    });
 });
 
-server.listen(3001, () => {
+server.listen(3002, () => {
     //console.log('Serveur en écoute sur http://localhost:3000');
 });
 
