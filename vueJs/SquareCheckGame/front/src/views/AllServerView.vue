@@ -205,6 +205,13 @@ export default {
       }
     };
 
+    socket.socket.on('update-game-details', (updatedGame) => {
+      console.log('Mise à jour des détails de la partie :', updatedGame);
+      const index = state.allserver.findIndex(game => game.id === updatedGame.id);
+      if (index !== -1) {
+        state.allserver[index] = updatedGame;
+      }
+    });
     // Charger les serveurs au montage du composant
     onMounted(() => {
       getAllServer();
@@ -228,7 +235,8 @@ export default {
       createGame,
       connectionError, // Retourner connectionError pour l'utiliser dans le template
       startGame,
-      socket
+      socket,
+    
     };
   },
 };

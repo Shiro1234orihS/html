@@ -160,6 +160,15 @@ export const usesocketStore = defineStore('socket', () => {
     }
   });
 
+  socket.on('update-game-details', (updatedGame) => {
+    console.log('Mise à jour des détails de la partie :', updatedGame);
+    const index = state.value.allserver.findIndex(game => game.id === updatedGame.id);
+    if (index !== -1) {
+      state.value.allserver[index] = updatedGame; // Met à jour l'état de la partie dans la liste
+    } else {
+      state.value.allserver.push(updatedGame); // Si la partie n'existe pas, on l'ajoute
+    }
+  });
 
   return { create, update, join,disconnect, updateStatePlayer, startGame ,state, socket };
 

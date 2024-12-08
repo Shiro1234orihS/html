@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
         const player = game.players[playerIndex];
         player.etats = player.etats === "Pas prêt" ? "Prêt !" : "Pas prêt";
       
-        io.to(gameId).emit('updateState-player', game);
+        io.to(gameId).emit('update-game-details', game); // Notifie tous les joueurs de la salle des changements
         console.log(`Statut mis à jour pour le joueur ${player.idPlayer} : ${player.etats}`);
     });
     
