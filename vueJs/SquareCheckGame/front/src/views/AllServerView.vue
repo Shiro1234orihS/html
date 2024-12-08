@@ -26,7 +26,7 @@
       <div id="list-serveurs-details" v-if="!viewServers" :key="viewServers">
         <h1>Info de la partie :</h1>
         <ul v-if="state.allserver.length" class="serveur">
-          <li v-for="server in state.allserver" :key="server.id">
+          <li v-for="server in state.allserver" :key="server.id + server.players.length">
             <div v-if="server.id === idServeur">
               <p>Nom du serveur : {{ server.name }}</p>
               <p>Joueurs : {{ server.players.length }} / {{ server.nombreMaxJoueur }}</p>
@@ -51,7 +51,11 @@
         <p>Nom du serveur :</p>
         <input type="text" v-model="namServer" placeholder="Entrez le nom du serveur" />
         <p>Nombre de joueurs :</p>
-        <input type="number" v-model="playerCount" placeholder="Nombre max de joueurs" />
+        <select v-model="playerCount">
+          <option v-for="n in 8" :key="n" :value="n + 2">
+            {{ n + 2 }}
+          </option>
+        </select>
         <p>Serveur Privé :</p>
         <input type="checkbox" id="privateServer" v-model="isPrivate" />
         <label for="privateServer">Activer</label>
@@ -120,12 +124,14 @@ export default {
       idServeur.value = id;
       try {
         await socket.join(id);
+        await getAllServer(); 
         toggleHiddenViewServers();
-        //console.log(`Vous avez rejoint la partie ${id}`);
+        console.log(`Vous avez rejoint la partie ${id}`);
       } catch (error) {
-        //console.error(`Impossible de rejoindre la partie : ${error.message}`);
+        console.error(`Impossible de rejoindre la partie : ${error.message}`);
       }
     };
+
 
     // Changer le statut du joueur
     const changeState = async () => {

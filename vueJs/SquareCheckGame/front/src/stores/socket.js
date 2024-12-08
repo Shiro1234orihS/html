@@ -4,9 +4,13 @@ import { io } from 'socket.io-client'; // Import correct
 
 
 export const usesocketStore = defineStore('socket', () => {
-  const socket = io('http://ricardonunesemilio.fr:3002', { //http://10.0.2.15:3001/
+  const socket = io('http://ricardonunesemilio.fr:3001', { //http://10.0.2.15:3001/
     withCredentials: true,
     transports: ['websocket'], // Utilisez WebSocket directement si disponible
+  });
+
+  const state = ref({
+    allserver: [], 
   });
 
   // Log pour vérifier la connexion
@@ -109,9 +113,37 @@ export const usesocketStore = defineStore('socket', () => {
       socket.emit('create-game', data);
     });
   }
+  //Ecoute evenement 
 
+  // Événement : mise à jour globale de la liste des serveurs
+  socket.on('update-games', (games) => {
+    state.value.allserver = games;
+  });
+
+  // 🔥 Écouter l'événement 'player-joined' et mettre à jour la partie correspondante
+  socket.on('player-joined', (game) => {
+    console.log(`Un joueur a rejoint la partie :`, game);
+    
+    // Trouver la partie mise à jour
+    const index = state.value.allserver.findIndex((g) => g.id === game.id);
+    if (index !== -1) {
+      state.value.allserver[index] = game; // Met à jour la partie avec les nouvelles données
+    }
+  });
   
+  socket.on('updateState-player', (game) => {
+    console.log(`Un changement de status à étais fais `, game);
+    
+    // Trouver la partie mise à jour
+    const index = state.value.allserver.findIndex((g) => g.id === game.id);
+    if (index !== -1) {
+      state.value.allserver[index] = game; // Met à jour la partie avec les nouvelles données
+    }
+  });
 
-  return { create, update, join,disconnect, updateStatePlayer };
+
+  return { create, update, join,disconnect, updateStatePlayer, state, socket };
 
 });
+
+
