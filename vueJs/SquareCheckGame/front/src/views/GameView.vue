@@ -114,7 +114,7 @@ export default {
             }
 
             // Points
-            let jointSize = cellWidth * renderingInfo.joint.scale;
+            let jointSize = cellWidth * (renderingInfo.joint?.scale ?? 0.15);
             ctx.fillStyle = renderingInfo.joint.color;
             for(let y = 0; y < gridInfo.h + 1; y++){
                 for(let x = 0; x < gridInfo.w + 1; x++){
@@ -152,42 +152,60 @@ export default {
         }
 
         document.addEventListener('mousemove', (e) => {
-            if (!canvas) return;
-            const rect = canvas.getBoundingClientRect();
-            const cx = (e.pageX - rect.left) / rect.width * canvas.width;
-            const cy = (e.pageY - rect.top) / rect.height * canvas.height;
+            let rect = canvas.getBoundingClientRect();
+            let cx = Math.max(0, Math.min(canvas.width, (e.pageX - rect.left) / rect.width * canvas.width));
+            let cy = Math.max(0, Math.min(canvas.height, (e.pageY - rect.top) / rect.height * canvas.height));
 
-            const { x, y, rx, ry } = canvasToGrid(cx, cy);
+
+            let {x,y,rx,ry} = canvasToGrid(cx, cy);
+
             let newSelectedCell = null;
-
-            if (rx >= 0 && rx < gridInfo.w && ry >= 0 && ry < gridInfo.h) {
+            let newSelectedEdge = null;
+            if(rx>=0 && rx<gridInfo.w && ry>=0 && ry<gridInfo.h){
                 newSelectedCell = grid.value[ry][rx];
+                x = x%1 - 0.5;
+                y = y%1 - 0.5;
+            
+                let radius = Math.sqrt(x*x + y*y);
+                let theta = Math.acos(x / radius) * 180 / Math.PI;
+            
+                if(theta <= 45) newSelectedEdge = newSelectedCell.edges.r;
+                else if(theta >= 135) newSelectedEdge = newSelectedCell.edges.l;
+                else if(y < 0) newSelectedEdge = newSelectedCell.edges.t;
+                else newSelectedEdge = newSelectedCell.edges.b;
             }
-
-            if (newSelectedCell !== selectedCell.value) {
+        
+            // Lazy render
+            if(newSelectedCell !== selectedCell.value || newSelectedEdge !== selectedEdge.value) {
                 selectedCell.value = newSelectedCell;
+                selectedEdge.value = newSelectedEdge;
                 renderGrid();
             }
+
         });
 
         document.addEventListener('click', (e) => {
-            if(!selectedEdge) return;
-            if(selectedEdge.color != null) return;
+            if (!selectedEdge.value) return; // Vérifiez si l'arête est bien définie
+            if (selectedEdge.value.color != null) return; // Empêche de redéfinir une arête déjà coloriée
                 
-            let color = colors[colorIndex%colors.length];
-            selectedEdge.color = color;
+            let color = colors[colorIndex % colors.length];
+            selectedEdge.value.color = color;
                 
             let coloredCells = 0;
-            selectedEdge.cells.forEach(cell => {
-                if(cell.isFull()){
-                    cell.color = color;
-                    coloredCells++;
-                }
-            });
+                
+            // Protégez l'accès à selectedEdge.value.cells
+            if (Array.isArray(selectedEdge.value.cells)) {
+                selectedEdge.value.cells.forEach(cell => {
+                    if (cell.isFull()) {
+                        cell.color = color;
+                        coloredCells++;
+                    }
+                });
+            }
         
-            if(coloredCells == 0) colorIndex++;
+            if (coloredCells === 0) colorIndex++;
             renderGrid();
-        })
+        });
 
         onMounted(() => {
             canvas = document.querySelector("#renderer");
