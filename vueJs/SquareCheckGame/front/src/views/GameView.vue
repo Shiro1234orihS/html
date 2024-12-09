@@ -185,15 +185,17 @@ export default {
         });
 
         document.addEventListener('click', (e) => {
-            if (!selectedEdge.value) return; // Vérifiez si l'arête est bien définie
-            if (selectedEdge.value.color != null) return; // Empêche de redéfinir une arête déjà coloriée
+            // Vérifiez si selectedEdge existe et si sa couleur n'est pas déjà définie
+            if (!selectedEdge.value) return; 
+            if (selectedEdge.value.color != null) return; 
                 
-            let color = colors[colorIndex % colors.length];
+            // Choisir une couleur dans la liste des couleurs disponibles
+            let color = colors.value[colorIndex % colors.value.length];
             selectedEdge.value.color = color;
                 
             let coloredCells = 0;
                 
-            // Protégez l'accès à selectedEdge.value.cells
+            // Vérifiez que `cells` est un tableau
             if (Array.isArray(selectedEdge.value.cells)) {
                 selectedEdge.value.cells.forEach(cell => {
                     if (cell.isFull()) {
@@ -203,9 +205,14 @@ export default {
                 });
             }
         
+            // Si aucun bord n'a été colorié, on passe à la couleur suivante
             if (coloredCells === 0) colorIndex++;
+        
+            // Force la mise à jour de la grille
+            grid.value = [...grid.value]; 
             renderGrid();
         });
+
 
         onMounted(() => {
             canvas = document.querySelector("#renderer");
