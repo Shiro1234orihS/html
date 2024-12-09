@@ -15,11 +15,11 @@ import './assets/main.css';
 
   <div id="separateur">
     <!-- Sidebar -->
-    <div class="silladbar">
+    <!-- <div class="silladbar">
       <p @click="navigateTo('profil')">Profil</p>
       <p @click="navigateTo('ami')">Ami</p>
       <p @click="navigateTo('accueil')">Accueil</p>
-    </div>
+    </div> -->
     <div>
       <RouterView />
     </div>
