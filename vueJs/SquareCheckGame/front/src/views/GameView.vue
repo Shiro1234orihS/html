@@ -112,6 +112,17 @@ export default {
                     drawEdge(grid.value[y][x].edges.r.getColor(selectedEdge, renderingInfo), x + 1, y, 0, 1);
                 }
             }
+
+            // Points
+            let jointSize = cellWidth * renderingInfo.joint.scale;
+            ctx.fillStyle = renderingInfo.joint.color;
+            for(let y = 0; y < gridInfo.h + 1; y++){
+                for(let x = 0; x < gridInfo.w + 1; x++){
+                    ctx.beginPath();
+                    ctx.arc(cellWidth * (x+1), cellHeight * (y+1), jointSize/2, 0, 360);
+                    ctx.fill();
+                }
+            }
         }
 
         function x_gridToCanvas(x) {
@@ -158,6 +169,25 @@ export default {
                 renderGrid();
             }
         });
+
+        document.addEventListener('click', (e) => {
+            if(!selectedEdge) return;
+            if(selectedEdge.color != null) return;
+                
+            let color = colors[colorIndex%colors.length];
+            selectedEdge.color = color;
+                
+            let coloredCells = 0;
+            selectedEdge.cells.forEach(cell => {
+                if(cell.isFull()){
+                    cell.color = color;
+                    coloredCells++;
+                }
+            });
+        
+            if(coloredCells == 0) colorIndex++;
+            renderGrid();
+        })
 
         onMounted(() => {
             canvas = document.querySelector("#renderer");
