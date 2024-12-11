@@ -1,29 +1,30 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import './assets/main.css';
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+
+const route = useRoute();
+
+const isConnexionView = computed(() => {
+  return !(route.name === 'connection' || route.name === 'creation');
+});
 </script>
 
 <template>
-  <!-- <header>
-    <div class="wrapper"> 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-  </header> -->
+ 
 
   <div id="separateur">
     <!-- Sidebar -->
-    <!-- <div class="silladbar">
+    <div class="silladbar"v-if="isConnexionView">
       <p @click="navigateTo('profil')">Profil</p>
       <p @click="navigateTo('ami')">Ami</p>
       <p @click="navigateTo('accueil')">Accueil</p>
-    </div> -->
+    </div>
     <div>
       <RouterView />
     </div>
   </div>
+
+  
 </template>
 
 <style scoped>

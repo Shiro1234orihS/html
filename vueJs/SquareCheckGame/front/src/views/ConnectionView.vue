@@ -39,6 +39,7 @@ function login() {
       speudo: name.value,
       motDePasse: password.value
     }, () => {
+      console.log("test");
       router.push({ name: 'home' }); // Redirection après la connexion
     });
   }
