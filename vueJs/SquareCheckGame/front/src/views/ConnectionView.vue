@@ -1,25 +1,74 @@
 <script setup>
+import { useApiStore } from '@/stores/api.js'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const api = useApiStore()
+const router = useRouter();
+
+const name = ref("")
+const password = ref("")
+
+const nameError = ref("")
+const passwordError = ref("")
+const confirmPasswordError = ref("")
+
+function validateForm() {
+  let isValid = true
+
+  if (name.value.trim() === "") {
+    nameError.value = "Le nom d'utilisateur est requis."
+    isValid = false
+  } else {
+    nameError.value = ""
+  }
+
+  if (password.value.trim() === "") {
+    passwordError.value = "Le mot de passe est requis."
+    isValid = false
+  } else {
+    passwordError.value = ""
+  }
+
+  return isValid
+}
+
+function login() {
+  if (validateForm()) {
+    api.login({
+      speudo: name.value,
+      motDePasse: password.value
+    }, () => {
+      router.push({ name: 'home' }); // Redirection après la connexion
+    });
+  }
+}
+
+function logout() {
+    api.logout();
+}
 </script>
 
 <template>
     <div class="page-flex">
         <div id="contraint-connection">
+            <span v-if="nameError" class="error">{{ nameError }}</span>
             <div class="contraint-input">
-                <input type="text" id="username" placeholder=" ">
+                <input  v-model="name" type="text" id="username" placeholder=" " required>
                 <label class="floating-label" for="username">Nom utilisateur</label>
             </div>
 
             <div class="contraint-input">
-                <input type="password" id="password" placeholder=" ">
+                <input v-model="password" type="password" id="password" placeholder=" " required>
                 <label class="floating-label" for="password">Mot de passe</label>
             </div>
-        
+            <span v-if="passwordError" class="error">{{ passwordError }}</span>
             <div class="div-flex">
                 <input type="checkbox" id="remember-me">
                 <label for="remember-me">Souvenir mot de passe</label>
             </div>
         
-            <button>Connexion</button>
+            <button @click="login" >Connexion</button>
             <div class="forgot-password">
                 <button>Mot de passe oublié</button>
             </div>

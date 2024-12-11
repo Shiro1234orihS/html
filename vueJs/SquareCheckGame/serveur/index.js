@@ -210,7 +210,7 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3001, () => {
+server.listen(3002, () => {
     //console.log('Serveur en écoute sur http://localhost:3000');
 });
 

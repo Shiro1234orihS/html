@@ -39,6 +39,34 @@ class UserController extends Controller
         }
     }
 
+    public function login($auth): JsonResponse
+    {
+        $validatedData = $request->validate([
+            'speudo' => 'required|string|max:255',
+            'motDePasse' => 'required|string|min:6',
+        ]);
+
+        try {
+            // Rechercher l'utilisateur avec le speudo et le mot de passe
+            $user = User::where('speudo', $validatedData['speudo'])
+                        ->where('motDePasse', $validatedData['motDePasse'])
+                        ->first();
+    
+            // Vérifie si l'utilisateur existe
+            if (!$user) {
+                return response()->json(['error' => 'Identifiants incorrects'], 401);
+            }
+    
+            // Retourne l'utilisateur connecté
+            return response()->json(['message' => 'Connexion réussie', 'user' => $user], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Une erreur s\'est produite lors de la tentative de connexion', 
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     /**
      * Returns a single User
      */
